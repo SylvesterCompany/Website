@@ -8,7 +8,7 @@ const config = {
     height: 208, // 13 tiles
 
     physics: {
-        default: "arcade",
+        default: 'arcade',
         arcade: {
             gravity: { y: 300 },
             debug: false
