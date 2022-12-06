@@ -21,3 +21,14 @@ const config = {
 
 const game = new Phaser.Game(config);
 
+
+
+/*
+const boot = function (game) {
+boot.prototype =  {
+
+
+}
+}
+*/
+
