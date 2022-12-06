@@ -1,1 +1,5 @@
-<?php
+<footer>
+    <section>
+
+    </section>
+</footer>
