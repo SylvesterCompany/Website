@@ -6,4 +6,8 @@
 
     --light-gold: #f9f4df;
     --brown: #461a03;
+
+    /* Transitions */
+
+    --back: cubic-bezier(0.260, 1.565, 0.415, 1.015);
 }

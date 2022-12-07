@@ -2,6 +2,28 @@
 
 @import "variables.css";
 
+/* Animations */
+
+@keyframes fade-up {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 /* Fonts */
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap');
@@ -54,7 +76,7 @@ header a {
 }
 
 header a.current {
-    border: solid white 2px;
+    border: solid var(--light-gold) 2px;
 }
 
 ul {
@@ -106,6 +128,17 @@ main, #title-container {
 
 #logo {
     height: 150px;
+    opacity: 0;
+    animation: fade-up 1.5s 1 forwards;
+    animation-delay: 0.2s;
+    transition: all var(--back);
+    -webkit-animation-timing-function: var(--back);
+    transition-timing-function: var(--back);
+}
+
+#subtitle, #play-btn {
+    opacity: 0;
+    animation: fade-in 1s 1 forwards;
 }
 
 #subtitle {
@@ -114,6 +147,8 @@ main, #title-container {
     font-weight: 500;
     font-size: 1.5rem;
     letter-spacing: 0.5px;
+
+    animation-delay: 0.8s;
 }
 
 #play-btn {
@@ -125,6 +160,8 @@ main, #title-container {
     border-radius: 50px;
     padding: 15px 40px;
     margin-top: 1rem;
+
+    animation-delay: 1.75s;
 }
 
 /* Footer */
