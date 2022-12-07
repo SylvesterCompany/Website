@@ -1,4 +1,9 @@
 :root {
     --header-height: 120px;
     --footer-height: 100px;
+
+    /* Colors */
+
+    --light-gold: #f9f4df;
+    --brown: #461a03;
 }

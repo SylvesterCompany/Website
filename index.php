@@ -13,7 +13,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HOME</title>
+    <title>Accueil</title>
     <link rel="icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="static/css/style.css">
     <script src="game/phaser.js"></script>
@@ -22,10 +22,14 @@
 <body>
 <?php include 'templates/header.php'; ?>
 <main>
-    <div id="game-container">
+    <div id="title-container">
+        <img id="logo" src="assets/img/game_logo.svg" alt="Logo du jeu Sylvester">
+        <p id="subtitle">C'est l'histoire d'un écureuil<br>qui va (encore) faire le sale boulot.</p>
+        <a id="play-btn">Lancer le jeu</a>
+    </div>
+    <div id="game-container" class="hidden">
         <canvas id="game"></canvas>
     </div>
-    <a id="play-btn">Jouer</a>
 </main>
 <?php include 'templates/footer.php'; ?>
 </body>

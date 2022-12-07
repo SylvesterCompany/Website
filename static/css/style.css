@@ -4,7 +4,7 @@
 
 /* Fonts */
 
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Kalam:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap');
 
 /* General */
 
@@ -22,6 +22,10 @@ body {
 
 * {
     font-family: "Fredoka", sans-serif;
+}
+
+.hidden {
+    display: none;
 }
 
 /* Header */
@@ -84,18 +88,43 @@ ul > li:last-child {
 /* Main */
 
 main {
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+main, #title-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
-    min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
 #game {
     border-radius: 15px;
     border: solid rgba(255, 255, 255, 0.1) 10px;
     /*box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2);*/
+}
+
+#logo {
+    height: 150px;
+}
+
+#subtitle {
+    text-align: center;
+    color: var(--light-gold);
+    font-weight: 500;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+#play-btn {
+    color: var(--brown);
+    font-weight: 600;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    background-color: var(--light-gold);
+    border-radius: 50px;
+    padding: 15px 40px;
+    margin-top: 1rem;
 }
 
 /* Footer */
