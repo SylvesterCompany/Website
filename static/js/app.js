@@ -1,3 +1,5 @@
+import { startGame } from "../../game/main.js";
+
 /**
  * Generates the copyright including the current year as well as the authors in a random order
  */
@@ -27,13 +29,18 @@ function switchToCanvas() {
 
     titleContainer.classList.add("hidden");
     gameContainer.classList.remove("hidden");
+
+    // TODO: Start game
+    startGame();
 }
 
 // Main program
 
-const authors = ["Simon Breil", "Vincent Cohadon", "Loukas Changeux", "Alonso Quispe"];
-const playBtn = document.getElementById("play-btn");
+document.addEventListener("DOMContentLoaded", () => {
+    const authors = ["Simon Breil", "Vincent Cohadon", "Loukas Changeux", "Alonso Quispe"];
+    const playBtn = document.getElementById("play-btn");
 
-generateCopyright(authors);
+    generateCopyright(authors);
 
-playBtn.addEventListener("click", switchToCanvas);
+    playBtn.addEventListener("click", switchToCanvas);
+});

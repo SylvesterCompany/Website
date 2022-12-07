@@ -2,6 +2,7 @@ import MenuScene from "./scenes/menu.js";
 import GameScene from "./scenes/game.js";
 
 const canvas = document.getElementById('game');
+let game = null;
 
 const config = {
     type: Phaser.WEBGL,
@@ -19,9 +20,9 @@ const config = {
     scene: [GameScene, MenuScene]
 };
 
-const game = new Phaser.Game(config);
-
-
+export function startGame() {
+    game = new Phaser.Game(config);
+}
 
 /*
 const boot = function (game) {

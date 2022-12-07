@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="static/css/style.css">
     <script src="game/phaser.js"></script>
     <script src="game/main.js" type="module" defer></script>
-    <script src="static/js/app.js" defer></script>
+    <script src="static/js/app.js" type="module" defer></script>
 </head>
 <body>
 <?php include 'templates/header.php'; ?>
