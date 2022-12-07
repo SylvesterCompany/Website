@@ -1,0 +1,111 @@
+/* Variables */
+
+@import "variables.css";
+
+/* Fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Kalam:wght@300;400&display=swap');
+
+/* General */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/assets/img/bg_placeholder.png");
+    /*background-size: cover;*/
+    background-repeat: repeat;
+}
+
+* {
+    font-family: "Fredoka", sans-serif;
+}
+
+/* Header */
+
+header {
+    height: var(--header-height);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.70), transparent);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 2rem;
+
+    color: white;
+}
+
+header a {
+    border: solid rgba(255, 255, 255, 0.3) 2px;
+    border-radius: 50px;
+
+    color: white;
+    text-decoration: none;
+
+    padding: 9px 30px;
+}
+
+header a.current {
+    border: solid white 2px;
+}
+
+ul {
+    display: inline-block;
+    padding: 0;
+}
+
+ul > li {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+ul > li:last-child {
+    margin-right: 0;
+}
+
+#univ-aside {
+    display: flex;
+    align-items: center;
+}
+
+#univ-aside p {
+    text-align: right;
+    margin-right: 1rem;
+}
+
+#univ-aside img {
+    height: 50px;
+}
+
+/* Main */
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+#game {
+    border-radius: 15px;
+    border: solid rgba(255, 255, 255, 0.1) 10px;
+    /*box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2);*/
+}
+
+/* Footer */
+
+footer {
+    background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+    color: white;
+
+    height: var(--footer-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

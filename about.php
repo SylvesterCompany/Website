@@ -7,9 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>About</title>
     <link rel="icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-<?php include 'templates/header.php';?>
-<?php include 'templates/footer.php';?>
+<?php include 'templates/header.php'; ?>
+<?php include 'templates/footer.php'; ?>
 </body>
 </html>

@@ -1,10 +1,11 @@
 <?php
-spl_autoload_register(function ($class) {
-    $file = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
-    if (file_exists($file))
-        require $file;
-});
-?>
+//spl_autoload_register(function ($class) {
+//    $file = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+//    if (file_exists($file))
+//        require $file;
+//});
+//?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,13 +15,18 @@ spl_autoload_register(function ($class) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HOME</title>
     <link rel="icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="static/css/style.css">
     <script src="game/phaser.js"></script>
     <script src="game/main.js" type="module" defer></script>
 </head>
 <body>
-<?php include 'templates/header.php';?>
-<canvas id="game"></canvas>
-<a id="play-btn">Jouer</a>
-<?php include 'templates/footer.php';?>
+<?php include 'templates/header.php'; ?>
+<main>
+    <div id="game-container">
+        <canvas id="game"></canvas>
+    </div>
+    <a id="play-btn">Jouer</a>
+</main>
+<?php include 'templates/footer.php'; ?>
 </body>
 </html>

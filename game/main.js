@@ -9,6 +9,7 @@ const config = {
     width: 320, // 20 tiles
     height: 208, // 13 tiles
     canvas: canvas,
+    zoom: 2,
     physics: {
         default: 'arcade',
         arcade: {
