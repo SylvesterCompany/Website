@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="20" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
  <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16" tilecount="400" columns="20">
-  <image source="tileset.png" width="320" height="320"/>
+  <image source="game/tiles/tileset.png" width="320" height="320"/>
  </tileset>
  <tileset firstgid="401" name="backgrounds" tilewidth="16" tileheight="16" tilecount="260" columns="20">
-  <image source="backgrounds.png" width="320" height="208"/>
+  <image source="game/tiles/backgrounds.png" width="320" height="208"/>
  </tileset>
  <layer id="1" name="Calque de Tuiles 1" width="20" height="13">
   <data encoding="csv">
