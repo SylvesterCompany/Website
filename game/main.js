@@ -2,7 +2,6 @@ import MenuScene from "./scenes/menu.js";
 import GameScene from "./scenes/game.js";
 
 const canvas = document.getElementById('game');
-console.log(canvas)
 
 const config = {
     type: Phaser.WEBGL,
