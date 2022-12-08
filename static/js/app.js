@@ -23,7 +23,7 @@ function generateCopyright(authors) {
     }
 }
 
-function switchToCanvas() {
+function switchToGame() {
     const titleContainer = document.getElementById("title-container");
     const gameContainer = document.getElementById("game-container");
 
@@ -36,11 +36,9 @@ function switchToCanvas() {
 
 // Main program
 
-document.addEventListener("DOMContentLoaded", () => {
-    const authors = ["Simon Breil", "Vincent Cohadon", "Loukas Changeux", "Alonso Quispe"];
-    const playBtn = document.getElementById("play-btn");
+const authors = ["Simon Breil", "Vincent Cohadon", "Loukas Changeux", "Alonso Quispe"];
+const playBtn = document.getElementById("play-btn");
 
-    generateCopyright(authors);
+generateCopyright(authors);
 
-    playBtn.addEventListener("click", switchToCanvas);
-});
+playBtn.addEventListener("click", switchToGame);

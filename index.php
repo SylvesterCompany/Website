@@ -26,7 +26,7 @@
     <div id="title-container">
         <img id="logo" src="assets/img/game_logo.svg" alt="Logo du jeu Sylvester">
         <p id="subtitle">C'est l'histoire d'un écureuil<br>qui va (encore) faire le sale boulot.</p>
-        <a id="play-btn">Lancer le jeu</a>
+        <a id="play-btn">Jouer !</a>
     </div>
     <div id="game-container" class="hidden">
         <img id="logo-mini" src="assets/img/game_logo_white.svg" alt="Logo du jeu Sylvester">
