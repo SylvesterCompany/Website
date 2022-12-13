@@ -34,5 +34,6 @@
     </div>
 </main>
 <?php include 'templates/footer.php'; ?>
+<div id="overlay"></div>
 </body>
 </html>

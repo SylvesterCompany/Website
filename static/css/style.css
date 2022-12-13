@@ -30,7 +30,7 @@
         opacity: 0;
     }
     to {
-        opacity: 0.25;
+        opacity: 0.15;
     }
 }
 
@@ -43,6 +43,18 @@
     }
 }
 
+@keyframes hide {
+    0% {
+        opacity: 1;
+    }
+    99% {
+        opacity: 0;
+    }
+    100% {
+        visibility: hidden;
+    }
+}
+
 /* General */
 
 * {
@@ -52,7 +64,7 @@
 body {
     margin: 0;
 
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/assets/img/bg_placeholder.png"), linear-gradient(to bottom, #646464, #646464);
+    background-image: url("/assets/img/bg_placeholder.png"), linear-gradient(to bottom, #646464, #646464);
     /*background-size: cover;*/
     background-repeat: repeat;
 }
@@ -63,6 +75,10 @@ body {
 
 .hidden {
     display: none !important;
+}
+
+.fade-hidden {
+    animation: hide 0.5s 1 forwards;
 }
 
 /* Header */
@@ -201,6 +217,24 @@ main, #title-container, #game-container {
     border: solid #c77b1e 5px;
     transform: scale(0.95);
     transition: 150ms;
+}
+
+/* Overlay */
+
+#overlay {
+    opacity: 0.5;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: opacity 1s;
+}
+
+#overlay.dim {
+    opacity: 0.7;
 }
 
 /* Footer */

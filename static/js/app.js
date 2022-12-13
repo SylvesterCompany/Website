@@ -26,11 +26,18 @@ function generateCopyright(authors) {
 function switchToGame() {
     const titleContainer = document.getElementById("title-container");
     const gameContainer = document.getElementById("game-container");
+    const header = document.querySelector("header");
+    const footer = document.querySelector("footer");
+    const overlay = document.getElementById("overlay");
+
+    // Changes the elements and dim the background
 
     titleContainer.classList.add("hidden");
     gameContainer.classList.remove("hidden");
+    header.classList.add("fade-hidden");
+    footer.classList.add("fade-hidden");
+    overlay.classList.add("dim");
 
-    // TODO: Start game
     startGame();
 }
 

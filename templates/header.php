@@ -7,7 +7,7 @@
         </ul>
     </nav>
     <div id="univ-aside">
-        <p>Réalisé dans le cadre<br>d'un projet universitaire</p>
+        <p>Réalisé dans le cadre<br>d'un&nbsp;projet&nbsp;universitaire</p>
         <img src="/assets/img/lr_univ_logo.png" alt="Logo de l'Université de La Rochelle">
     </div>
 </header>
