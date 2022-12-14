@@ -3,6 +3,9 @@ import Player from "/game/classes/Player.js";
 export default class GameScene extends Phaser.Scene {
     player;
     cursors;
+    decors;
+    background;
+    plateformes;
 
     constructor() {
         super('GameScene')
@@ -31,9 +34,11 @@ export default class GameScene extends Phaser.Scene {
         const back = map.addTilesetImage('backgrounds')
         const tileset = map.addTilesetImage('Tileset')
 
-        map.createLayer('Calque de Tuiles 1', back)
-        map.createLayer('Calque de Tuiles 2', tileset)
-        map.createLayer('Calque de Tuiles 3', tileset)
+        this.background = map.createLayer('Background', back)
+        this.plateformes = map.createLayer('Plateformes', tileset)
+        this.decors = map.createLayer('Decors', tileset)
+        this.plateformes.setCollisionByProperty({ estSolide: true });
+        // this.physics.add.collider(player, plateformes);
     }
 
     update() {
