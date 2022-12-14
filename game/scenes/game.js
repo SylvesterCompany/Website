@@ -18,9 +18,11 @@ export default class GameScene extends Phaser.Scene {
         const back = map.addTilesetImage('backgrounds')
         const tileset = map.addTilesetImage('Tileset')
 
-        map.createLayer('Calque de Tuiles 1', back)
-        map.createLayer('Calque de Tuiles 2', tileset)
-        map.createLayer('Calque de Tuiles 3', tileset)
+        const background = map.createLayer('Background', back)
+        const plateformes = map.createLayer('Plateformes', tileset)
+        const decors = map.createLayer('Decors', tileset)
+        plateformes.setCollisionByProperty({ estSolide: true });
+        // this.physics.add.collider(player, plateformes);
     }
 
     update() {
