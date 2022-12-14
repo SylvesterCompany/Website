@@ -18,7 +18,7 @@
             641, 642, 643, 644, 645, 646, 647, 648, 649, 650, 651, 652, 653, 654, 655, 656, 657, 658, 659, 660],
          "height":13,
          "id":1,
-         "name":"Decors",
+         "name":"Background",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -66,7 +66,7 @@
             0, 0, 0, 0, 0, 2147483693, 2147483692, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 0, 0],
          "height":13,
          "id":4,
-         "name":"Background",
+         "name":"Decors",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -139,15 +139,6 @@
                         }]
                 }, 
                 {
-                 "id":5,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
                  "id":20,
                  "properties":[
                         {
@@ -211,15 +202,6 @@
                         }]
                 }, 
                 {
-                 "id":41,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
                  "id":42,
                  "properties":[
                         {
@@ -247,15 +229,6 @@
                         }]
                 }, 
                 {
-                 "id":45,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
                  "id":60,
                  "properties":[
                         {
@@ -272,8 +245,7 @@
                          "type":"bool",
                          "value":true
                         }]
-                },
-            
+                }, 
                 {
                  "id":62,
                  "properties":[
@@ -281,33 +253,6 @@
                          "name":"estSolide",
                          "type":"bool",
                          "value":true
-                        }]
-                }, 
-                {
-                 "id":63,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":64,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":65,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
                         }]
                 }, 
                 {
@@ -327,7 +272,8 @@
                          "type":"bool",
                          "value":true
                         }]
-                }, 
+                },
+            
                 {
                  "id":82,
                  "properties":[
@@ -335,33 +281,6 @@
                          "name":"estSolide",
                          "type":"bool",
                          "value":true
-                        }]
-                }, 
-                {
-                 "id":83,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":84,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":85,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
                         }]
                 }, 
                 {
@@ -380,97 +299,6 @@
                          "name":"estSolide",
                          "type":"bool",
                          "value":true
-                        }]
-                }, 
-                {
-                 "id":102,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":103,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":104,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":105,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":120,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":121,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":122,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":123,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                },
-            
-                {
-                 "id":124,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":125,
-                 "properties":[
-                        {
-                         "name":"estSolide",
-                         "type":"bool",
-                         "value":false
                         }]
                 }],
          "tilewidth":16
