@@ -21,7 +21,7 @@
     <script src="static/js/app.js" type="module" defer></script>
 </head>
 <body>
-<?php include 'templates/header.php'; ?>
+<?php include __DIR__ . 'templates/header.php'; ?>
 <main>
     <div id="title-container">
         <img id="logo" src="assets/img/game_logo.svg" alt="Logo du jeu Sylvester">
@@ -39,7 +39,7 @@
         <canvas id="game"></canvas>
     </div>
 </main>
-<?php include 'templates/footer.php'; ?>
+<?php include __DIR__ . 'templates/footer.php'; ?>
 <div id="overlay"></div>
 </body>
 </html>
