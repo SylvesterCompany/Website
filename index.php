@@ -30,6 +30,12 @@
     </div>
     <div id="game-container" class="hidden">
 <!--        <img id="logo-mini" src="assets/img/game_logo_white.svg" alt="Logo du jeu Sylvester">-->
+        <!--    Chat Box    -->
+        <div id="chatbox">
+            <img class="bg" src="/assets/img/chatbox.svg" alt="Boîte de dialogue">
+            <span>Reviens, Sylvester ! Reviens, Sylvester ! Reviens, Sylvester ! Nous devons terminer ce combat. Nous devons !</span>
+            <img class="enter" src="/assets/img/enter.png" alt="Entrée">
+        </div>
         <canvas id="game"></canvas>
     </div>
 </main>

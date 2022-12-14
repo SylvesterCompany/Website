@@ -56,6 +56,18 @@
     }
 }
 
+@keyframes up-down {
+    0% {
+        transform: translateY(var(--up-down-amplitude));
+    }
+    50% {
+        transform: translateY(calc(var(--up-down-amplitude) * -1));
+    }
+    100% {
+        transform: translateY(var(--up-down-amplitude));
+    }
+}
+
 /* General */
 
 * {
@@ -240,6 +252,46 @@ main, #title-container, #game-container {
 #overlay.dim {
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
+}
+
+/* Game elements */
+
+#chatbox {
+    transform: translateY(130%);
+    width: calc(860px * 0.6); /* TODO: Replace with dynamic width (depending on game constants) */
+    height: calc(191px * 0.6); /* TODO: Ditto */
+    padding: 0 2.5rem;
+
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chatbox .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#chatbox .enter {
+    z-index: 1;
+    width: 75px;
+
+    animation: up-down 1.25s infinite;
+    animation-timing-function: ease-in-out;
+}
+
+#chatbox span {
+    z-index: 1;
+
+    margin-right: 0.5rem;
+
+    color: var(--light-gold);
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 /* Footer */

@@ -27,5 +27,5 @@ playBtn.addEventListener("click", () => {
 
 // TODO: Delete after development phase
 
-// switchToGame();
-// startGame();
+switchToGame();
+startGame();
