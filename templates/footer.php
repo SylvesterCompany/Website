@@ -11,6 +11,6 @@ $copyright = 'Copyright &copy ' . date('Y') . ' Sylvester - ' . implode(', ', $n
 
 <footer>
     <span id="copyright">
-        <?= $copyright ?>
+        <?= $copyright; ?>
     </span>
 </footer>

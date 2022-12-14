@@ -1,6 +1,17 @@
 <?php
-if (!isset($page['lang']))
-    $page['lang'] = 'en';
+
+use src\lib\Lang;
+
+spl_autoload_register(function ($class) {
+    $file = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+    if (file_exists($file))
+        require $file;
+});
+$lang = new Lang();
+
+$page['lang'] = $lang->getLang();
+$translation = $lang->translate('header');
+
 ?>
 <!doctype html>
 <html lang="<?=$page['lang'];?>">
@@ -12,7 +23,7 @@ if (!isset($page['lang']))
     <title><?=$page['title'];?></title>
     <link rel="icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="static/css/style.css">
-    <?php if ($page['name'] == 'index') :?>
+    <?php if ($page['name'] === 'index') :?>
         <script src="game/phaser.js"></script>
         <script src="game/main.js" type="module" defer></script>
         <script src="static/js/app.js" type="module" defer></script>
@@ -22,13 +33,13 @@ if (!isset($page['lang']))
 <header>
     <nav>
         <ul>
-            <li><a href="index.php" class="current">Accueil</a></li>
-            <li><a href="about.php">À propos</a></li>
-            <li><a href="credits.php">Crédits</a></li>
+            <li><a href="index.php" class="current"><?=$translation['home'];?></a></li>
+            <li><a href="about.php"><?=$translation['about'];?></a></li>
+            <li><a href="credits.php"><?=$translation['credits'];?></a></li>
         </ul>
     </nav>
     <div id="univ-aside">
-        <p>Réalisé dans le cadre<br>d'un&nbsp;projet&nbsp;universitaire</p>
+        <p><?=$translation['context'];?></p>
         <img src="/assets/img/lr_univ_logo.png" alt="Logo de l'Université de La Rochelle">
     </div>
 </header>
