@@ -11,6 +11,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        // scene.sys.displayList.add(this);
+        // scene.sys.updateList.add(this);
+        // scene.sys.arcadePhysics.world.enableBody(this, 0);
 
         this.setCollideWorldBounds(true);
         this.setBounce(this.BOUNCE);
@@ -68,7 +71,5 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             frames: [{ key: "player-left", frame: 0 }],
             frameRate: 1
         });
-
-        // this.physics.add.collider(this.player, this.platforms)
     }
 }
