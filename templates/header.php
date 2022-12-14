@@ -3,8 +3,7 @@ if (!isset($page['lang']))
     $page['lang'] = 'en';
 ?>
 <!doctype html>
-<!--[if IE]><html lang="<?=$page['lang'];?>" class="ie-legacy"><![endif]-->
-<!--[if !IE]><!--><html lang="<?=$page['lang'];?>"><!--<![endif]-->
+<html lang="<?=$page['lang'];?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
