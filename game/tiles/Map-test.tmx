@@ -1,12 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="20" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
+ <editorsettings>
+  <export target="Map-test.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16" tilecount="400" columns="20">
-  <image source="game/tiles/tileset.png" width="320" height="320"/>
+  <image source="tileset.png" width="320" height="320"/>
+  <tile id="0">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="estSolide" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="estSolide" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="estSolide" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="estSolide" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="estSolide" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="40">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="42">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="estSolide" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="44">
+   <properties>
+    <property name="estSolide" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="60">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="61">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="62">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="80">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="81">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="82">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="100">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="101">
+   <properties>
+    <property name="estSolide" type="bool" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="401" name="backgrounds" tilewidth="16" tileheight="16" tilecount="260" columns="20">
-  <image source="game/tiles/backgrounds.png" width="320" height="208"/>
+  <image source="backgrounds.png" width="320" height="208"/>
  </tileset>
- <layer id="1" name="Calque de Tuiles 1" width="20" height="13">
+ <layer id="1" name="Background" width="20" height="13">
   <data encoding="csv">
 401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,
 421,422,423,424,425,426,427,428,429,430,431,432,433,434,435,436,437,438,439,440,
@@ -23,7 +141,7 @@
 641,642,643,644,645,646,647,648,649,650,651,652,653,654,655,656,657,658,659,660
 </data>
  </layer>
- <layer id="3" name="Calque de Tuiles 2" width="20" height="13">
+ <layer id="3" name="Plateformes" width="20" height="13">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -40,7 +158,7 @@
 21,22,22,22,22,22,22,22,23,0,21,22,22,23,0,0,21,22,22,23
 </data>
  </layer>
- <layer id="4" name="Calque de Tuiles 3" width="20" height="13">
+ <layer id="4" name="Decors" width="20" height="13">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
