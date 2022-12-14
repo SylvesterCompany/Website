@@ -257,17 +257,28 @@ main, #title-container, #game-container {
 /* Game elements */
 
 #chatbox {
-    transform: translateY(130%);
-    width: calc(860px * 0.6); /* TODO: Replace with dynamic width (depending on game constants) */
-    height: calc(191px * 0.6); /* TODO: Ditto */
+    transform: translateY(140%);
+    margin-top: calc(var(--chat-box-eff-height) * -1); /* Allows not to decenter the other elements */
+    width: var(--chat-box-eff-width); /* TODO: Replace with dynamic width (depending on game constants) */
+    height: var(--chat-box-eff-height); /* TODO: Ditto */
     padding: 0 2.5rem;
-
-    position: relative;
-    z-index: 1;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    position: relative;
+    z-index: 1;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: 200ms;
+}
+
+#chatbox.open {
+    visibility: visible;
+    transform: translateY(130%);
+    opacity: 1;
 }
 
 #chatbox .bg {
@@ -280,8 +291,9 @@ main, #title-container, #game-container {
     z-index: 1;
     width: 75px;
 
-    animation: up-down 1.25s infinite;
+    animation: up-down 0.75s infinite;
     animation-timing-function: ease-in-out;
+    /*animation-timing-function: steps(1, end);*/
 }
 
 #chatbox span {

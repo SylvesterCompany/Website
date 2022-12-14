@@ -29,3 +29,18 @@ playBtn.addEventListener("click", () => {
 
 switchToGame();
 startGame();
+
+import openDialog from "/game/utils/openDialog.js";
+
+openDialog({
+    text: "Bonjour les amis, j'espère que vous allez bien ! Aujourd'hui, " +
+        "je vais vous raconter l'histoire d'un gars qui fait de la programmation à 4 heures du matin, " +
+        "alors qu'il devrait logiquement aller dormir, " +
+        "car il va devoir continuer son projet. Qu'en pensez-vous ?"
+}, () => {
+    // setTimeout(() => {
+    //     openDialog({
+    //         text: "Allez, salut !"
+    //     });
+    // }, 1000);
+});

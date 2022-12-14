@@ -11,4 +11,12 @@
 
     --back: cubic-bezier(0.260, 1.565, 0.415, 1.015);
     --up-down-amplitude: 2px;
+
+    /* Chat box */
+
+    --chat-box-scale: 0.6;
+    --chat-box-width: 860px;
+    --chat-box-height: 191px;
+    --chat-box-eff-width: calc(var(--chat-box-width) * var(--chat-box-scale));
+    --chat-box-eff-height: calc(var(--chat-box-height) * var(--chat-box-scale));
 }
