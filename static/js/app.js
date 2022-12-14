@@ -27,16 +27,16 @@ playBtn.addEventListener("click", () => {
 
 // TODO: Delete after development phase
 
-// switchToGame();
-// startGame();
+switchToGame();
+startGame();
 
 import openDialog from "/game/utils/openDialog.js";
 
-setTimeout(() => {
-    openDialog({
-        text: "Bonjour les amis, j'espère que vous allez bien ! Aujourd'hui, " +
-            "je vais vous raconter l'histoire d'un gars qui fait de la programmation à 4 heures du matin, " +
-            "alors qu'il devrait logiquement aller dormir, " +
-            "car il va devoir continuer son projet. Qu'en pensez-vous ?"
-    });
-}, 5000);
+// setTimeout(() => {
+//     openDialog({
+//         text: "Bonjour les amis, j'espère que vous allez bien ! Aujourd'hui, " +
+//             "je vais vous raconter l'histoire d'un gars qui fait de la programmation à 4 heures du matin, " +
+//             "alors qu'il devrait logiquement aller dormir, " +
+//             "car il va devoir continuer son projet. Qu'en pensez-vous ?"
+//     });
+// }, 5000);
