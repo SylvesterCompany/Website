@@ -9,7 +9,7 @@
     <link rel="icon" href="assets/img/favicon.ico">
 </head>
 <body>
-<?php include 'templates/header.php';?>
-<?php include 'templates/footer.php';?>
+<?php include __DIR__ . '/templates/header.php'; ?>
+<?php include __DIR__ . '/templates/footer.php'; ?>
 </body>
 </html>
