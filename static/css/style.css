@@ -1,6 +1,7 @@
 /* Imports */
 
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap');
+/* FIXME: Fix the import (not working) */
+@import url('//fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap');
 @import "variables.css";
 
 /* Animations */
@@ -36,10 +37,10 @@
 
 @keyframes zoom-in {
     from {
-        transform: scale(0);
+        transform: scaleY(0);
     }
     to {
-        transform: scale(1);
+        transform: scaleY(1);
     }
 }
 
@@ -151,11 +152,15 @@ main, #title-container, #game-container {
     flex-direction: column;
 }
 
+#game-container:not(.hidden) {
+    height: 100vh;
+}
+
 #game {
     border-radius: 15px;
-    border: solid rgba(255, 255, 255, 0.1) 10px;
-    /*box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.2);*/
-    animation: zoom-in 0.5s 1 forwards;
+    /*border: solid var(--light-gold) 2px;*/
+    box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.4);
+    animation: zoom-in 0.35s 1 forwards;
 }
 
 #logo {
@@ -222,19 +227,19 @@ main, #title-container, #game-container {
 /* Overlay */
 
 #overlay {
-    opacity: 0.5;
     width: 100vw;
     height: 100vh;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0;
     left: 0;
     z-index: -1;
-    transition: opacity 1s;
+    transition: background-color 1s;
 }
 
 #overlay.dim {
-    opacity: 0.7;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
 }
 
 /* Footer */

@@ -29,7 +29,7 @@
         <a id="play-btn">Jouer !</a>
     </div>
     <div id="game-container" class="hidden">
-        <img id="logo-mini" src="assets/img/game_logo_white.svg" alt="Logo du jeu Sylvester">
+<!--        <img id="logo-mini" src="assets/img/game_logo_white.svg" alt="Logo du jeu Sylvester">-->
         <canvas id="game"></canvas>
     </div>
 </main>

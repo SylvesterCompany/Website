@@ -11,8 +11,8 @@ function switchToGame() {
 
     titleContainer.classList.add("hidden");
     gameContainer.classList.remove("hidden");
-    header.classList.add("fade-hidden");
-    footer.classList.add("fade-hidden");
+    header.classList.add("hidden");
+    footer.classList.add("hidden");
     overlay.classList.add("dim");
 }
 
@@ -24,3 +24,8 @@ playBtn.addEventListener("click", () => {
     switchToGame();
     startGame();
 });
+
+// TODO: Delete after development phase
+
+// switchToGame();
+// startGame();
