@@ -17,4 +17,9 @@ class Lang
         $language = http_negotiate_language(self::ALL);
         echo $language;
     }
+
+    public function translate() : void
+    {
+
+    }
 }

@@ -4,23 +4,10 @@
 //    if (file_exists($file))
 //        require $file;
 //});
-//?>
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Accueil</title>
-    <link rel="icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="static/css/style.css">
-    <script src="game/phaser.js"></script>
-    <script src="game/main.js" type="module" defer></script>
-    <script src="static/js/app.js" type="module" defer></script>
-</head>
-<body>
+//
+$page['title'] = 'Accueil';
+$page['name'] = 'index';
+?>
 <?php include __DIR__ . '/templates/header.php'; ?>
 <main>
     <div id="title-container">
@@ -41,5 +28,3 @@
 </main>
 <?php include __DIR__ . '/templates/footer.php'; ?>
 <div id="overlay"></div>
-</body>
-</html>
