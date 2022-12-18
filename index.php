@@ -3,21 +3,25 @@
 $page['title'] = 'Accueil';
 $page['name'] = 'index';
 
+include __DIR__ . '/templates/header.php';
+
+$translation = array_merge($translation, $lang->translate('index'));
+
 ?>
-<?php include __DIR__ . '/templates/header.php'; ?>
+
 <main>
     <div id="title-container">
         <img id="logo" src="assets/img/game_logo.svg" alt="Logo du jeu Sylvester">
-        <p id="subtitle">C'est l'histoire d'un écureuil<br>qui va (encore) faire le sale boulot.</p>
-        <a id="play-btn">Jouer !</a>
+        <p id="subtitle"><?= $translation["subtitle"] ?></p>
+        <a id="play-btn"><?= $translation["play_btn"] ?></a>
     </div>
     <div id="game-container" class="hidden">
 <!--        <img id="logo-mini" src="assets/img/game_logo_white.svg" alt="Logo du jeu Sylvester">-->
         <!--    Chat Box    -->
         <div id="chatbox">
-            <img class="bg" src="/assets/img/chatbox.svg" alt="Boîte de dialogue">
-            <span>Reviens, Sylvester ! Reviens, Sylvester ! Reviens, Sylvester ! Nous devons terminer ce combat. Nous devons !</span>
-            <img class="enter" src="/assets/img/enter.png" alt="Entrée">
+            <img class="bg" src="/assets/img/chatbox.svg" alt="<?= $translation["dialog_bg_alt"] ?>">
+            <span></span>
+            <img class="enter" src="/assets/img/enter.png" alt="<?= $translation["enter_alt"] ?>">
         </div>
         <canvas id="game"></canvas>
     </div>

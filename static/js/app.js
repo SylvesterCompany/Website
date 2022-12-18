@@ -38,5 +38,9 @@ import openDialog from "/game/utils/openDialog.js";
 //             "je vais vous raconter l'histoire d'un gars qui fait de la programmation à 4 heures du matin, " +
 //             "alors qu'il devrait logiquement aller dormir, " +
 //             "car il va devoir continuer son projet. Qu'en pensez-vous ?"
+//     }, () => {
+//         openDialog({
+//             text: "Salut."
+//         });
 //     });
 // }, 5000);
