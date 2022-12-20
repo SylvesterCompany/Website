@@ -21,7 +21,7 @@ export default class GameScene extends Phaser.Scene {
 
         // --
 
-        this.load.image('Tileset', 'game/tiles/tileset.png')
+        this.load.image('tileset', 'game/tiles/tileset.png')
         this.load.image('backgrounds', 'game/tiles/backgrounds.png')
 
         // Load the JSON file
@@ -29,11 +29,11 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        this.player = new Player(this, 50, 100);
+        this.player = new Player(this, 50, 0);
 
         const map = this.add.tilemap('map_tiles')
         // const back = map.addTilesetImage('backgrounds')
-        const tileset = map.addTilesetImage('Tileset')
+        const tileset = map.addTilesetImage('tileset')
 
         // this.background = map.createLayer('Background', back)
         this.plateformes = map.createLayer('Plateformes', tileset)
@@ -41,6 +41,10 @@ export default class GameScene extends Phaser.Scene {
 
         this.plateformes.setCollisionByProperty({ estSolide: true });
         this.physics.add.collider(this.player, this.plateformes);
+
+        // DEBUG
+
+        this.plateformes.renderDebug(this.add.graphics());
     }
 
     update() {
@@ -48,6 +52,4 @@ export default class GameScene extends Phaser.Scene {
 
         this.player.listenControls(this.cursors);
     }
-
 };
-
