@@ -21,7 +21,7 @@ let game = null;
 const config = {
     type: Phaser.WEBGL,
     width: CANVAS_WIDTH, // 20 tiles
-    height: CANVAS_HEIGHT, // 1 tiles
+    height: CANVAS_HEIGHT, // 13 tiles
     canvas: canvas,
     zoom: ZOOM_FACTOR,
     physics: {

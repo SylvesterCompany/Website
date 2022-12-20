@@ -45,6 +45,10 @@ export default class GameScene extends Phaser.Scene {
         // DEBUG
 
         this.plateformes.renderDebug(this.add.graphics());
+
+        this.physics.world.setBounds(0,0,20,13);
+        this.cameras.main.setBounds(0,0,20,12);
+        this.cameras.main.startFollow(this.player);
     }
 
     update() {
@@ -52,4 +56,6 @@ export default class GameScene extends Phaser.Scene {
 
         this.player.listenControls(this.cursors);
     }
+
 };
+
