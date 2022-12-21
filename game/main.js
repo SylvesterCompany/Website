@@ -24,10 +24,11 @@ const config = {
     height: CANVAS_HEIGHT, // 13 tiles
     canvas: canvas,
     zoom: ZOOM_FACTOR,
+    backgroundColor: 0xffffff,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: {y: 300},
+            gravity: {y: 2400},
             debug: DEBUG_MODE
         }
     },

@@ -37,7 +37,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityX(0);
             this.anims.play(this.playerDirection === "right" ? "idle-right" : "idle-left", true);
         }
-        if (cursors.up.isDown && this.body.touching.down) { // Jump (not finished)
+        if (cursors.up.isDown && this.body.onFloor()) { // Jump (not finished)
             this.setVelocityY(-450);
         }
     }

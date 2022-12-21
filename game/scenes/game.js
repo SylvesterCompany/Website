@@ -25,11 +25,12 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('backgrounds', 'game/tiles/backgrounds.png')
 
         // Load the JSON file
-        this.load.tilemapTiledJSON('map_tiles', 'game/tiles/Map-test.json')
+        this.load.tilemapTiledJSON('map_tiles', 'game/tiles/map-test.json')
     }
 
     create() {
-        this.player = new Player(this, 50, 0);
+        this.player = new Player(this, 100, 100);
+        this.player.visible = true;
 
         const map = this.add.tilemap('map_tiles')
         // const back = map.addTilesetImage('backgrounds')
@@ -44,10 +45,10 @@ export default class GameScene extends Phaser.Scene {
 
         // DEBUG
 
-        this.plateformes.renderDebug(this.add.graphics());
+        // this.plateformes.renderDebug(this.add.graphics());
 
-        this.physics.world.setBounds(0,0,20,13);
-        this.cameras.main.setBounds(0,0,20,12);
+        this.physics.world.setBounds(0,0, 20 * 16,13 * 16);
+        this.cameras.main.setBounds(0,0,20 * 16,12 * 16);
         this.cameras.main.startFollow(this.player);
     }
 
@@ -56,6 +57,5 @@ export default class GameScene extends Phaser.Scene {
 
         this.player.listenControls(this.cursors);
     }
-
 };
 
