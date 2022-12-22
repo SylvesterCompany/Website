@@ -29,16 +29,15 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        this.player = new Player(this, 100, 100);
-        this.player.visible = true;
-
         const map = this.add.tilemap('map_tiles')
-        // const back = map.addTilesetImage('backgrounds')
+        const back = map.addTilesetImage('backgrounds')
         const tileset = map.addTilesetImage('tileset')
 
-        // this.background = map.createLayer('Background', back)
+        this.background = map.createLayer('Background', back)
         this.plateformes = map.createLayer('Plateformes', tileset)
         this.decors = map.createLayer('Decors', tileset)
+        this.player = new Player(this, 100, 100);
+        this.player.visible = true;
 
         this.plateformes.setCollisionByProperty({ estSolide: true });
         this.physics.add.collider(this.player, this.plateformes);
@@ -47,9 +46,9 @@ export default class GameScene extends Phaser.Scene {
 
         // this.plateformes.renderDebug(this.add.graphics());
 
-        this.physics.world.setBounds(0,0, 20 * 16,13 * 16);
-        this.cameras.main.setBounds(0,0,20 * 16,12 * 16);
-        this.cameras.main.startFollow(this.player);
+        this.physics.world.setBounds(0,0,40*16,13*16,)
+        this.cameras.main.setBounds(0,0,40 * 16,13 * 16);
+        this.cameras.main.startFollow(this.player, true);
     }
 
     update() {
