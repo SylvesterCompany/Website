@@ -83,9 +83,13 @@ export default class GameScene extends Phaser.Scene {
 
         // to know where to position fires
 
+        /*
+
         this.input.on('pointerdown', function(pointer){
             console.log(pointer.x, pointer.y)
         });
+
+         */
 
     };
 
