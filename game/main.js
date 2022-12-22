@@ -9,7 +9,7 @@ const TILE_Y = 13;
 const ZOOM_FACTOR = 3;
 const CANVAS_WIDTH = TILE_SIZE * TILE_X;
 const CANVAS_HEIGHT = TILE_SIZE * TILE_Y;
-// const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 
 // Global variables
 
@@ -29,7 +29,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: {y: 2400},
-            // debug: DEBUG_MODE
+            debug: DEBUG_MODE
         }
     },
     scene: [GameScene, MenuScene]

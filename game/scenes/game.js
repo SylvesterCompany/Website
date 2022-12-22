@@ -6,11 +6,12 @@ export default class GameScene extends Phaser.Scene {
     decors;
     background;
     plateformes;
-    gameover;
+    gameoverText;
+
+    camera;
 
     constructor() {
         super('GameScene')
-        this.gameover = false;
     }
 
     preload() {
@@ -33,6 +34,11 @@ export default class GameScene extends Phaser.Scene {
         this.createPlayer();
         this.createCamera();
         this.physics.add.collider(this.player, this.plateformes);
+
+
+        this.gameoverText = this.add.text(20*16,6*16,"GameOver"); //TODO::Afficher le message toujours au milieu.
+        this.gameoverText.setOrigin(0.5);
+        this.gameoverText.visible = false;
 
         // DEBUG
         // this.plateformes.renderDebug(this.add.graphics());
@@ -59,14 +65,18 @@ export default class GameScene extends Phaser.Scene {
     };
      createCamera(){
          //Add camera
-         this.physics.world.setBounds(0,0,40*16,13*16)
+         this.physics.world.setBounds(0,0,40*16,13*16);
          this.cameras.main.setBounds(0,0,40 * 16,13 * 16);
          this.cameras.main.startFollow(this.player, true);
      };
 
+     gameoverScreen(){
+        this.physics.pause();
+        this.gameoverText.visible=true;
+     };
+
     update() {
         this.cursors = this.input.keyboard.createCursorKeys(); // Retrieves the keys
-
         this.player.listenControls(this.cursors);
     }
 };
