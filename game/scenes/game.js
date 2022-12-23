@@ -7,8 +7,10 @@ export default class GameScene extends Phaser.Scene {
     background;
     plateformes;
     gameoverText;
+    screenCenterX;
+    screenCenterY;
+    restartButton;
 
-    camera;
 
     constructor() {
         super('GameScene')
@@ -20,6 +22,7 @@ export default class GameScene extends Phaser.Scene {
         this.load.image("player-left", "assets/img/player/sylvester_contour_left.png");
         this.load.spritesheet("player-running", "assets/img/player/sylvester_anim.png", { frameWidth: 24, frameHeight: 16 });
         this.load.spritesheet("player-running-left", "assets/img/player/sylvester_anim_left.png", { frameWidth: 24, frameHeight: 16 });
+        this.load.image('Restart',"assets/img/PLACEHOLDER.png");
 
         // Fire texture
         this.load.spritesheet('fire', 'assets/img/player/fire_spritesheet.png', {
@@ -46,51 +49,16 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+
         this.createWorld();
         this.createPlayer();
         this.createCamera();
+        this.setupFire();
+        //Collisions
         this.physics.add.collider(this.player, this.plateformes);
 
-
-        this.gameoverText = this.add.text(20*16,6*16,"GameOver"); //TODO::Afficher le message toujours au milieu.
-        this.gameoverText.setOrigin(0.5);
-        this.gameoverText.visible = false;
-
-        // DEBUG
-        // this.plateformes.renderDebug(this.add.graphics());
-
-         // fireee
-
-        if(!this.anims.get('burning')) {
-            // fire animation
-            this.anims.create({
-                key: 'burning',
-                frames: this.anims.generateFrameNames('fire', {
-                    frames: [0, 1]
-                }),
-                frameRate: 4,
-                repeat: -1
-            });
-        }
-
-        this.setupFire();
-
-
-
-        // overlap with fires
-
-        this.physics.add.overlap(this.player, this.fires, this.restartGame, null, this);
-
-        // to know where to position fires
-
-        /*
-
-        this.input.on('pointerdown', function(pointer){
-            console.log(pointer.x, pointer.y)
-        });
-
-         */
-
+        //Overlap
+        this.physics.add.overlap(this.player, this.fires, this.gameoverScreen, null, this);
     };
 
     createPlayer(){
@@ -115,22 +83,18 @@ export default class GameScene extends Phaser.Scene {
      createCamera(){
          //Add camera
          this.physics.world.setBounds(0,0,40*16,13*16);
-         this.cameras.main.setBounds(0,0,40 * 16,13 * 16);
+         this.cameras.main.setBounds(0,0,40*16,13*16,true);
          this.cameras.main.startFollow(this.player, true);
      };
 
      gameoverScreen(){
         this.physics.pause();
-        this.gameoverText.visible=true;
+        this.gameoverText = this.add.text(this.screenCenterX,this.screenCenterY,'GameOver',{fontSize:'24px', backgroundColor:'#543F24'});
+        this.gameoverText.setOrigin(0.5);
+
+        this.restartButton = this.add.sprite(this.screenCenterX,this.screenCenterY+25,'Restart').setInteractive();
+        this.restartButton.on('pointerdown', this.restartGame, this);
      };
-
-    update() {
-        this.cursors = this.input.keyboard.createCursorKeys(); // Retrieves the keys
-        this.player.listenControls(this.cursors);
-    }
-
-    // fires gestion
-
     setupFire(){
 
         // Load json data
@@ -145,47 +109,45 @@ export default class GameScene extends Phaser.Scene {
             let curr = this.levelData.fires[i];
 
             let newObj = this.add.sprite(curr.x, curr.y, 'fire').setOrigin(0);
-
+            if(!this.anims.get('burning')) {
+                // fire animation
+                this.anims.create({
+                    key: 'burning',
+                    frames: this.anims.generateFrameNames('fire', {
+                        frames: [0, 1]
+                    }),
+                    frameRate: 4,
+                    repeat: -1
+                });
+            }
             // play fire animation
             newObj.anims.play('burning');
             this.fires.add(newObj);
-            // console.log(newObj); // testing in console properties
-
-            // make fires dragable (TESTING PURPOSE)
-            newObj.setInteractive();
-            this.input.setDraggable(newObj);
-
-
         }
-        // for level creation and gestion fire position
-        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-            gameObject.x = dragX;
-            gameObject.y = dragY;
-            console.log(dragX, dragY);
-        });
-
     };
 
-
-
-
-
 // restart game (game over + you won!) // source and target sprite for further interactions
-    // camera and effect for use to move camera and use an frame from sprite
-
-    restartGame (sourceSprite, targetSprite) {
+// camera and effect for use to move camera and use a frame from sprite
+    restartGame () {
         // fade out
-        this.cameras.main.fade(500);
+        this.restartButton.visible=false;
+        this.gameoverText.visible=false;
+        this.cameras.main.fadeOut(500);
 
         // when fade out completes, restart scene
-        this.cameras.main.on('camerafadeoutcomplete', function(camera, effect){
+        this.cameras.main.on('camerafadeoutcomplete', function(){
             // restart the scene
             this.scene.restart();
         }, this);
     }
 
+    update() {
+        this.cursors = this.input.keyboard.createCursorKeys(); // Retrieves the keys
+        this.player.listenControls(this.cursors);
 
-
-
+        //Center of the Game screen
+        this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
+        this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
+    }
 };
 
