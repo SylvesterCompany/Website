@@ -11,10 +11,6 @@ export default class GameScene extends Phaser.Scene {
     screenCenterY;
     restartButton;
 
-    // Debugging variables
-    debugText;
-
-
     constructor() {
         super('GameScene')
     }
@@ -65,9 +61,6 @@ export default class GameScene extends Phaser.Scene {
 
         //Overlap
         this.physics.add.overlap(this.player, this.fires, this.gameoverScreen, null, this);
-
-        // DEBUG
-        this.debugText = this.add.text(10, 25, "");
     };
 
     createPlayer() {
@@ -159,22 +152,9 @@ export default class GameScene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys(); // Retrieves the keys
         this.player.listenControls(this.cursors);
 
-        //Center of the Game screen
+        // Center of the Game screen
         this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
-
-        // DEBUG
-
-        const velocityY = this.player.body.velocity.y;
-        let jumpState;
-
-        if (this.player.body.onFloor()) {
-            jumpState = "Floor";
-        } else {
-            jumpState = velocityY < 0 ? "Up" : "Down";
-        }
-
-        this.debugText.text = jumpState + " " + velocityY;
     }
 };
 
