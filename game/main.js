@@ -7,6 +7,7 @@ const TILE_SIZE = 16;
 const TILE_X = 20;
 const TILE_Y = 13;
 const ZOOM_FACTOR = 3;
+const GRAVITY = 1000;
 const CANVAS_WIDTH = TILE_SIZE * TILE_X;
 const CANVAS_HEIGHT = TILE_SIZE * TILE_Y;
 const DEBUG_MODE = false;
@@ -24,11 +25,12 @@ const config = {
     height: CANVAS_HEIGHT, // 13 tiles
     canvas: canvas,
     zoom: ZOOM_FACTOR,
+    roundPixels: true,
     backgroundColor: 0xffffff,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: {y: 2400},
+            gravity: {y: GRAVITY},
             debug: DEBUG_MODE
         }
     },

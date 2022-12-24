@@ -1,23 +1,22 @@
-// TODO: À compléter
-
 export default class Player extends Phaser.Physics.Arcade.Sprite {
-    BOUNCE = 0.25;
+    BOUNCE = 0;
     SPEED = 125;
+    JUMP = 300;
 
     playerDirection;
     cursors;
 
     constructor(scene, x, y) {
-        super(scene, x, y, "player");
+        super(scene, x, y, "player-right");
 
+        // Adds the player to the scene
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
-        // scene.sys.displayList.add(this);
-        // scene.sys.updateList.add(this);
-        // scene.sys.arcadePhysics.world.enableBody(this, 0);
-
+        // Prevents the player from passing through the world's bounds
         this.setCollideWorldBounds(true);
+
+        // Defines the bounce factor
         this.setBounce(this.BOUNCE);
 
         this.playerDirection = "right";
@@ -27,19 +26,44 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     listenControls(cursors) {
         if (cursors.right.isDown) { // Right
+
             this.playerDirection = "right";
             this.setVelocityX(this.SPEED);
-            this.anims.play("running-right", true);
+
+            if (this.body.onFloor()) {
+                this.anims.play("running-right", true);
+            }
+
         } else if (cursors.left.isDown) { // Left
+
             this.playerDirection = "left";
             this.setVelocityX(-this.SPEED);
-            this.anims.play("running-left", true);
+
+            if (this.body.onFloor()) {
+                this.anims.play("running-left", true);
+            }
+
         } else { // Idle
+
             this.setVelocityX(0);
-            this.anims.play(this.playerDirection === "right" ? "idle-right" : "idle-left", true);
+
+            if (this.body.onFloor()) {
+                this.anims.play(this.playerDirection === "right" ? "idle-right" : "idle-left", true);
+            }
+
         }
-        if (cursors.up.isDown && this.body.onFloor()) { // Jump (not finished)
-            this.setVelocityY(-450);
+
+        if (cursors.up.isDown && this.body.onFloor()) { // Jump
+
+            this.setVelocityY(-this.JUMP);
+            this.anims.play(this.playerDirection === "right" ? "jump-up-right" : "jump-up-left", true);
+
+        }
+
+        if (!this.body.onFloor()) { // In midair
+            if (this.body.velocity.y > 0) {
+                this.anims.play(this.playerDirection === "right" ? "jump-down-right" : "jump-down-left", true);
+            }
         }
     }
 
@@ -64,13 +88,37 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene.anims.create({ // Idle right
             key: "idle-right",
-            frames: [{ key: "player", frame: 0 }],
+            frames: [{ key: "player-right", frame: 0 }],
             frameRate: 1
         });
 
         this.scene.anims.create({ // Idle left
             key: "idle-left",
             frames: [{ key: "player-left", frame: 0 }],
+            frameRate: 1
+        });
+
+        this.scene.anims.create({ // Jump up
+            key: "jump-up-right",
+            frames: [{ key: "player-jump", frame: 0 }],
+            frameRate: 1
+        });
+
+        this.scene.anims.create({ // Jump down
+            key: "jump-down-right",
+            frames: [{ key: "player-jump", frame: 1 }],
+            frameRate: 1
+        });
+
+        this.scene.anims.create({ // Jump up
+            key: "jump-up-left",
+            frames: [{ key: "player-jump", frame: 2 }],
+            frameRate: 1
+        });
+
+        this.scene.anims.create({ // Jump down
+            key: "jump-down-left",
+            frames: [{ key: "player-jump", frame: 3 }],
             frameRate: 1
         });
     }

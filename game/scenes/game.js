@@ -11,6 +11,9 @@ export default class GameScene extends Phaser.Scene {
     screenCenterY;
     restartButton;
 
+    // Debugging variables
+    debugText;
+
 
     constructor() {
         super('GameScene')
@@ -19,10 +22,19 @@ export default class GameScene extends Phaser.Scene {
     preload() {
         // Player's textures
 
-        this.load.image("player", "assets/img/player/sylvester_right.png");
+        this.load.image("player-right", "assets/img/player/sylvester_right.png");
         this.load.image("player-left", "assets/img/player/sylvester_left.png");
-        this.load.spritesheet("player-running", "assets/img/player/sylvester_anim.png", { frameWidth: 24, frameHeight: 16 });
-        this.load.image('Restart',"assets/img/PLACEHOLDER.png");
+        this.load.spritesheet("player-running", "assets/img/player/sylvester_anim.png", {
+            frameWidth: 24,
+            frameHeight: 16
+        });
+        this.load.spritesheet("player-jump", "assets/img/player/sylvester_jump.png", {
+            frameWidth: 24,
+            frameHeight: 16
+        });
+
+        // Restart button
+        this.load.image('Restart', "assets/img/PLACEHOLDER.png");
 
         // Fire texture
         this.load.spritesheet('fire', 'assets/img/player/fire_spritesheet.png', {
@@ -41,14 +53,9 @@ export default class GameScene extends Phaser.Scene {
 
         //fire dataPositionLoad
         this.load.json('fireData', 'game/levelDataFire.json');
-
-
-
-
     }
 
     create() {
-
         this.createWorld();
         this.createPlayer();
         this.createCamera();
@@ -58,14 +65,17 @@ export default class GameScene extends Phaser.Scene {
 
         //Overlap
         this.physics.add.overlap(this.player, this.fires, this.gameoverScreen, null, this);
+
+        // DEBUG
+        this.debugText = this.add.text(10, 25, "");
     };
 
-    createPlayer(){
+    createPlayer() {
         this.player = new Player(this, 100, 100);
         this.player.visible = true;
     };
 
-    createWorld(){
+    createWorld() {
         //Add Tiles set
         const map = this.add.tilemap('map_tiles')
         const back = map.addTilesetImage('backgrounds')
@@ -77,25 +87,30 @@ export default class GameScene extends Phaser.Scene {
         this.decors = map.createLayer('Decors', tileset)
 
         //Add physics
-        this.plateformes.setCollisionByProperty({ estSolide: true });
+        this.plateformes.setCollisionByProperty({estSolide: true});
     };
-     createCamera(){
-         //Add camera
-         this.physics.world.setBounds(0,0,40*16,13*16);
-         this.cameras.main.setBounds(0,0,40*16,13*16,true);
-         this.cameras.main.startFollow(this.player, true);
-     };
 
-     gameoverScreen(){
+    createCamera() {
+        // Add camera
+        this.physics.world.setBounds(0, 0, 40 * 16, 13 * 16);
+        this.cameras.main.setBounds(0, 0, 40 * 16, 13 * 16, true);
+        this.cameras.main.startFollow(this.player, true);
+    };
+
+    gameoverScreen() {
         this.physics.pause();
-        this.gameoverText = this.add.text(this.screenCenterX,this.screenCenterY,'GameOver',{fontSize:'24px', backgroundColor:'#543F24'});
+
+        this.gameoverText = this.add.text(this.screenCenterX, this.screenCenterY, 'Game Over', {
+            fontSize: '24px',
+            backgroundColor: '#543F24'
+        });
         this.gameoverText.setOrigin(0.5);
 
-        this.restartButton = this.add.sprite(this.screenCenterX,this.screenCenterY+25,'Restart').setInteractive();
+        this.restartButton = this.add.sprite(this.screenCenterX, this.screenCenterY + 25, 'Restart').setInteractive();
         this.restartButton.on('pointerdown', this.restartGame, this);
-     };
-    setupFire(){
+    };
 
+    setupFire() {
         // Load json data
         this.levelData = this.cache.json.get('fireData');
 
@@ -104,11 +119,11 @@ export default class GameScene extends Phaser.Scene {
             allowGravity: false,
             immovable: true
         });
-        for (let i = 0; i <this.levelData.fires.length; i++) {
+        for (let i = 0; i < this.levelData.fires.length; i++) {
             let curr = this.levelData.fires[i];
 
             let newObj = this.add.sprite(curr.x, curr.y, 'fire').setOrigin(0);
-            if(!this.anims.get('burning')) {
+            if (!this.anims.get('burning')) {
                 // fire animation
                 this.anims.create({
                     key: 'burning',
@@ -127,14 +142,14 @@ export default class GameScene extends Phaser.Scene {
 
 // restart game (game over + you won!) // source and target sprite for further interactions
 // camera and effect for use to move camera and use a frame from sprite
-    restartGame () {
+    restartGame() {
         // fade out
-        this.restartButton.visible=false;
-        this.gameoverText.visible=false;
+        this.restartButton.visible = false;
+        this.gameoverText.visible = false;
         this.cameras.main.fadeOut(500);
 
         // when fade out completes, restart scene
-        this.cameras.main.on('camerafadeoutcomplete', function(){
+        this.cameras.main.on('camerafadeoutcomplete', function () {
             // restart the scene
             this.scene.restart();
         }, this);
@@ -147,6 +162,19 @@ export default class GameScene extends Phaser.Scene {
         //Center of the Game screen
         this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
+
+        // DEBUG
+
+        const velocityY = this.player.body.velocity.y;
+        let jumpState;
+
+        if (this.player.body.onFloor()) {
+            jumpState = "Floor";
+        } else {
+            jumpState = velocityY < 0 ? "Up" : "Down";
+        }
+
+        this.debugText.text = jumpState + " " + velocityY;
     }
 };
 
