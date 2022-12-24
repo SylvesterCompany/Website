@@ -9,7 +9,7 @@ const TILE_Y = 13;
 const ZOOM_FACTOR = 3;
 const CANVAS_WIDTH = TILE_SIZE * TILE_X;
 const CANVAS_HEIGHT = TILE_SIZE * TILE_Y;
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 
 // Global variables
 

@@ -2,6 +2,7 @@
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
     BOUNCE = 0.25;
+    SPEED = 125;
 
     playerDirection;
     cursors;
@@ -27,11 +28,11 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     listenControls(cursors) {
         if (cursors.right.isDown) { // Right
             this.playerDirection = "right";
-            this.setVelocityX(150);
-            this.anims.play("running", true);
+            this.setVelocityX(this.SPEED);
+            this.anims.play("running-right", true);
         } else if (cursors.left.isDown) { // Left
             this.playerDirection = "left";
-            this.setVelocityX(-150);
+            this.setVelocityX(-this.SPEED);
             this.anims.play("running-left", true);
         } else { // Idle
             this.setVelocityX(0);
@@ -44,7 +45,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     _registerAnimations() {
         this.scene.anims.create({ // Right
-            key: "running",
+            key: "running-right",
             frames: this.anims.generateFrameNumbers("player-running", {
                 start: 0, end: 4
             }),
@@ -54,8 +55,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene.anims.create({ // Left
             key: "running-left",
-            frames: this.anims.generateFrameNumbers("player-running-left", {
-                start: 0, end: 4
+            frames: this.anims.generateFrameNumbers("player-running", {
+                start: 5, end: 9
             }),
             frameRate: 1000 / 50,
             repeat: -1
