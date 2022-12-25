@@ -7,7 +7,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     cursors;
 
     constructor(scene, x, y) {
-        super(scene, x, y, "player-right");
+        super(scene, x, y, "player-idle", 0);
 
         // Adds the player to the scene
         scene.add.existing(this);
@@ -88,13 +88,13 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene.anims.create({ // Idle right
             key: "idle-right",
-            frames: [{ key: "player-right", frame: 0 }],
+            frames: [{ key: "player-idle", frame: 0 }],
             frameRate: 1
         });
 
         this.scene.anims.create({ // Idle left
             key: "idle-left",
-            frames: [{ key: "player-left", frame: 0 }],
+            frames: [{ key: "player-idle", frame: 1 }],
             frameRate: 1
         });
 

@@ -18,8 +18,10 @@ export default class GameScene extends Phaser.Scene {
     preload() {
         // Player's textures
 
-        this.load.image("player-right", "assets/img/player/sylvester_right.png");
-        this.load.image("player-left", "assets/img/player/sylvester_left.png");
+        this.load.spritesheet("player-idle", "assets/img/player/sylvester_idle.png", {
+            frameWidth: 24,
+            frameHeight: 16,
+        });
         this.load.spritesheet("player-running", "assets/img/player/sylvester_anim.png", {
             frameWidth: 24,
             frameHeight: 16
