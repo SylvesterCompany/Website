@@ -1,7 +1,7 @@
 export default class Player extends Phaser.Physics.Arcade.Sprite {
     BOUNCE = 0;
     SPEED = 125;
-    JUMP = 300;
+    JUMP = 290;
 
     playerDirection;
     cursors;

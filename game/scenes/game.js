@@ -41,11 +41,11 @@ export default class GameScene extends Phaser.Scene {
         });
 
         // Map's textures
-        this.load.image('tileset', 'game/tiles/tileset.png')
-        this.load.image('backgrounds', 'game/tiles/backgrounds.png')
+        this.load.image('tileset_forest', 'game/tiles/tileset_forest.png')
+        this.load.image('background', 'game/tiles/light_sky.png')
 
         // Load the JSON file
-        this.load.tilemapTiledJSON('map_tiles', 'game/tiles/map-test.json')
+        this.load.tilemapTiledJSON('tilemap_forest', 'game/tiles/tilemap_forest.json')
 
         //fire dataPositionLoad
         this.load.json('fireData', 'game/levelDataFire.json');
@@ -70,14 +70,14 @@ export default class GameScene extends Phaser.Scene {
 
     createWorld() {
         //Add Tiles set
-        const map = this.add.tilemap('map_tiles')
-        const back = map.addTilesetImage('backgrounds')
-        const tileset = map.addTilesetImage('tileset')
+        const map = this.add.tilemap('tilemap_forest')
+        const back = map.addTilesetImage('background')
+        const tileset = map.addTilesetImage('tileset_forest')
 
         //Create Layers
-        this.background = map.createLayer('Background', back)
-        this.plateformes = map.createLayer('Plateformes', tileset)
-        this.decors = map.createLayer('Decors', tileset)
+        this.background = map.createLayer('background', back)
+        this.plateformes = map.createLayer('plateformes', tileset)
+        this.decors = map.createLayer('decors', tileset)
 
         //Add physics
         this.plateformes.setCollisionByProperty({estSolide: true});
@@ -112,6 +112,7 @@ export default class GameScene extends Phaser.Scene {
             allowGravity: false,
             immovable: true
         });
+
         for (let i = 0; i < this.levelData.fires.length; i++) {
             let curr = this.levelData.fires[i];
 
