@@ -55,12 +55,16 @@ export default class GameScene extends Phaser.Scene {
         this.createWorld();
         this.createPlayer();
         this.createCamera();
-        this.setupFire();
-        //Collisions
+        // this.setupFire();
+
+        // Collisions
         this.physics.add.collider(this.player, this.plateformes);
 
-        //Overlap
+        // Overlap
         this.physics.add.overlap(this.player, this.fires, this.gameoverScreen, null, this);
+
+        // Make the camera follow the player
+        this.cameras.main.startFollow(this.player);
     };
 
     createPlayer() {
@@ -69,17 +73,17 @@ export default class GameScene extends Phaser.Scene {
     };
 
     createWorld() {
-        //Add Tiles set
-        const map = this.add.tilemap('tilemap_forest')
-        const back = map.addTilesetImage('background')
-        const tileset = map.addTilesetImage('tileset_forest')
+        // Add Tiles set
+        const map = this.add.tilemap('tilemap_forest');
+        const back = map.addTilesetImage('background');
+        const tileset = map.addTilesetImage('tileset_forest');
 
-        //Create Layers
-        this.background = map.createLayer('background', back)
-        this.plateformes = map.createLayer('plateformes', tileset)
-        this.decors = map.createLayer('decors', tileset)
+        // Create Layers
+        this.background = map.createLayer('background', back);
+        this.plateformes = map.createLayer('plateformes', tileset);
+        this.decors = map.createLayer('decors', tileset);
 
-        //Add physics
+        // Add physics
         this.plateformes.setCollisionByProperty({estSolide: true});
     };
 
@@ -87,7 +91,6 @@ export default class GameScene extends Phaser.Scene {
         // Add camera
         this.physics.world.setBounds(0, 0, 40 * 16, 13 * 16);
         this.cameras.main.setBounds(0, 0, 40 * 16, 13 * 16, true);
-        this.cameras.main.startFollow(this.player, true);
     };
 
     gameoverScreen() {
