@@ -4,6 +4,7 @@ export default class GameScene extends Phaser.Scene {
     player;
     cursors;
     decors;
+    front;
     background;
     plateformes;
     gameoverText;
@@ -43,8 +44,9 @@ export default class GameScene extends Phaser.Scene {
         });
 
         // Map's textures
-        this.load.image('tileset_forest', 'game/tiles/tileset_forest.png')
-        this.load.image('background', 'game/tiles/light_sky.png')
+        this.load.image('tileset_forest', 'game/tiles/tileset_forest.png');
+        this.load.image("front_rocks", "game/tiles/front_rocks.png");
+        this.load.image('background', 'game/tiles/light_sky.png');
 
         // Load the JSON file
         this.load.tilemapTiledJSON('tilemap_forest', 'game/tiles/tilemap_forest.json')
@@ -72,18 +74,31 @@ export default class GameScene extends Phaser.Scene {
     createPlayer() {
         this.player = new Player(this, 100, 100);
         this.player.visible = true;
+        this.player.depth = 0;
     };
 
     createWorld() {
         // Add Tiles set
         const map = this.add.tilemap('tilemap_forest');
         const back = map.addTilesetImage('background');
-        const tileset = map.addTilesetImage('tileset_forest');
+        const tileset_forest = map.addTilesetImage('tileset_forest');
+        const tileset_rocks = map.addTilesetImage('front_rocks');
 
         // Create Layers
         this.background = map.createLayer('background', back);
-        this.plateformes = map.createLayer('plateformes', tileset);
-        this.decors = map.createLayer('decors', tileset);
+        this.background.scrollFactorX = 0.3;
+        this.background.depth = -1;
+
+        this.plateformes = map.createLayer('plateformes', tileset_forest);
+        this.plateformes.depth = 0;
+
+        this.decors = map.createLayer('decors', tileset_forest);
+        this.decors.depth = 0;
+
+        this.front = map.createLayer("front", tileset_rocks);
+        console.log(map.getLayer("front"));
+        this.front.scrollFactorX = 1.2;
+        this.front.depth = 2;
 
         // Add physics
         this.plateformes.setCollisionByProperty({estSolide: true});
