@@ -1,11 +1,12 @@
 <?php
-
+/**
+ * @var array $translation
+ */
 $page['name'] = basename(__FILE__, '.php');
 
 include __DIR__ . '/templates/header.php';
 
 ?>
-
 <main>
     <div id="title-container">
         <img id="logo" src="/static/img/game_logo.svg" alt="Logo du jeu Sylvester">

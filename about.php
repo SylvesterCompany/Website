@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @var array $translation
+ */
 $page['name'] = basename(__FILE__, '.php');
 
 include __DIR__ . '/templates/header.php';
