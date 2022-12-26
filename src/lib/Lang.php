@@ -40,9 +40,9 @@ class Lang
      */
     public function __construct()
     {
-        $languages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-        [$locale] = array_map('trim', explode(';', $languages[0], 2));
-        $this->lang = substr($locale, 0, 2) ?? self::DEFAULT;
+        /*$languages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        [$locale] = array_map('trim', explode(';', $languages[0], 2));*/
+        $this->lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) ?? self::DEFAULT;
     }
 
     /**

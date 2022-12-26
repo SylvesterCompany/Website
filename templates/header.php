@@ -41,7 +41,7 @@ $translation = $lang->translate('header');
     </nav>
     <div id="univ-aside">
         <p><?= $translation['context']; ?></p>
-        <img src="/assets/img/lr_univ_logo.png" alt="Logo de l'Université de La Rochelle">
+        <img src="assets/img/lr_univ_logo.png" alt="Logo de l'Université de La Rochelle">
     </div>
 </header>
 </body>
