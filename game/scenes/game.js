@@ -7,6 +7,8 @@ export default class GameScene extends Phaser.Scene {
     front;
     background;
     plateformes;
+    checkpoint;
+    checkLap;
     gameoverText;
     screenCenterX;
     screenCenterY;
@@ -59,16 +61,19 @@ export default class GameScene extends Phaser.Scene {
         this.createWorld();
         this.createPlayer();
         this.createCamera();
-        // this.setupFire();
+        this.createFire();
 
         // Collisions
         this.physics.add.collider(this.player, this.plateformes);
 
         // Overlap
         this.physics.add.overlap(this.player, this.fires, this.gameoverScreen, null, this);
-
+        this.checkLap = this.physics.add.overlap(this.player, this.save());
         // Make the camera follow the player
-        this.cameras.main.startFollow(this.player);
+        this.cameras.main.startFollow(this.player,true);
+
+        //ALWAYS AT THE END OF CREATE
+        this.loadCheckpoint();
     };
 
     createPlayer() {
@@ -86,6 +91,9 @@ export default class GameScene extends Phaser.Scene {
 
         // Create Layers
         this.background = map.createLayer('background', back);
+        this.plateformes = map.createLayer('plateformes', tileset);
+        this.decors = map.createLayer('decors', tileset);
+        this.checkpoint = map.createLayer('checkpoint', tileset);
         this.background.scrollFactorX = 0.3;
         this.background.depth = -1;
 
@@ -110,20 +118,7 @@ export default class GameScene extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 40 * 16, 13 * 16, true);
     };
 
-    gameoverScreen() {
-        this.physics.pause();
-
-        this.gameoverText = this.add.text(this.screenCenterX, this.screenCenterY, 'Game Over', {
-            fontSize: '24px',
-            backgroundColor: '#543F24'
-        });
-        this.gameoverText.setOrigin(0.5);
-
-        this.restartButton = this.add.sprite(this.screenCenterX, this.screenCenterY + 25, 'Restart').setInteractive();
-        this.restartButton.on('pointerdown', this.restartGame, this);
-    };
-
-    setupFire() {
+    createFire() {
         // Load json data
         this.levelData = this.cache.json.get('fireData');
 
@@ -152,6 +147,38 @@ export default class GameScene extends Phaser.Scene {
             newObj.anims.play('burning');
             this.fires.add(newObj);
         }
+    };
+
+    Save(){
+        this.checkLap.destroy();
+        localStorage.setItem('Player_position', JSON.stringify({
+            x: this.player.x,
+            y: this.player.y,
+            }
+        ))
+    };
+
+    loadCheckpoint(){
+        const lastCheckpoint = localStorage.getItem('hero_checkpoint');
+        if (lastCheckpoint) {
+            const position = JSON.parse(lastCheckpoint);
+            this.player.setX(position.x);
+            this.player.setY(position.y);
+        }
+
+        localStorage.removeItem('hero_checkpoint');
+    };
+
+    gameoverScreen() {
+        this.physics.pause();
+        this.gameoverText = this.add.text(this.screenCenterX, this.screenCenterY, 'Game Over', {
+            fontSize: '24px',
+            backgroundColor: '#543F24'
+        });
+        this.gameoverText.setOrigin(0.5);
+
+        this.restartButton = this.add.image(this.screenCenterX, this.screenCenterY + 25, 'Restart').setInteractive();
+        this.restartButton.on('pointerdown', this.restartGame, this);
     };
 
 // restart game (game over + you won!) // source and target sprite for further interactions
