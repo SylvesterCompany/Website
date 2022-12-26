@@ -29,18 +29,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.playerDirection = "right";
 
         this._registerAnimations();
-
-        // DEBUG
-
-        // setInterval(() => {
-        //     if (this.playerDirection === "right") {
-        //         this._turnLeft();
-        //         console.log(this.flipX);
-        //     } else {
-        //         this._turnRight();
-        //         console.log(this.flipX);
-        //     }
-        // }, 1000);
     }
 
     listenControls(cursors) {
@@ -147,24 +135,12 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     _turnLeft() {
         if (this.playerDirection != "left") {
             this.playerDirection = "left";
-
-            // Changes bounding box
-            // this.body.setOffset(0, 0);
-
-            // Offsets sprite's position
-            // this.x += 12;
         }
     }
 
     _turnRight() {
         if (this.playerDirection != "right") {
             this.playerDirection = "right";
-
-            // Changes bounding box
-            // this.body.setOffset(12, 0);
-
-            // Offsets sprite's position
-            // this.x -= 12;
         }
     }
 }
