@@ -90,26 +90,24 @@ export default class GameScene extends Phaser.Scene {
         const tileset_rocks = map.addTilesetImage('front_rocks');
 
         // Create Layers
+
         this.background = map.createLayer('background', back);
-        this.plateformes = map.createLayer('plateformes', tileset);
-        this.decors = map.createLayer('decors', tileset);
-        this.checkpoint = map.createLayer('checkpoint', tileset);
         this.background.scrollFactorX = 0.3;
         this.background.depth = -1;
 
         this.plateformes = map.createLayer('plateformes', tileset_forest);
+        this.plateformes.setCollisionByProperty({estSolide: true});
         this.plateformes.depth = 0;
+
+        // this.checkpoint = map.createLayer('checkpoint', tileset_forest);
 
         this.decors = map.createLayer('decors', tileset_forest);
         this.decors.depth = 0;
 
         this.front = map.createLayer("front", tileset_rocks);
-        console.log(map.getLayer("front"));
+        // TODO: Dynamically set scrollFactor (from Tiled info)
         this.front.scrollFactorX = 1.2;
         this.front.depth = 2;
-
-        // Add physics
-        this.plateformes.setCollisionByProperty({estSolide: true});
     };
 
     createCamera() {
@@ -149,13 +147,13 @@ export default class GameScene extends Phaser.Scene {
         }
     };
 
-    Save(){
-        this.checkLap.destroy();
-        localStorage.setItem('Player_position', JSON.stringify({
-            x: this.player.x,
-            y: this.player.y,
-            }
-        ))
+    save(){
+        // this.checkLap.destroy();
+        // localStorage.setItem('Player_position', JSON.stringify({
+        //     x: this.player.x,
+        //     y: this.player.y,
+        //     }
+        // ))
     };
 
     loadCheckpoint(){
