@@ -11,7 +11,8 @@ spl_autoload_register(function ($class) {
 $lang = new Lang();
 
 $page['lang'] = $lang->getLang();
-$translation = $lang->translate('header');
+
+$translation = array_merge($lang->translate(), $lang->translate($page['name']));
 
 ?>
 <!doctype html>
@@ -21,7 +22,7 @@ $translation = $lang->translate('header');
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?= $page['title']; ?></title>
+    <title><?= $translation['title']; ?></title>
     <link rel="icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="static/css/style.css">
     <?php if ($page['name'] === 'index') : ?>

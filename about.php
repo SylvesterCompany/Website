@@ -1,5 +1,4 @@
 <?php
-$page['title'] = 'A propos';
 $page['name'] = 'about';
 ?>
 <?php include __DIR__ . '/templates/header.php'; ?>

@@ -1,11 +1,8 @@
 <?php
 
-$page['title'] = 'Accueil';
 $page['name'] = 'index';
 
 include __DIR__ . '/templates/header.php';
-
-$translation = array_merge($translation, $lang->translate('index'));
 
 ?>
 

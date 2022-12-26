@@ -9,9 +9,6 @@ declare(strict_types=1);
 
 namespace src\lib;
 
-use function explode;
-use function array_map;
-use function preg_match;
 use function in_array;
 use function json_decode;
 use function substr;
@@ -25,8 +22,8 @@ class Lang
     /** @var string[] ALL SUPPORTED LANGUAGES */
     private const SUPPORTED = [
         'en',
-        'fr',
-        'es'
+        'es',
+        'fr'
     ];
 
     /** @var string DEFAULT LANGUAGE */
@@ -51,7 +48,7 @@ class Lang
      * @param string $index
      * @return array
      */
-    public function translate(string $index = 'index') : array
+    public function translate(string $index = 'header') : array
     {
         $file = self::DIRECTORY . '/' . $this->getLang() . '/' . $index . '.json';
         return json_decode(file_get_contents($file), true);
@@ -75,7 +72,6 @@ class Lang
     public function isLang() : bool
     {
         return $this->lang == self::DEFAULT ||
-            (preg_match('#^[a-z]{2}(-([A-Z]{2}|[A-Z][a-z]+))?$#', $this->lang) &&
-            in_array($this->lang, self::SUPPORTED));
+            in_array($this->lang, self::SUPPORTED);
     }
 }
