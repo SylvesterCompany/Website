@@ -1,6 +1,6 @@
 <?php
 
-$page['name'] = 'index';
+$page['name'] = basename(__FILE__, '.php');
 
 include __DIR__ . '/templates/header.php';
 
@@ -8,7 +8,7 @@ include __DIR__ . '/templates/header.php';
 
 <main>
     <div id="title-container">
-        <img id="logo" src="assets/img/game_logo.svg" alt="Logo du jeu Sylvester">
+        <img id="logo" src="/static/img/game_logo.svg" alt="Logo du jeu Sylvester">
         <p id="subtitle"><?= $translation["subtitle"] ?></p>
         <a id="play-btn"><?= $translation["play_btn"] ?></a>
     </div>
@@ -16,9 +16,9 @@ include __DIR__ . '/templates/header.php';
 <!--        <img id="logo-mini" src="assets/img/game_logo_white.svg" alt="Logo du jeu Sylvester">-->
         <!--    Chat Box    -->
         <div id="chatbox">
-            <img class="bg" src="/assets/img/chatbox.svg" alt="<?= $translation["dialog_bg_alt"] ?>">
+            <img class="bg" src="/static/img/chatbox.svg" alt="<?= $translation["dialog_bg_alt"] ?>">
             <span></span>
-            <img class="enter" src="/assets/img/enter.png" alt="<?= $translation["enter_alt"] ?>">
+            <img class="enter" src="/static/img/enter.png" alt="<?= $translation["enter_alt"] ?>">
         </div>
         <canvas id="game"></canvas>
     </div>

@@ -21,24 +21,24 @@ export default class GameScene extends Phaser.Scene {
     preload() {
         // Player's textures
 
-        this.load.spritesheet("player-idle", "assets/img/player/sylvester_idle.png", {
+        this.load.spritesheet("player-idle", "game/sprites/sylvester_idle.png", {
             frameWidth: Player.SPRITE_WIDTH,
             frameHeight: Player.SPRITE_HEIGHT,
         });
-        this.load.spritesheet("player-run", "assets/img/player/sylvester_run.png", {
+        this.load.spritesheet("player-run", "game/sprites/sylvester_run.png", {
             frameWidth: Player.SPRITE_WIDTH,
             frameHeight: Player.SPRITE_HEIGHT
         });
-        this.load.spritesheet("player-jump", "assets/img/player/sylvester_jump.png", {
+        this.load.spritesheet("player-jump", "game/sprites/sylvester_jump.png", {
             frameWidth: Player.SPRITE_WIDTH,
             frameHeight: Player.SPRITE_HEIGHT
         });
 
         // Restart button
-        this.load.image('Restart', "assets/img/PLACEHOLDER.png");
+        this.load.image('Restart', "static/img/PLACEHOLDER.png");
 
         // Fire texture
-        this.load.spritesheet('fire', 'assets/img/player/fire_spritesheet.png', {
+        this.load.spritesheet('fire', 'game/sprites/fire_spritesheet.png', {
             frameWidth: 20,
             frameHeight: 21,
             margin: 1,
