@@ -21,24 +21,22 @@ export default class GameScene extends Phaser.Scene {
     preload() {
         // Player's textures
 
-        this.load.spritesheet("player-idle", "game/sprites/sylvester_idle.png", {
+        this.load.spritesheet("player-idle", "assets/img/player/sylvester_idle.png", {
             frameWidth: Player.SPRITE_WIDTH,
             frameHeight: Player.SPRITE_HEIGHT,
         });
-        this.load.spritesheet("player-run", "game/sprites/sylvester_run.png", {
+        this.load.spritesheet("player-run", "assets/img/player/sylvester_run.png", {
             frameWidth: Player.SPRITE_WIDTH,
             frameHeight: Player.SPRITE_HEIGHT
         });
-        this.load.spritesheet("player-jump", "game/sprites/sylvester_jump.png", {
+        this.load.spritesheet("player-jump", "assets/img/player/sylvester_jump.png", {
             frameWidth: Player.SPRITE_WIDTH,
             frameHeight: Player.SPRITE_HEIGHT
         });
 
-        // Restart button
-        this.load.image('Restart', "static/img/PLACEHOLDER.png");
 
         // Fire texture
-        this.load.spritesheet('fire', 'game/sprites/fire_spritesheet.png', {
+        this.load.spritesheet('fire', 'assets/img/player/fire_spritesheet.png', {
             frameWidth: 20,
             frameHeight: 21,
             margin: 1,
@@ -49,6 +47,9 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('tileset_forest', 'game/tiles/tileset_forest.png');
         this.load.image("front_rocks", "game/tiles/front_rocks.png");
         this.load.image('background', 'game/tiles/light_sky.png');
+        this.load.image('Flag', 'assets/img/Flag.png');
+        // Restart button
+        this.load.image('Restart', 'assets/img/PLACEHOLDER.png');
 
         // Load the JSON file
         this.load.tilemapTiledJSON('tilemap_forest', 'game/tiles/tilemap_forest.json')
@@ -62,18 +63,20 @@ export default class GameScene extends Phaser.Scene {
         this.createPlayer();
         this.createCamera();
         this.createFire();
+        //ALWAYS AT THE END OF CREATE
+        this.loadCheckpoint();
 
         // Collisions
         this.physics.add.collider(this.player, this.plateformes);
 
         // Overlap
         this.physics.add.overlap(this.player, this.fires, this.gameoverScreen, null, this);
-        this.checkLap = this.physics.add.overlap(this.player, this.save());
+        // this.physics.add.overlap(this.player, this.checkpoints, this.save);
+
         // Make the camera follow the player
         this.cameras.main.startFollow(this.player,true);
 
-        //ALWAYS AT THE END OF CREATE
-        this.loadCheckpoint();
+
     };
 
     createPlayer() {
@@ -88,6 +91,7 @@ export default class GameScene extends Phaser.Scene {
         const back = map.addTilesetImage('background');
         const tileset_forest = map.addTilesetImage('tileset_forest');
         const tileset_rocks = map.addTilesetImage('front_rocks');
+        const flag = map.addTilesetImage('Flag');
 
         // Create Layers
 
@@ -99,7 +103,8 @@ export default class GameScene extends Phaser.Scene {
         this.plateformes.setCollisionByProperty({estSolide: true});
         this.plateformes.depth = 0;
 
-        // this.checkpoint = map.createLayer('checkpoint', tileset_forest);
+        // this.checkpoints = map.createLayer('checkpoints', flag);
+        // this.checkpoints.depth = 0;
 
         this.decors = map.createLayer('decors', tileset_forest);
         this.decors.depth = 0;
@@ -148,23 +153,21 @@ export default class GameScene extends Phaser.Scene {
     };
 
     save(){
-        // this.checkLap.destroy();
-        // localStorage.setItem('Player_position', JSON.stringify({
-        //     x: this.player.x,
-        //     y: this.player.y,
-        //     }
-        // ))
+        localStorage.setItem('hero_checkpoint', JSON.stringify({
+            x: hero.x,
+            y: hero.y,
+        }));
     };
 
     loadCheckpoint(){
-        const lastCheckpoint = localStorage.getItem('hero_checkpoint');
+        const lastCheckpoint = localStorage.getItem('Player_position');
         if (lastCheckpoint) {
             const position = JSON.parse(lastCheckpoint);
             this.player.setX(position.x);
             this.player.setY(position.y);
         }
 
-        localStorage.removeItem('hero_checkpoint');
+        localStorage.removeItem('Player_position');
     };
 
     gameoverScreen() {
