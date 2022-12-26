@@ -1,7 +1,11 @@
 export default class Player extends Phaser.Physics.Arcade.Sprite {
-    BOUNCE = 0;
-    SPEED = 125;
-    JUMP = 270;
+    static SPRITE_WIDTH = 36;
+    static SPRITE_HEIGHT = 16;
+    static BOX_WIDTH = 12;
+
+    static BOUNCE = 0;
+    static SPEED = 125;
+    static JUMP = 265;
 
     playerDirection;
     cursors;
@@ -16,31 +20,48 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         // Prevents the player from passing through the world's bounds
         this.setCollideWorldBounds(true);
 
+        // Bounding box
+        this.setSize(Player.BOX_WIDTH, Player.SPRITE_HEIGHT);
+
         // Defines the bounce factor
-        this.setBounce(this.BOUNCE);
+        this.setBounce(Player.BOUNCE);
 
         this.playerDirection = "right";
 
         this._registerAnimations();
+
+        // DEBUG
+
+        // setInterval(() => {
+        //     if (this.playerDirection === "right") {
+        //         this._turnLeft();
+        //         console.log(this.flipX);
+        //     } else {
+        //         this._turnRight();
+        //         console.log(this.flipX);
+        //     }
+        // }, 1000);
     }
 
     listenControls(cursors) {
         if (cursors.right.isDown) { // Right
 
-            this.playerDirection = "right";
-            this.setVelocityX(this.SPEED);
+            this._turnRight();
+
+            this.setVelocityX(Player.SPEED);
 
             if (this.body.onFloor()) {
-                this.anims.play("running-right", true);
+                this.anims.play("run-right", true);
             }
 
         } else if (cursors.left.isDown) { // Left
 
-            this.playerDirection = "left";
-            this.setVelocityX(-this.SPEED);
+            this._turnLeft();
+
+            this.setVelocityX(-Player.SPEED);
 
             if (this.body.onFloor()) {
-                this.anims.play("running-left", true);
+                this.anims.play("run-left", true);
             }
 
         } else { // Idle
@@ -55,7 +76,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         if (cursors.up.isDown && this.body.onFloor()) { // Jump
 
-            this.setVelocityY(-this.JUMP);
+            this.setVelocityY(-Player.JUMP);
             this.anims.play(this.playerDirection === "right" ? "jump-up-right" : "jump-up-left", true);
 
         }
@@ -69,8 +90,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     _registerAnimations() {
         this.scene.anims.create({ // Right
-            key: "running-right",
-            frames: this.anims.generateFrameNumbers("player-running", {
+            key: "run-right",
+            frames: this.anims.generateFrameNumbers("player-run", {
                 start: 0, end: 4
             }),
             frameRate: 1000 / 50,
@@ -78,8 +99,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         });
 
         this.scene.anims.create({ // Left
-            key: "running-left",
-            frames: this.anims.generateFrameNumbers("player-running", {
+            key: "run-left",
+            frames: this.anims.generateFrameNumbers("player-run", {
                 start: 5, end: 9
             }),
             frameRate: 1000 / 50,
@@ -121,5 +142,29 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             frames: [{ key: "player-jump", frame: 3 }],
             frameRate: 1
         });
+    }
+
+    _turnLeft() {
+        if (this.playerDirection != "left") {
+            this.playerDirection = "left";
+
+            // Changes bounding box
+            // this.body.setOffset(0, 0);
+
+            // Offsets sprite's position
+            // this.x += 12;
+        }
+    }
+
+    _turnRight() {
+        if (this.playerDirection != "right") {
+            this.playerDirection = "right";
+
+            // Changes bounding box
+            // this.body.setOffset(12, 0);
+
+            // Offsets sprite's position
+            // this.x -= 12;
+        }
     }
 }

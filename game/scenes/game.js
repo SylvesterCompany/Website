@@ -12,23 +12,23 @@ export default class GameScene extends Phaser.Scene {
     restartButton;
 
     constructor() {
-        super('GameScene')
+        super('GameScene');
     }
 
     preload() {
         // Player's textures
 
         this.load.spritesheet("player-idle", "assets/img/player/sylvester_idle.png", {
-            frameWidth: 24,
-            frameHeight: 16,
+            frameWidth: Player.SPRITE_WIDTH,
+            frameHeight: Player.SPRITE_HEIGHT,
         });
-        this.load.spritesheet("player-running", "assets/img/player/sylvester_anim.png", {
-            frameWidth: 24,
-            frameHeight: 16
+        this.load.spritesheet("player-run", "assets/img/player/sylvester_run.png", {
+            frameWidth: Player.SPRITE_WIDTH,
+            frameHeight: Player.SPRITE_HEIGHT
         });
         this.load.spritesheet("player-jump", "assets/img/player/sylvester_jump.png", {
-            frameWidth: 24,
-            frameHeight: 16
+            frameWidth: Player.SPRITE_WIDTH,
+            frameHeight: Player.SPRITE_HEIGHT
         });
 
         // Restart button
@@ -163,4 +163,3 @@ export default class GameScene extends Phaser.Scene {
         this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
     }
 };
-
