@@ -9,9 +9,6 @@ export default class GameScene extends Phaser.Scene {
     background;
     plateformes;
     checkpoint;
-    checkpoints
-    checkpointsLayer;
-    checkLap
     gameoverText;
     screenCenterX;
     screenCenterY;
