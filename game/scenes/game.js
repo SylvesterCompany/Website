@@ -9,6 +9,7 @@ export default class GameScene extends Phaser.Scene {
     background;
     plateformes;
     checkpoint;
+    checkpoints
     checkpointsLayer;
     checkLap
     gameoverText;
@@ -23,11 +24,13 @@ export default class GameScene extends Phaser.Scene {
     create() {
         this.createWorld();
         this.createPlayer();
+        this.createCheckpoint(305, 130);
+        this.createCheckpoint(580, 130);
         this.createCamera();
         this.createFire();
 
-        this.createCheckpoint(305, 130);
-        this.createCheckpoint(580, 130);
+        // Méthode avec classe
+
 
         // Collisions
         this.physics.add.collider(this.player, this.plateformes);
@@ -41,13 +44,12 @@ export default class GameScene extends Phaser.Scene {
         //ALWAYS AT THE END OF CREATE
         this.loadCheckpoint();
 
-
     };
 
     createPlayer() {
         this.player = new Player(this, 80, 145);
         this.player.visible = true;
-        this.player.depth = 0;
+        this.player.depth = 1;
     };
 
     createCheckpoint(x, y) {
@@ -74,17 +76,6 @@ export default class GameScene extends Phaser.Scene {
         this.plateformes = map.createLayer('plateformes', tileset_forest);
         this.plateformes.setCollisionByProperty({estSolide: true});
         this.plateformes.depth = 0;
-
-        // this.checkpointsLayer = map.getObjectLayer('checkpoints')['objects'];
-        // this.checkpoints = this.physics.add.staticGroup();
-        // this.checkpointsLayer.forEach(object => {
-        //     let flag = this.checkpoints.create(object.x, object.y, 'flag');
-        //
-        //     flag.setScale(object.width/16, object.height/16);
-        //     flag.setOrigin(1);
-        //     flag.body.width = object.width;
-        //     flag.body.height = object.height;
-        // });
 
         this.decors = map.createLayer('decors', tileset_forest);
         this.decors.depth = 0;
@@ -132,8 +123,7 @@ export default class GameScene extends Phaser.Scene {
         }
     };
 
-    save(player, checkpoint){
-        checkpoint.disableBody(true,true);
+    save(){
         localStorage.setItem('Player_position', JSON.stringify({
             x: this.player.x,
             y: this.player.y,
