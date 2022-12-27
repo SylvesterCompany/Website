@@ -21,6 +21,8 @@ export default class PreloaderScene extends Phaser.Scene {
             frameHeight: Player.SPRITE_HEIGHT
         });
 
+        // Load the music
+        this.load.audio('adventure', ['/game/music/adventure.mp3']);
 
         // Fire texture
         this.load.spritesheet('fire', '/game/sprites/fire_spritesheet.png', {
