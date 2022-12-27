@@ -7,8 +7,8 @@ export default class GameScene extends Phaser.Scene {
     front;
     background;
     plateformes;
-    checkpoint;
-    checkLap;
+    checkpoints;
+    checkpointsLayer;
     gameoverText;
     screenCenterX;
     screenCenterY;
@@ -31,7 +31,7 @@ export default class GameScene extends Phaser.Scene {
 
         // Overlap
         this.physics.add.overlap(this.player, this.fires, this.gameoverScreen, null, this);
-        // this.physics.add.overlap(this.player, this.checkpoints, this.save);
+        this.physics.add.overlap(this.player, this.checkpoints, this.save, null ,this);
 
         // Make the camera follow the player
         this.cameras.main.startFollow(this.player,true);
@@ -51,7 +51,6 @@ export default class GameScene extends Phaser.Scene {
         const back = map.addTilesetImage('background');
         const tileset_forest = map.addTilesetImage('tileset_forest');
         const tileset_rocks = map.addTilesetImage('front_rocks');
-        const flag = map.addTilesetImage('Flag');
 
         // Create Layers
 
@@ -63,8 +62,16 @@ export default class GameScene extends Phaser.Scene {
         this.plateformes.setCollisionByProperty({estSolide: true});
         this.plateformes.depth = 0;
 
-        // this.checkpoints = map.createLayer('checkpoints', flag);
-        // this.checkpoints.depth = 0;
+        this.checkpointsLayer = map.getObjectLayer('checkpoints')['objects'];
+        this.checkpoints = this.physics.add.staticGroup();
+        this.checkpointsLayer.forEach(object => {
+            let flag = this.checkpoints.create(object.x, object.y, 'flag');
+
+            flag.setScale(object.width/16, object.height/16);
+            flag.setOrigin(1);
+            flag.body.width = object.width;
+            flag.body.height = object.height;
+        });
 
         this.decors = map.createLayer('decors', tileset_forest);
         this.decors.depth = 0;
@@ -113,9 +120,9 @@ export default class GameScene extends Phaser.Scene {
     };
 
     save(){
-        localStorage.setItem('hero_checkpoint', JSON.stringify({
-            x: hero.x,
-            y: hero.y,
+        localStorage.setItem('Player_position', JSON.stringify({
+            x: this.player.x,
+            y: this.player.y,
         }));
     };
 

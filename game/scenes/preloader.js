@@ -34,7 +34,7 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('tileset_forest', '/game/tiles/tileset_forest.png');
         this.load.image("front_rocks", "/game/tiles/front_rocks.png");
         this.load.image('background', '/game/tiles/light_sky.png');
-        this.load.image('Flag', '/game/sprites/flag.png');
+        this.load.image('flag', '/game/sprites/flag.png');
         // Restart button
         this.load.image('Restart', '/static/img/PLACEHOLDER.png');
 
