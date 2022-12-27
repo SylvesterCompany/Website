@@ -1,4 +1,5 @@
 import Player from "/game/classes/Player.js";
+import Checkpoint from "/game/classes/Checkpoint.js";
 
 export default class GameScene extends Phaser.Scene {
     player;
@@ -8,7 +9,6 @@ export default class GameScene extends Phaser.Scene {
     background;
     plateformes;
     checkpoint;
-    checkLap;
     gameoverText;
     screenCenterX;
     screenCenterY;
@@ -21,28 +21,40 @@ export default class GameScene extends Phaser.Scene {
     create() {
         this.createWorld();
         this.createPlayer();
+        this.createCheckpoint(305, 130);
+        this.createCheckpoint(580, 130);
         this.createCamera();
         this.createFire();
-        //ALWAYS AT THE END OF CREATE
-        this.loadCheckpoint();
+
+        // Méthode avec classe
+
 
         // Collisions
         this.physics.add.collider(this.player, this.plateformes);
 
         // Overlap
         this.physics.add.overlap(this.player, this.fires, this.gameoverScreen, null, this);
-        // this.physics.add.overlap(this.player, this.checkpoints, this.save);
 
         // Make the camera follow the player
         this.cameras.main.startFollow(this.player,true);
 
+        //ALWAYS AT THE END OF CREATE
+        this.loadCheckpoint();
 
     };
 
     createPlayer() {
-        this.player = new Player(this, 100, 100);
+        this.player = new Player(this, 80, 145);
         this.player.visible = true;
-        this.player.depth = 0;
+        this.player.depth = 1;
+    };
+
+    createCheckpoint(x, y) {
+        this.checkpoint = new Checkpoint(this, x, y);
+        this.checkpoint.visible = true;
+        this.checkpoint.depth = 0;
+        this.physics.add.collider(this.checkpoint, this.plateformes);
+        this.physics.add.overlap(this.player, this.checkpoint, this.save, null ,this);
     };
 
     createWorld() {
@@ -51,7 +63,6 @@ export default class GameScene extends Phaser.Scene {
         const back = map.addTilesetImage('background');
         const tileset_forest = map.addTilesetImage('tileset_forest');
         const tileset_rocks = map.addTilesetImage('front_rocks');
-        const flag = map.addTilesetImage('Flag');
 
         // Create Layers
 
@@ -62,9 +73,6 @@ export default class GameScene extends Phaser.Scene {
         this.plateformes = map.createLayer('plateformes', tileset_forest);
         this.plateformes.setCollisionByProperty({estSolide: true});
         this.plateformes.depth = 0;
-
-        // this.checkpoints = map.createLayer('checkpoints', flag);
-        // this.checkpoints.depth = 0;
 
         this.decors = map.createLayer('decors', tileset_forest);
         this.decors.depth = 0;
@@ -113,10 +121,11 @@ export default class GameScene extends Phaser.Scene {
     };
 
     save(){
-        localStorage.setItem('hero_checkpoint', JSON.stringify({
-            x: hero.x,
-            y: hero.y,
+        localStorage.setItem('Player_position', JSON.stringify({
+            x: this.player.x,
+            y: this.player.y,
         }));
+
     };
 
     loadCheckpoint(){

@@ -133,13 +133,13 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     _turnLeft() {
-        if (this.playerDirection != "left") {
+        if (this.playerDirection !== "left") {
             this.playerDirection = "left";
         }
     }
 
     _turnRight() {
-        if (this.playerDirection != "right") {
+        if (this.playerDirection !== "right") {
             this.playerDirection = "right";
         }
     }
