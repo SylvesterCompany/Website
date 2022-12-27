@@ -1,5 +1,6 @@
 import MenuScene from "./scenes/menu.js";
 import GameScene from "./scenes/game.js";
+import PreloaderScene from "./scenes/preloader.js";
 
 // Constants
 
@@ -34,7 +35,7 @@ const config = {
             debug: DEBUG_MODE
         }
     },
-    scene: [GameScene, MenuScene]
+    scene: [PreloaderScene, GameScene, MenuScene]
 };
 
 /**
