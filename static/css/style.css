@@ -252,11 +252,13 @@ main, #title-container, #game-container {
 }
 
 #overlay.dim {
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
+    background-color: black;
+    /*backdrop-filter: blur(10px);*/
 }
 
 /* Game elements */
+
+/* Chat box */
 
 #chatbox {
     transform: translateY(140%);
@@ -306,6 +308,58 @@ main, #title-container, #game-container {
     color: var(--light-gold);
     font-size: 1.2rem;
     font-weight: 500;
+}
+
+/* Archive */
+
+#archive {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    margin-top: 10vh;
+    margin-left: 7vh;
+    z-index: 1;
+    transform: translateY(50px) rotate(3deg);
+
+    transition: 0.5s;
+}
+
+#archive.open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+}
+
+#archive img {
+    height: 70vh;
+}
+
+#archive h3, #archive p, #archive span {
+    position: absolute;
+    z-index: 2;
+}
+
+#archive h3 {
+    font-size: 3vh;
+    margin-top: 0;
+    margin-left: 5vh;
+    top: 6.2vh;
+    color: var(--archive-title);
+}
+
+#archive p {
+    font-size: 2.5vh;
+    margin: 0 15vh 0 7.5vh;
+    top: 15vh;
+    color: var(--archive-content);
+}
+
+#archive span {
+    font-size: 2.8vh;
+    font-weight: bold;
+    margin-left: 7.5vh;
+    bottom: 17vh;
+    color: var(--archive-content);
 }
 
 /* Footer */

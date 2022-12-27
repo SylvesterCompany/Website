@@ -1,3 +1,5 @@
+import getZoomFactor from "./utils/getResolution.js";
+
 import MenuScene from "./scenes/menu.js";
 import GameScene from "./scenes/game.js";
 import PreloaderScene from "./scenes/preloader.js";
@@ -7,10 +9,10 @@ import PreloaderScene from "./scenes/preloader.js";
 const TILE_SIZE = 16;
 const TILE_X = 20;
 const TILE_Y = 13;
-const ZOOM_FACTOR = 3;
 const GRAVITY = 1000;
 const CANVAS_WIDTH = TILE_SIZE * TILE_X;
 const CANVAS_HEIGHT = TILE_SIZE * TILE_Y;
+const ZOOM_FACTOR = getZoomFactor(CANVAS_HEIGHT);
 const DEBUG_MODE = false;
 
 // Global variables
