@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="13" tilewidth="16" tileheight="16" infinite="1" nextlayerid="9" nextobjectid="3">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="13" tilewidth="16" tileheight="16" infinite="1" nextlayerid="9" nextobjectid="4">
  <editorsettings>
   <export target="tilemap_forest.json" format="json"/>
  </editorsettings>
@@ -132,8 +132,8 @@
  <tileset firstgid="661" name="front_rocks" tilewidth="16" tileheight="16" tilecount="120" columns="40">
   <image source="front_rocks.png" width="640" height="48"/>
  </tileset>
- <tileset firstgid="781" name="Flag" tilewidth="12" tileheight="16" tilecount="1" columns="1">
-  <image source="../../assets/img/Flag.png" width="12" height="16"/>
+ <tileset firstgid="781" name="flag" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="../sprites/flag.png" width="16" height="16"/>
  </tileset>
  <layer id="3" name="background" width="48" height="16">
   <data encoding="csv">
@@ -251,50 +251,6 @@
 </chunk>
   </data>
  </layer>
- <layer id="6" name="checkpoints" width="40" height="13">
-  <data encoding="csv">
-   <chunk x="16" y="0" width="16" height="16">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,781,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</chunk>
-   <chunk x="32" y="0" width="16" height="16">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,781,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</chunk>
-  </data>
- </layer>
- <objectgroup id="8" name="checkpoints">
-  <object id="1" gid="781" x="259.333" y="128.667" width="12" height="16"/>
-  <object id="2" gid="781" x="610" y="128.667" width="12" height="16"/>
- </objectgroup>
  <layer id="2" name="decors" width="48" height="16">
   <data encoding="csv">
    <chunk x="0" y="0" width="16" height="16">
@@ -447,4 +403,7 @@
 </chunk>
   </data>
  </layer>
+ <objectgroup id="8" name="checkpoints">
+  <object id="3" gid="781" x="303.667" y="128" width="16.3636" height="16"/>
+ </objectgroup>
 </map>
