@@ -166,6 +166,7 @@ export default class GameScene extends Phaser.Scene {
 
     gameoverScreen() {
         this.physics.pause();
+        this.anims.pauseAll();
         this.gameoverText = this.add.text(this.screenCenterX, this.screenCenterY, 'Game Over', {
             fontSize: '24px',
             backgroundColor: '#543F24'
