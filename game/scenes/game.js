@@ -1,5 +1,7 @@
 import Player from "/game/classes/Player.js";
-import Checkpoint from "/game/classes/Checkpoint.js";
+import Checkpoint from "../classes/Checkpoint.js";
+import ArchiveCollection from "../classes/ArchiveCollection.js";
+import openArchive from "../utils/openArchive.js";
 
 export default class GameScene extends Phaser.Scene {
     player;
@@ -9,16 +11,20 @@ export default class GameScene extends Phaser.Scene {
     background;
     plateformes;
     checkpoint;
+    checkLap;
     gameoverText;
     screenCenterX;
     screenCenterY;
     restartButton;
+    archiveCollection;
 
     constructor() {
         super('GameScene');
     }
 
     create() {
+        this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));
+
         this.createWorld();
         this.createPlayer();
         this.createCheckpoint(305, 130);
@@ -27,7 +33,6 @@ export default class GameScene extends Phaser.Scene {
         this.createFire();
 
         // Méthode avec classe
-
 
         // Collisions
         this.physics.add.collider(this.player, this.plateformes);
@@ -38,9 +43,8 @@ export default class GameScene extends Phaser.Scene {
         // Make the camera follow the player
         this.cameras.main.startFollow(this.player,true);
 
-        //ALWAYS AT THE END OF CREATE
+        // ALWAYS AT THE END OF CREATE
         this.loadCheckpoint();
-
     };
 
     createPlayer() {
@@ -120,12 +124,33 @@ export default class GameScene extends Phaser.Scene {
         }
     };
 
+    collectArchive(id) {
+        this.archiveCollection.collect(id);
+
+        this.physics.pause();
+
+        openArchive(this.archiveCollection.getArchive(id), () => {
+            this.physics.resume();
+        });
+        // Opens the archive
+
+        // let currentArchives = localStorage.getItem('Archives_collected');
+        //
+        // if (currentArchives) {
+        //     currentArchives = [...JSON.parse(currentArchives), id];
+        //     localStorage.setItem('Archives_collected', JSON.stringify(currentArchives));
+        // } else {
+        //     localStorage.setItem('Archives_collected', JSON.stringify([id]));
+        // }
+        //
+        // console.log(localStorage.getItem('Archives_collected'));
+    }
+
     save(){
         localStorage.setItem('Player_position', JSON.stringify({
             x: this.player.x,
             y: this.player.y,
         }));
-
     };
 
     loadCheckpoint(){

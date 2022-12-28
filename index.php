@@ -14,10 +14,15 @@ include __DIR__ . '/templates/header.php';
         <a id="play-btn"><?= $translation["play_btn"] ?></a>
     </div>
     <div id="game-container" class="hidden">
-<!--        <img id="logo-mini" src="assets/img/game_logo_white.svg" alt="Logo du jeu Sylvester">-->
-        <!--    Chat Box    -->
         <div id="chatbox">
             <img class="bg" src="/static/img/chatbox.svg" alt="<?= $translation["dialog_bg_alt"] ?>">
+            <span></span>
+            <img class="enter" src="/static/img/enter.png" alt="<?= $translation["enter_alt"] ?>">
+        </div>
+        <div id="archive">
+            <img class="bg" src="/static/img/archive.svg" alt="<?= $translation["archive_alt"] ?>">
+            <h3></h3>
+            <p></p>
             <span></span>
             <img class="enter" src="/static/img/enter.png" alt="<?= $translation["enter_alt"] ?>">
         </div>

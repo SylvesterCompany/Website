@@ -1,4 +1,6 @@
 :root {
+    /* General */
+
     --header-height: 120px;
     --footer-height: 100px;
 
@@ -19,4 +21,9 @@
     --chat-box-height: 191px;
     --chat-box-eff-width: calc(var(--chat-box-width) * var(--chat-box-scale));
     --chat-box-eff-height: calc(var(--chat-box-height) * var(--chat-box-scale));
+
+    /* Archive */
+
+    --archive-title: #e6e4dc;
+    --archive-content: #5a3e37;
 }

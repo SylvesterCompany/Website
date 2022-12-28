@@ -15,6 +15,7 @@ $page['lang'] = $lang->getLang();
 $translation = array_merge($lang->translate(), $lang->translate($page['name']));
 
 ?>
+
 <!doctype html>
 <html lang="<?= $page['lang']; ?>">
 <head>
@@ -25,6 +26,9 @@ $translation = array_merge($lang->translate(), $lang->translate($page['name']));
     <title>Sylvester - <?= $translation['title']; ?></title>
     <link rel="icon" href="/static/img/favicon.ico">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script>
+        const LANG = "<?= $page["lang"] ?>";
+    </script>
     <?php if ($page['name'] === 'index') : ?>
         <script src="/game/phaser.js"></script>
         <script src="/game/main.js" type="module" defer></script>
@@ -45,5 +49,3 @@ $translation = array_merge($lang->translate(), $lang->translate($page['name']));
         <img src="/static/img/lr_univ_logo.png" alt="Logo de l'Université de La Rochelle">
     </div>
 </header>
-</body>
-</html>

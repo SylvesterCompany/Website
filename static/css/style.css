@@ -74,6 +74,11 @@
     box-sizing: border-box;
 }
 
+::selection {
+    background-color: transparent;
+    color: unset;
+}
+
 body {
     margin: 0;
 
@@ -170,11 +175,11 @@ main, #title-container, #game-container {
 
 
 #game {
+    transform: scaleY(0);
     border-radius: 15px;
     /*border: solid var(--light-gold) 2px;*/
     box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.4);
-    animation: fade-in 5s;
-
+    animation: zoom-in 1s 1 forwards;
 }
 
 #logo {
@@ -291,7 +296,7 @@ main, #title-container, #game-container {
     left: 0;
 }
 
-#chatbox .enter {
+.enter {
     z-index: 1;
     width: 75px;
 
@@ -330,7 +335,7 @@ main, #title-container, #game-container {
     transform: translateY(0) rotate(0deg);
 }
 
-#archive img {
+#archive .bg {
     height: 70vh;
 }
 
@@ -360,6 +365,13 @@ main, #title-container, #game-container {
     margin-left: 7.5vh;
     bottom: 17vh;
     color: var(--archive-content);
+}
+
+#archive .enter {
+    position: absolute;
+    margin-left: 7.5vh;
+    bottom: 5vh;
+    width: 10vh;
 }
 
 /* Footer */

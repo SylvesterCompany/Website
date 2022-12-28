@@ -14,3 +14,6 @@ $copyright = 'Copyright &copy ' . date('Y') . ' Sylvester - ' . implode(', ', $n
         <?= $copyright; ?>
     </span>
 </footer>
+
+</body>
+</html>

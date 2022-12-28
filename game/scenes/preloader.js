@@ -43,8 +43,11 @@ export default class PreloaderScene extends Phaser.Scene {
         // Load the JSON file
         this.load.tilemapTiledJSON('tilemap_forest', '/game/tiles/tilemap_forest.json')
 
-        //fire dataPositionLoad
+        // Fire dataPositionLoad
         this.load.json('fireData', '/game/levelDataFire.json');
+
+        // Archive data
+        this.load.json('archives', `/lang/${LANG}/game_archives.json`);
     }
 
     create() {
