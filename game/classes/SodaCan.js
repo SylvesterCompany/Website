@@ -20,5 +20,28 @@ export default class SodaCan extends Phaser.Physics.Arcade.Sprite {
 
         this.setSize(SodaCan.SPRITE_WIDTH, SodaCan.SPRITE_HEIGHT);
         this.setOrigin(0, 1);
+
+        this._registerAnimations();
+
+        this.anims.play("highlight");
+    }
+
+    _registerAnimations() {
+        const highlightAnim = this.scene.anims.create({ // Highlight
+            key: "highlight",
+            frames: this.anims.generateFrameNumbers("soda_can", {
+                start: 0, end: 9
+            }),
+            frameRate: 1000 / 100,
+            repeat: -1
+        });
+
+        highlightAnim.addFrame([
+            {
+                key: "soda_can",
+                frame: 0,
+                duration: 1500
+            }
+        ]);
     }
 }
