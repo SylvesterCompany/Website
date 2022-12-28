@@ -1,9 +1,9 @@
 import Player from "../classes/Player.js";
 import SodaCan from "../classes/SodaCan.js";
 
-export default class PreloaderScene extends Phaser.Scene {
+export default class LoaderScene extends Phaser.Scene {
     constructor() {
-        super("PreloaderScene");
+        super("LoaderScene");
     }
 
     preload() {
