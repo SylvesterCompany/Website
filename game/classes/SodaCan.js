@@ -1,4 +1,7 @@
 export default class SodaCan extends Phaser.Physics.Arcade.Sprite {
+    static SPRITE_WIDTH = 16;
+    static SPRITE_HEIGHT = 16;
+
     constructor(scene, x, y) {
         super(scene, x, y, "soda_can");
 
@@ -10,5 +13,8 @@ export default class SodaCan extends Phaser.Physics.Arcade.Sprite {
         this.body.allowGravity = false;
         this.visible = true;
         this.depth = 0;
+
+        this.setSize(SodaCan.SPRITE_WIDTH, SodaCan.SPRITE_HEIGHT);
+        this.setOrigin(0, 1);
     }
 }

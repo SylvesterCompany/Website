@@ -2,6 +2,7 @@ import Player from "/game/classes/Player.js";
 import Checkpoint from "../classes/Checkpoint.js";
 import ArchiveCollection from "../classes/ArchiveCollection.js";
 import openArchive from "../utils/openArchive.js";
+import SodaCan from "../classes/SodaCan.js";
 
 export default class GameScene extends Phaser.Scene {
     player;
@@ -11,6 +12,7 @@ export default class GameScene extends Phaser.Scene {
     front;
     background;
     plateformes;
+    sodacans = [];
     checkpoints = [];
     checkLap;
     gameoverText;
@@ -35,6 +37,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.createWorld();
         this.createPlayer();
+        this.createSodaCans();
         this.createCheckpoints();
         this.createCamera();
         this.createFire();
@@ -60,23 +63,34 @@ export default class GameScene extends Phaser.Scene {
         this.player.depth = 1;
     };
 
+    createSodaCans() {
+        // Create soda cans
+
+        const sodacans = this.map.objects.find(object => object.name === "sodacans").objects;
+
+        for (const sc of sodacans) {
+            // console.log(sc)
+            const newSodacan = new SodaCan(this, sc.x, sc.y);
+
+            this.physics.add.overlap(this.player, newSodacan, null, null, this);
+
+            this.sodacans = [...this.sodacans, newSodacan];
+        }
+    }
+
     createCheckpoints() {
         // Create checkpoints
 
         const checkpoints = this.map.objects.find(object => object.name === "checkpoints").objects;
 
         for (const cp of checkpoints) {
-            this.createCheckpoint(cp.x, cp.y);
+            const newCheckpoint = new Checkpoint(this, cp.x, cp.y);
+
+            this.physics.add.overlap(this.player, newCheckpoint, this.save, null, this);
+
+            this.checkpoints = [...this.checkpoints, newCheckpoint];
         }
     }
-
-    createCheckpoint(x, y) {
-        const newCheckpoint = new Checkpoint(this, x, y);
-
-        this.physics.add.overlap(this.player, newCheckpoint, this.save, null, this);
-
-        this.checkpoints = [...this.checkpoints, newCheckpoint];
-    };
 
     createWorld() {
         // Add Tiles set

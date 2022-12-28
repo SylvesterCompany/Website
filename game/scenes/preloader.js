@@ -1,4 +1,5 @@
 import Player from "../classes/Player.js";
+import SodaCan from "../classes/SodaCan.js";
 
 export default class PreloaderScene extends Phaser.Scene {
     constructor() {
@@ -67,7 +68,10 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image("front_rocks", "/game/tiles/front_rocks.png");
         this.load.image('background', '/game/tiles/light_sky.png');
         this.load.image('checkpoint', '/game/sprites/checkpoint.png');
-        this.load.image('soda_can', '/game/sprites/soda_can.png');
+        this.load.spritesheet('soda_can', '/game/sprites/soda_can.png', {
+            frameWidth: SodaCan.SPRITE_WIDTH,
+            frameHeight: SodaCan.SPRITE_HEIGHT
+        });
 
         // Restart button
         this.load.image('Restart', '/static/img/PLACEHOLDER.png');
