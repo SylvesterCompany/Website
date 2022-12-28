@@ -5,7 +5,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     static BOUNCE = 0;
     static SPEED = 135;
-    static ACCELERATION = 5;
+    static ACCELERATION = 27;
     static JUMP = 270;
 
     playerDirection;
