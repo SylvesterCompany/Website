@@ -48,7 +48,10 @@ export default class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.plateformes);
 
         // Overlap
-        this.physics.add.overlap(this.player, this.fires, this.gameoverScreen, null, this);
+        this.physics.add.overlap(this.player, this.fires, () => {
+            // Starts the scene in parallel
+            this.scene.launch('GameOverScene');
+        }, null, this);
 
         // Make the camera follow the player
         this.cameras.main.startFollow(this.player,true);
@@ -183,20 +186,6 @@ export default class GameScene extends Phaser.Scene {
         }
 
         localStorage.removeItem('Player_position');
-    };
-
-    gameoverScreen() {
-        this.physics.pause();
-        this.theme.stop();
-        this.anims.pauseAll();
-        this.gameoverText = this.add.text(this.screenCenterX, this.screenCenterY, 'Game Over', {
-            fontSize: '24px',
-            backgroundColor: '#543F24'
-        });
-        this.gameoverText.setOrigin(0.5);
-
-        this.restartButton = this.add.image(this.screenCenterX, this.screenCenterY + 25, 'Restart').setInteractive();
-        this.restartButton.on('pointerdown', this.restartGame, this);
     };
 
 // restart game (game over + you won!) // source and target sprite for further interactions

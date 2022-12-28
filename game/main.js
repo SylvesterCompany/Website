@@ -3,6 +3,7 @@ import getZoomFactor from "./utils/getResolution.js";
 import MenuScene from "./scenes/Menu.js";
 import GameScene from "./scenes/Game.js";
 import LoaderScene from "./scenes/Loader.js";
+import GameOverScene from "./scenes/GameOver.js";
 
 // Constants
 
@@ -37,7 +38,7 @@ const config = {
             debug: DEBUG_MODE
         }
     },
-    scene: [LoaderScene, GameScene, MenuScene]
+    scene: [LoaderScene, GameScene, GameOverScene, MenuScene]
 };
 
 /**
