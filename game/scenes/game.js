@@ -69,10 +69,10 @@ export default class GameScene extends Phaser.Scene {
         const sodacans = this.map.objects.find(object => object.name === "sodacans").objects;
 
         for (const sc of sodacans) {
-            // console.log(sc)
-            const newSodacan = new SodaCan(this, sc.x, sc.y);
+            const archiveId = sc.properties.find(property => property.name === "archiveId").value;
+            const newSodacan = new SodaCan(this, sc.x, sc.y, archiveId);
 
-            this.physics.add.overlap(this.player, newSodacan, null, null, this);
+            this.physics.add.overlap(this.player, newSodacan, this.collectArchive, null, this);
 
             this.sodacans = [...this.sodacans, newSodacan];
         }
@@ -157,12 +157,14 @@ export default class GameScene extends Phaser.Scene {
         }
     };
 
-    collectArchive(id) {
-        this.archiveCollection.collect(id);
+    collectArchive(player, sodacan) {
+        sodacan.destroy();
+
+        this.archiveCollection.collect(sodacan.archiveId);
 
         this.physics.pause();
 
-        openArchive(this.archiveCollection.getArchive(id), () => {
+        openArchive(this.archiveCollection.getArchive(sodacan.archiveId), () => {
             this.physics.resume();
         });
     }
