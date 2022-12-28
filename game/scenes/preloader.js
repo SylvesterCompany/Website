@@ -6,8 +6,10 @@ export default class PreloaderScene extends Phaser.Scene {
     }
 
     preload() {
-        // Player's textures
+        // Sylvester's cave Theme
+        this.load.audio('cave', ['cave.mp3']);
 
+        // Player's textures
         this.load.spritesheet("player-idle", "/game/sprites/sylvester_idle.png", {
             frameWidth: Player.SPRITE_WIDTH,
             frameHeight: Player.SPRITE_HEIGHT,

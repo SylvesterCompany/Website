@@ -18,6 +18,7 @@ export default class GameScene extends Phaser.Scene {
     screenCenterY;
     restartButton;
     archiveCollection;
+    theme;
 
     constructor() {
         super('GameScene');
@@ -25,6 +26,12 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));
+
+        this.theme = this.sound.add('cave', {
+            volume: 0.2,
+            loop: true
+        });
+        this.theme.play();
 
         this.createWorld();
         this.createPlayer();
@@ -166,6 +173,7 @@ export default class GameScene extends Phaser.Scene {
 
     gameoverScreen() {
         this.physics.pause();
+        this.theme.stop();
         this.anims.pauseAll();
         this.gameoverText = this.add.text(this.screenCenterX, this.screenCenterY, 'Game Over', {
             fontSize: '24px',
