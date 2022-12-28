@@ -5,6 +5,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     static BOUNCE = 0;
     static SPEED = 135;
+    static ACCELERATION = 5;
     static JUMP = 270;
 
     playerDirection;
@@ -36,7 +37,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
             this._turnRight();
 
-            this.setVelocityX(Player.SPEED);
+            this.setVelocityX(this.body.velocity.x < Player.SPEED ? this.body.velocity.x + Player.ACCELERATION : Player.SPEED);
 
             if (this.body.onFloor()) {
                 this.anims.play("run-right", true);
@@ -46,7 +47,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
             this._turnLeft();
 
-            this.setVelocityX(-Player.SPEED);
+            this.setVelocityX(this.body.velocity.x > -Player.SPEED ? this.body.velocity.x - Player.ACCELERATION : -Player.SPEED);
 
             if (this.body.onFloor()) {
                 this.anims.play("run-left", true);
