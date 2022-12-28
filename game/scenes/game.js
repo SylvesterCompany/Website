@@ -5,12 +5,13 @@ import openArchive from "../utils/openArchive.js";
 
 export default class GameScene extends Phaser.Scene {
     player;
+    map;
     cursors;
     decors;
     front;
     background;
     plateformes;
-    checkpoint;
+    checkpoints = [];
     checkLap;
     gameoverText;
     screenCenterX;
@@ -27,8 +28,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.createWorld();
         this.createPlayer();
-        this.createCheckpoint(305, 130);
-        this.createCheckpoint(580, 130);
+        this.createCheckpoints();
         this.createCamera();
         this.createFire();
 
@@ -53,17 +53,29 @@ export default class GameScene extends Phaser.Scene {
         this.player.depth = 1;
     };
 
+    createCheckpoints() {
+        // Create checkpoints
+
+        const checkpoints = this.map.objects.find(object => object.name === "checkpoints").objects;
+
+        for (const cp of checkpoints) {
+            this.createCheckpoint(cp.x, cp.y);
+        }
+    }
+
     createCheckpoint(x, y) {
-        this.checkpoint = new Checkpoint(this, x, y);
-        this.checkpoint.visible = true;
-        this.checkpoint.depth = 0;
-        this.physics.add.collider(this.checkpoint, this.plateformes);
-        this.physics.add.overlap(this.player, this.checkpoint, this.save, null ,this);
+        const newCheckpoint = new Checkpoint(this, x, y);
+
+        this.physics.add.overlap(this.player, newCheckpoint, this.save, null, this);
+
+        this.checkpoints = [...this.checkpoints, newCheckpoint];
     };
 
     createWorld() {
         // Add Tiles set
         const map = this.add.tilemap('tilemap_forest');
+        this.map = map;
+
         const back = map.addTilesetImage('background');
         const tileset_forest = map.addTilesetImage('tileset_forest');
         const tileset_rocks = map.addTilesetImage('front_rocks');
@@ -132,18 +144,6 @@ export default class GameScene extends Phaser.Scene {
         openArchive(this.archiveCollection.getArchive(id), () => {
             this.physics.resume();
         });
-        // Opens the archive
-
-        // let currentArchives = localStorage.getItem('Archives_collected');
-        //
-        // if (currentArchives) {
-        //     currentArchives = [...JSON.parse(currentArchives), id];
-        //     localStorage.setItem('Archives_collected', JSON.stringify(currentArchives));
-        // } else {
-        //     localStorage.setItem('Archives_collected', JSON.stringify([id]));
-        // }
-        //
-        // console.log(localStorage.getItem('Archives_collected'));
     }
 
     save(){
