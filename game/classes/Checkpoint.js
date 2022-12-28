@@ -2,7 +2,6 @@ export default class Checkpoint extends Phaser.Physics.Arcade.Sprite {
     static SPRITE_WIDTH = 16;
     static SPRITE_HEIGHT = 16;
 
-
     constructor(scene, x, y) {
         super(scene, x, y, "checkpoint");
 
@@ -14,8 +13,6 @@ export default class Checkpoint extends Phaser.Physics.Arcade.Sprite {
         this.body.allowGravity = false;
         this.visible = true;
         this.depth = 0;
-
-        this.setCollideWorldBounds(true);
 
         this.setSize(Checkpoint.SPRITE_WIDTH, Checkpoint.SPRITE_HEIGHT);
         this.setOrigin(0, 1);

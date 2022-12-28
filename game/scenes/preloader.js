@@ -39,12 +39,13 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image("front_rocks", "/game/tiles/front_rocks.png");
         this.load.image('background', '/game/tiles/light_sky.png');
         this.load.image('checkpoint', '/game/sprites/checkpoint.png');
+        this.load.image('soda_can', '/game/sprites/soda_can.png');
 
         // Restart button
         this.load.image('Restart', '/static/img/PLACEHOLDER.png');
 
         // Load the JSON file
-        this.load.tilemapTiledJSON('tilemap_forest', '/game/tiles/tilemap_forest.json')
+        this.load.tilemapTiledJSON('tilemap_forest', '/game/tiles/tilemap_forest.json');
 
         // Fire dataPositionLoad
         this.load.json('fireData', '/game/levelDataFire.json');
