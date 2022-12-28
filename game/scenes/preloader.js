@@ -6,6 +6,34 @@ export default class PreloaderScene extends Phaser.Scene {
     }
 
     preload() {
+        let width = this.cameras.main.centerX;
+        let height = this.cameras.main.centerY;
+
+        const progressBar = this.add.graphics();
+        const progressBox = this.add.graphics();
+        progressBox.fillStyle(0x222222, 0.6);
+        progressBox.fillRect(width - 25, height - 2.5, 50, 5);
+
+        let loadingText = this.add.text(width - 22, height - 15, 'Loading...').setFontSize(10);
+        let percentText = this.add.text(width - 12, height + 5, '0%').setFontSize(10);
+
+
+        this.load.on('progress', (value) => {
+            loadingText.setText('Loading' + '.'
+                .repeat((loadingText.text.match(/./g) || []).length % 3))
+            percentText.setText(parseInt(value * 100) + '%');
+            progressBar.clear();
+            progressBar.fillStyle(0x00FF00, 1);
+            progressBar.fillRect(width - 23, height - 1, 50 * value - 4, 2.5);
+        });
+
+        this.load.on('complete', () => {
+            progressBar.destroy();
+            progressBox.destroy();
+            loadingText.destroy();
+            percentText.destroy();
+        });
+
         // Sylvester's cave Theme
         this.load.audio('cave', ['/game/music/cave.mp3']);
 
