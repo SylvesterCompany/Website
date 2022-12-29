@@ -1,17 +1,18 @@
 [
   {
     "id": 1,
-    "title": "Rapport du Pr. BRANCHE",
-    "content": "Nos analyses approfondies rapportent une forte dégradation de l'écosystème forestier. La quasi-totalité des espèces animales sont affectées, dont certaines montrant une hostilité rare. Cette disparition des forêts réduit l'absorption du dioxyde de carbone par les arbres. De plus amples détails sont fournis dans le rapport du Pr. BROUSSE."
+    "title": "Informe del Pr. BRANCHE",
+    "content": "Nuestros análisis exhaustivos indican una fuerte degradación del ecosistema forestal. La casi totalidad de las especies animales han sido afectadas, de las cuales algunas muestran un carácter hostil anormal. La desaparición de los bosques reduce la absorción de dióxido de carbono de los árborles. Se ofrecen más detalles en el informe del Pr. BROUSSE."
+
   },
   {
     "id": 2,
-    "title": "Rapport du Pr. BROUSSE",
-    "content": "Suite aux travaux du Pr. BRANCHE, nous avons envoyé une deuxième équipe sur le terrain. Sur place, l'air et le sol présentaient une forte acidité. Une espèce inconnue ressemblant à la description faite par le Pr. BRANCHE nous a attaqués. Nous rapportons le décès de 3 membres sur les 5 personnes qui composaient l'équipe de recherche."
+    "title": "Informe del Pr. BROUSSE",
+    "content": "Siguiendo el trabajo del Pr. BRANCHE, enviamos un segundo equipo al terreno. En el área, el suelo y el aire presentaban una fuerte acidez. Una especie desconocida, coincidente con la descripción del pr. BRANCHE, nos atacó. Reportamos el deceso de 3 de nuestros 5 miembros, quienes formaban parte del equipo de búsqueda."
   },
   {
     "id": 3,
-    "title": "Rapport du Pr. BROUSSE (suite)",
-    "content": "Alors que je me tiens ici au milieu des arbres mourants de la forêt, je ne peux m'empêcher de ressentir un profond sentiment de tristesse et de désespoir. L'écosystème autrefois florissant n'est plus que l'ombre de lui-même. J'espère qu'à travers mes recherches, je pourrai œuvrer pour trouver une solution avant qu'il ne soit trop tard."
+    "title": "Informe del Pr. BROUSSE (continuación)",
+    "content": "Mientras permanezco aquí, entre los árboles moribundos del bosque, no puedo evitar sentir un profundo sentimiento de tristeza y desesperación. El ecosistema, en otro tiempo tan floreciente, no es más que la sombra de su pasado. Espero que, a través de mis investigacioneses, pueda hallar una solución, antes que sea demasiado tarde."
   }
 ]
