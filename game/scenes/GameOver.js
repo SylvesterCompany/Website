@@ -18,10 +18,10 @@ export default class GameOverScene extends Phaser.Scene {
         });
         gameOverText.setOrigin(0.5);
 
-        let restartButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 25, 'restart')
+        let button = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 25, 'restart')
             .setInteractive({useHandCursor: true});
 
-        restartButton.on('pointerdown', () => {
+        button.on('pointerdown', () => {
             console.log(gameScene);
             gameScene.scene.restart();
             this.scene.stop();
