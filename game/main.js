@@ -14,7 +14,7 @@ const GRAVITY = 1000;
 const CANVAS_WIDTH = TILE_SIZE * TILE_X;
 const CANVAS_HEIGHT = TILE_SIZE * TILE_Y;
 const ZOOM_FACTOR = getZoomFactor(CANVAS_HEIGHT);
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 
 // Global variables
 

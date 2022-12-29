@@ -32,7 +32,7 @@ export default class SodaCan extends Phaser.Physics.Arcade.Sprite {
             frames: this.anims.generateFrameNumbers("soda_can", {
                 start: 0, end: 9
             }),
-            frameRate: 1000 / 100,
+            frameRate: 1000 / 50,
             repeat: -1
         });
 
