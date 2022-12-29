@@ -50,7 +50,7 @@ export default class GameScene extends Phaser.Scene {
         // Overlap
         this.physics.add.overlap(this.player, this.fires, () => {
             // Starts the scene in parallel
-            this.scene.launch('GameOverScene');
+            //this.scene.launch('GameOverScene');
         }, null, this);
 
         // Make the camera follow the player
