@@ -13,11 +13,10 @@ export default class GameOverScene extends Phaser.Scene {
         gameScene.scene.pause();
         gameScene.theme.stop();
 
-        let gameOverText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'Game Over', {
+        this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'Game Over', {
             fontSize: '24px',
             backgroundColor: '#543F24'
-        });
-        gameOverText.setOrigin(0.5);
+        }).setOrigin(0.5);
 
         let button = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 25, 'restart')
             .setInteractive({useHandCursor: true});
