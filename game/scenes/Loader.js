@@ -15,8 +15,8 @@ export default class LoaderScene extends Phaser.Scene {
         progressBox.fillStyle(0x222222, 0.6);
         progressBox.fillRect(width - 25, height - 2.5, 50, 5);
 
-        let loadingText = this.add.text(width - 22, height - 15, 'Loading...').setFontSize(10);
-        let percentText = this.add.text(width - 12, height + 5, '0%').setFontSize(10);
+        let loadingText = this.add.text(width, height - 10, 'Loading...').setFontSize(10).setOrigin(0.5);
+        let percentText = this.add.text(width, height + 10, '0%').setFontSize(10).setOrigin(0.5);
 
 
         this.load.on('progress', (value) => {
@@ -74,7 +74,7 @@ export default class LoaderScene extends Phaser.Scene {
         });
 
         // Restart button
-        this.load.image('Restart', '/static/img/PLACEHOLDER.png');
+        this.load.image('restart', '/game/sprites/restart.png');
 
         // Load the JSON file
         this.load.tilemapTiledJSON('tilemap_forest', '/game/tiles/tilemap_forest.json');
