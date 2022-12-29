@@ -70,6 +70,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (cursors.up.isDown && this.body.onFloor()) { // Jump
+
             this.setVelocityY(-Player.JUMP);
             this.anims.play(this.playerDirection === "right" ? "jump-up-right" : "jump-up-left", true);
 
@@ -83,7 +84,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     die() {
-        this.scene.scene.launch("GameOverScene");
+        this.scene.launch("GameOverScene", {ctx: this});
     }
 
     _registerAnimations() {
