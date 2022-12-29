@@ -1,5 +1,6 @@
 import Player from "../classes/Player.js";
 import SodaCan from "../classes/SodaCan.js";
+import Checkpoint from "../classes/Checkpoint.js";
 
 export default class LoaderScene extends Phaser.Scene {
     constructor() {
@@ -67,11 +68,19 @@ export default class LoaderScene extends Phaser.Scene {
         this.load.image('tileset_forest', '/game/tiles/tileset_forest.png');
         this.load.image("front_rocks", "/game/tiles/front_rocks.png");
         this.load.image('background', '/game/tiles/light_sky.png');
-        this.load.image('checkpoint', '/game/sprites/checkpoint.png');
+
+        this.load.spritesheet('checkpoint', '/game/sprites/checkpoint.png', {
+            frameWidth: Checkpoint.SPRITE_WIDTH,
+            frameHeight: Checkpoint.SPRITE_HEIGHT
+        });
+
         this.load.spritesheet('soda_can', '/game/sprites/soda_can.png', {
             frameWidth: SodaCan.SPRITE_WIDTH,
             frameHeight: SodaCan.SPRITE_HEIGHT
         });
+
+        // Dust texture
+        this.load.image('dust', '/game/sprites/dust.png');
 
         // Restart button
         this.load.image('restart', '/game/sprites/restart.png');
