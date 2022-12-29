@@ -4,8 +4,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     static BOX_WIDTH = 12;
 
     static BOUNCE = 0;
-    static SPEED = 135;
-    static ACCELERATION = 27;
+    static SPEED = 150;
+    static ACCELERATION = 15;
     static JUMP = 270;
 
     playerDirection;
@@ -35,9 +35,12 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     listenControls(cursors) {
         if (cursors.right.isDown) { // Right
 
-            this._turnRight();
-
-            this.setVelocityX(this.body.velocity.x < Player.SPEED ? this.body.velocity.x + Player.ACCELERATION : Player.SPEED);
+            if (this.playerDirection === "left") {
+                this._turnRight();
+                this.setVelocityX(0); // Prevents the player from sliding on the floor
+            } else {
+                this.setVelocityX(this.body.velocity.x < Player.SPEED ? this.body.velocity.x + Player.ACCELERATION : Player.SPEED);
+            }
 
             if (this.body.onFloor()) {
                 this.anims.play("run-right", true);
@@ -45,9 +48,12 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         } else if (cursors.left.isDown) { // Left
 
-            this._turnLeft();
-
-            this.setVelocityX(this.body.velocity.x > -Player.SPEED ? this.body.velocity.x - Player.ACCELERATION : -Player.SPEED);
+            if (this.playerDirection === "right") {
+                this._turnLeft();
+                this.setVelocityX(0); // Prevents the player from sliding on the floor
+            } else {
+                this.setVelocityX(this.body.velocity.x > -Player.SPEED ? this.body.velocity.x - Player.ACCELERATION : -Player.SPEED);
+            }
 
             if (this.body.onFloor()) {
                 this.anims.play("run-left", true);
@@ -75,6 +81,10 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
                 this.anims.play(this.playerDirection === "right" ? "jump-down-right" : "jump-down-left", true);
             }
         }
+    }
+
+    die() {
+        this.scene.launch("GameOverScene");
     }
 
     _registerAnimations() {

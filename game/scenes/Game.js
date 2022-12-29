@@ -35,12 +35,12 @@ export default class GameScene extends Phaser.Scene {
         });
         this.theme.play();
 
-        this.createWorld();
         this.createPlayer();
+        this.createWorld();
         this.createSodaCans();
         this.createCheckpoints();
         this.createCamera();
-        this.createFire();
+        // this.createFire();
 
         // Méthode avec classe
 
@@ -100,6 +100,7 @@ export default class GameScene extends Phaser.Scene {
 
     createWorld() {
         // Add Tiles set
+
         const map = this.add.tilemap('tilemap_forest');
         this.map = map;
 
@@ -118,12 +119,26 @@ export default class GameScene extends Phaser.Scene {
         this.plateformes.depth = 0;
 
         this.decors = map.createLayer('decors', tileset_forest);
-        this.decors.depth = 0;
+        this.decors.depth = -1;
 
         this.front = map.createLayer("front", tileset_rocks);
         // TODO: Dynamically set scrollFactor (from Tiled info)
         this.front.scrollFactorX = 1.2;
         this.front.depth = 2;
+
+        // Make dangerous tiles... dangerous
+
+        const dangerousTiles = this.plateformes.filterTiles(tile => tile.properties.estDangereux);
+        const processedIndexes = new Set();
+
+        dangerousTiles.forEach(dangerousTile => {
+            const index = dangerousTile.index;
+
+            if (!processedIndexes.has(index)) {
+                processedIndexes.add(index);
+                this.plateformes.setTileIndexCallback(index, this.player.die, this);
+            }
+        });
     };
 
     createCamera() {
