@@ -23,7 +23,6 @@ export default class GameOverScene extends Phaser.Scene {
             .setInteractive({useHandCursor: true});
 
         button.on('pointerdown', () => {
-            console.log(gameScene);
             gameScene.scene.restart();
             this.scene.stop();
         }, this);

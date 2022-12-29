@@ -193,21 +193,6 @@ export default class GameScene extends Phaser.Scene {
         localStorage.removeItem('Player_position');
     };
 
-// restart game (game over + you won!) // source and target sprite for further interactions
-// camera and effect for use to move camera and use a frame from sprite
-    restartGame() {
-        // fade out
-        this.restartButton.visible = false;
-        this.gameoverText.visible = false;
-        this.cameras.main.fadeOut(500);
-
-        // when fade out completes, restart scene
-        this.cameras.main.on('camerafadeoutcomplete', function () {
-            // restart the scene
-            this.scene.restart();
-        }, this);
-    }
-
     update() {
         this.cursors = this.input.keyboard.createCursorKeys(); // Retrieves the keys
         this.player.listenControls(this.cursors);
