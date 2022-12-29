@@ -52,6 +52,10 @@ export default class LoaderScene extends Phaser.Scene {
             frameWidth: Player.SPRITE_WIDTH,
             frameHeight: Player.SPRITE_HEIGHT
         });
+        this.load.spritesheet("checkpoint_save", "game/sprites/checkpoint_save.png", {
+            frameWidth: Checkpoint.SPRITE_WIDTH,
+            frameHeight: Checkpoint.SPRITE_HEIGHT
+        });
 
         // Load the music
         this.load.audio('adventure', ['/game/music/adventure.mp3']);

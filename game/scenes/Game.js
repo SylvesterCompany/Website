@@ -222,7 +222,8 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
-    save(){
+    save(player, checkpoint){
+        // checkpoint.anims.play("checkpoint_save",true);
         localStorage.setItem('Player_position', JSON.stringify({
             x: this.player.x,
             y: this.player.y,
