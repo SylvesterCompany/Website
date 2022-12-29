@@ -3,6 +3,8 @@ import SodaCan from "../classes/SodaCan.js";
 import Checkpoint from "../classes/Checkpoint.js";
 
 export default class LoaderScene extends Phaser.Scene {
+    LEVEL = "tilemap_forest.json";
+
     constructor() {
         super("LoaderScene");
     }
@@ -35,6 +37,9 @@ export default class LoaderScene extends Phaser.Scene {
             loadingText.destroy();
             percentText.destroy();
         });
+
+        // Load the JSON level
+        this.load.tilemapTiledJSON('tilemap_forest', `/game/tiles/${this.LEVEL}`);
 
         // Sylvester's cave Theme
         this.load.audio('cave', ['/game/music/cave.mp3']);
@@ -72,6 +77,8 @@ export default class LoaderScene extends Phaser.Scene {
         this.load.image('tileset_forest', '/game/tiles/tileset_forest.png');
         this.load.image("front_rocks", "/game/tiles/front_rocks.png");
         this.load.image('background', '/game/tiles/light_sky.png');
+        this.load.image('last_background', '/game/tiles/last_background.png');
+        this.load.image('lights', '/game/tiles/lights.png');
 
         this.load.spritesheet("checkpoint_save", "game/sprites/checkpoint_save.png", {
             frameWidth: Checkpoint.SPRITE_WIDTH,
@@ -90,9 +97,6 @@ export default class LoaderScene extends Phaser.Scene {
 
         // Restart button
         this.load.image('restart', '/game/sprites/restart.png');
-
-        // Load the JSON file
-        this.load.tilemapTiledJSON('tilemap_forest', '/game/tiles/tilemap_forest.json');
 
         // Fire dataPositionLoad
         this.load.json('fireData', '/game/levelDataFire.json');

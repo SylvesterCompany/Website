@@ -30,7 +30,7 @@ const config = {
     canvas: canvas,
     zoom: ZOOM_FACTOR,
     roundPixels: true,
-    backgroundColor: 0x000000,
+    backgroundColor: 0x212222,
     physics: {
         default: 'arcade',
         arcade: {
