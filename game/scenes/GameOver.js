@@ -7,8 +7,9 @@ export default class GameOverScene extends Phaser.Scene {
      * Things done when Game Over is called
      */
     create() {
-        // Pause everything like scene and music
         const gameScene = this.scene.get('GameScene');
+
+        // Pause everything like scene and music
         gameScene.scene.pause();
         gameScene.theme.stop();
 
