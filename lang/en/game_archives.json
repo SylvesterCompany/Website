@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "title": "Rapport du Pr. BRANCHE",
-    "content": "Nos analyses approfondies rapportent une forte dégradation de l'écosystème forestier. La quasi-totalité des espèces animales sont affectées, dont certaines montrant une hostilité rare. Cette disparition des forêts réduit l'absorption du dioxyde de carbone par les arbres. De plus amples détails sont fournis dans le rapport du Pr. BROUSSE."
+    "title": "Report of Pr. BRANCH",
+    "content": "Our in-depth analyses report a strong degradation of the forest ecosystem. Almost all animal species are affected, some of them showing a rare hostility. This disappearance of the forests reduces the absorption of CO2 by the trees. More details are provided in the report of Pr. BUSH."
   },
   {
     "id": 2,
-    "title": "Rapport du Pr. BROUSSE",
-    "content": "Suite aux travaux du Pr. BRANCHE, nous avons envoyé une deuxième équipe sur le terrain. Sur place, l'air et le sol présentaient une forte acidité. Une espèce inconnue ressemblant à la description faite par le Pr. BRANCHE nous a attaqués. Nous rapportons le décès de 3 membres sur les 5 personnes qui composaient l'équipe de recherche."
+    "title": "Report of Pr. BUSH",
+    "content": "Following the work of Prof. BRANCH, we sent a second team to the field. On the spot, the air and the soil were very acidic. An unknown species resembling the description made by Prof. BRANCHE attacked us. We report the death of three members out of the five people who made up the research team."
   },
   {
     "id": 3,
-    "title": "Rapport du Pr. BROUSSE (suite)",
-    "content": "Alors que je me tiens ici au milieu des arbres mourants de la forêt, je ne peux m'empêcher de ressentir un profond sentiment de tristesse et de désespoir. L'écosystème autrefois florissant n'est plus que l'ombre de lui-même. J'espère qu'à travers mes recherches, je pourrai œuvrer pour trouver une solution avant qu'il ne soit trop tard."
+    "title": "Report of Pr. BUSH",
+    "content": "As I stand here among the dying trees of the forest, I cannot help but feel a deep sense of sadness and despair. The once thriving ecosystem is a shadow of its former self. I hope that through my research, I can work to find a solution before it is too late."
   }
 ]
