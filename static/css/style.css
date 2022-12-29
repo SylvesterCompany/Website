@@ -347,14 +347,15 @@ main, #title-container, #game-container {
 #archive h3 {
     font-size: 3vh;
     margin-top: 0;
-    margin-left: 5vh;
+    left: 5vh;
     top: 6.2vh;
     color: var(--archive-title);
 }
 
 #archive p {
     font-size: 2.5vh;
-    margin: 0 15vh 0 7.5vh;
+    margin: 0 15vh 0 0;
+    left: 7.5vh;
     top: 15vh;
     color: var(--archive-content);
 }
@@ -362,14 +363,14 @@ main, #title-container, #game-container {
 #archive span {
     font-size: 2.8vh;
     font-weight: bold;
-    margin-left: 7.5vh;
+    left: 7.5vh;
     bottom: 17vh;
     color: var(--archive-content);
 }
 
 #archive .enter {
     position: absolute;
-    margin-left: 7.5vh;
+    left: 7.5vh;
     bottom: 5vh;
     width: 10vh;
 }
