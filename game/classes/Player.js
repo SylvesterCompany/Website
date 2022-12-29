@@ -84,7 +84,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     die() {
-        this.scene.launch("GameOverScene", {ctx: this});
+        this.scene.launch("GameOverScene");
     }
 
     _registerAnimations() {

@@ -21,6 +21,7 @@ export default class GameScene extends Phaser.Scene {
     restartButton;
     archiveCollection;
     theme;
+    dustEmitter;
 
     constructor() {
         super('GameScene');
@@ -40,6 +41,7 @@ export default class GameScene extends Phaser.Scene {
         this.createSodaCans();
         this.createCheckpoints();
         this.createCamera();
+        this.createDustEmitters();
         // this.createFire();
 
         // Méthode avec classe
@@ -136,10 +138,40 @@ export default class GameScene extends Phaser.Scene {
 
             if (!processedIndexes.has(index)) {
                 processedIndexes.add(index);
-                this.plateformes.setTileIndexCallback(index, this.player.die, this);
+                this.plateformes.setTileIndexCallback(index, () => { this.player.die() }, this);
             }
         });
     };
+
+    createDustEmitters() {
+        const MIN_SPEED = 1;
+        const MAX_SPEED = 5;
+
+        const dustParticles = this.add.particles("dust");
+        this.dustEmitter = dustParticles.createEmitter();
+        this.dustEmitter.deathCallback = this._relocateDust.bind(this);
+
+        this.dustEmitter.setPosition(0, 0);
+        this.dustEmitter.setSpeed({ min: MIN_SPEED, max: MAX_SPEED});
+        this.dustEmitter.setFrequency(50);
+        this.dustEmitter.setAngle(0);
+        this.dustEmitter.setLifespan(4000);
+        this.dustEmitter.setQuantity(1);
+        this.dustEmitter.setBlendMode(Phaser.BlendModes.ADD);
+    }
+
+    _relocateDust() {
+        const MIN_GRAVITY = 1;
+        const MAX_GRAVITY = 5;
+        const AMPLITUDE = 2;
+
+        this.dustEmitter.setPosition(
+            this.player.x + Math.random() * this.game.canvas.width * AMPLITUDE - (this.game.canvas.width * AMPLITUDE) / 2,
+            0 + Math.random() * this.game.canvas.height
+        );
+        this.dustEmitter.setGravityY(Math.random() * (MIN_GRAVITY + MAX_GRAVITY) - MIN_GRAVITY);
+        this.dustEmitter.setAlpha(Math.cos(this.game.getTime() / 500) / 10 + 0.2);
+    }
 
     createCamera() {
         // Add camera
@@ -190,7 +222,9 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
-    save(){
+    save(player, checkpoint){
+        checkpoint.save();
+
         localStorage.setItem('Player_position', JSON.stringify({
             x: this.player.x,
             y: this.player.y,
