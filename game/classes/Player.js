@@ -27,6 +27,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         // Defines the bounce factor
         this.setBounce(Player.BOUNCE);
 
+        this.setOrigin(0.5);
+
         this.playerDirection = "right";
 
         this._registerAnimations();

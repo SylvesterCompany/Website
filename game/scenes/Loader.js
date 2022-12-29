@@ -73,10 +73,12 @@ export default class LoaderScene extends Phaser.Scene {
         this.load.image("front_rocks", "/game/tiles/front_rocks.png");
         this.load.image('background', '/game/tiles/light_sky.png');
 
-        this.load.spritesheet('checkpoint', '/game/sprites/checkpoint.png', {
+        this.load.spritesheet("checkpoint_save", "game/sprites/checkpoint_save.png", {
             frameWidth: Checkpoint.SPRITE_WIDTH,
             frameHeight: Checkpoint.SPRITE_HEIGHT
         });
+
+        this.load.image('checkpoint_off', '/game/sprites/checkpoint_off.png');
 
         this.load.spritesheet('soda_can', '/game/sprites/soda_can.png', {
             frameWidth: SodaCan.SPRITE_WIDTH,
