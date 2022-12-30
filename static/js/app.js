@@ -37,8 +37,8 @@ playBtn.addEventListener("click", () => {
 // TODO: Delete after development phase
 loadFont('Pixel', '/static/fonts/Pixel.ttf');
 
-// switchToGame();
-// startGame();
+switchToGame();
+startGame();
 
 import openDialog from "/game/utils/openDialog.js";
 import getResolution from "../../game/utils/getZoomFactor.js";

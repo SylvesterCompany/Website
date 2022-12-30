@@ -46,6 +46,9 @@ export default class LoaderScene extends Phaser.Scene {
         // Sylvester's cave Theme
         this.load.audio('cave', ['/game/music/cave.mp3']);
 
+        // Wind Sound
+        this.load.audio('wind', ['/game/music/wind.mp3']);
+
         // Player's textures
         this.load.spritesheet("player-idle", "/game/sprites/sylvester_idle.png", {
             frameWidth: Player.SPRITE_WIDTH,
@@ -63,9 +66,6 @@ export default class LoaderScene extends Phaser.Scene {
             frameWidth: Checkpoint.SPRITE_WIDTH,
             frameHeight: Checkpoint.SPRITE_HEIGHT
         });
-
-        // Load the music
-        this.load.audio('adventure', ['/game/music/adventure.mp3']);
 
         // Fire texture
         this.load.spritesheet('fire', '/game/sprites/fire_spritesheet.png', {
