@@ -9,11 +9,6 @@ export default class GameScene extends Phaser.Scene {
     player;
     map;
     cursors;
-
-    checkLap;
-    gameoverText;
-    screenCenterX;
-    screenCenterY;
     restartButton;
     archiveCollection;
     theme;
@@ -38,7 +33,8 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         this.scene.launch('OverlayScene');
-        this.scale.resize(16 * 20, 16 * 13);
+        //this.scale.resize(16 * 20, 16 * 13);
+        this.scale.setGameSize(16 * 20, 16 * 13);
         this.cameras.main.fadeIn(500);
 
         this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));
@@ -52,7 +48,6 @@ export default class GameScene extends Phaser.Scene {
             volume: 0.3,
         });
 
-        this.createPlayer();
         this.createWorld();
         this.createSodaCans();
         this.createCheckpoints();
@@ -65,26 +60,23 @@ export default class GameScene extends Phaser.Scene {
 
         // Collisions
         this.physics.add.collider(this.player, this.plateformes);
+        this.physics.world.setBounds(0, 0, 40 * TILE_SIZE, 13 * TILE_SIZE); // TODO: Gérer par rapport à la taille de la map chargée
 
         // Overlap
-        this.physics.add.overlap(this.player, this.fires, () => {
+        /*this.physics.add.overlap(this.player, this.fires, () => {
             // Starts the scene in parallel
             //this.scene.launch('GameOverScene');
-        }, null, this);
+        }, null, this);*/
 
         // Make the camera follow the player
-        this.cameras.main.startFollow(this.player, true);
+
+        this.cameras.main.setBounds(0, 0, 40 * TILE_SIZE, TILE_Y * TILE_SIZE, true);
+        this.cameras.main.startFollow(this.player, true, 1, 1, 0, 0);
 
         // ALWAYS AT THE END OF CREATE
         this.loadCheckpoint();
 
         //console.log(this.player.body.onFloor());
-    };
-
-    createPlayer() {
-        this.player = new Player(this, 80, 145);
-        this.player.visible = true;
-        this.player.depth = 1;
     };
 
     createSodaCans() {
@@ -155,10 +147,17 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    changeLevel(levelId, checkpointId) {
+        this.currentLevel = this.game.registry.get('levels')[levelId - 1];
+
+        this.save(levelId, checkpointId);
+        this.scene.restart();
+    }
+
     createWorld() {
         // Add Tiles set
 
-        const map = this.add.tilemap('tilemap_forest');
+        const map = this.add.tilemap("tilemap_1_1");
         this.map = map;
 
         const last_back = map.addTilesetImage('last_background');
@@ -261,12 +260,6 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
-    createCamera() {
-        // Add camera
-        this.physics.world.setBounds(0, 0, 40 * 16, 13 * 16);
-        this.cameras.main.setBounds(0, 0, 40 * 16, 13 * 16, true);
-    };
-
     createFire() {
         // Load json data
         this.levelData = this.cache.json.get('fireData');
@@ -310,33 +303,26 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
-    save(player, checkpoint) {
-        checkpoint.save();
+    save(levelId, checkpointId) {
+        localStorage.removeItem('Level');
 
-        localStorage.setItem('Player_position', JSON.stringify({
-            x: this.player.x,
-            y: this.player.y,
+        localStorage.setItem('Level', JSON.stringify({
+            levelId: levelId,
+            checkpointId: checkpointId
         }));
     };
 
-    loadCheckpoint() {
-        const lastCheckpoint = localStorage.getItem('Player_position');
-        if (lastCheckpoint) {
-            const position = JSON.parse(lastCheckpoint);
-            this.player.setX(position.x);
-            this.player.setY(position.y);
-        }
+    spawn() {
+        const { checkpointId } = JSON.parse(localStorage.getItem('Level'));
 
-        localStorage.removeItem('Player_position');
+        const checkpoint = this.checkpoints.find(cp => cp.id === checkpointId);
+
+        this.player.setPosition(checkpoint.x, checkpoint.y);
     };
 
     update() {
         console.log(this.player.body.onFloor());
         this.cursors = this.input.keyboard.createCursorKeys(); // Retrieves the keys
         this.player.listenControls(this.cursors);
-
-        // Center of the Game screen
-        this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
-        this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
     }
 };

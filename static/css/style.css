@@ -182,6 +182,7 @@ main, #title-container, #game-container {
 
 
 #game {
+    cursor: none;
     /*transform: scaleY(0);*/
     border-radius: 12px;
     /*border: solid var(--light-gold) 2px;*/

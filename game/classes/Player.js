@@ -104,8 +104,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         const SHAKE_DURATION = 100;
         const SHAKE_INTENSITY = 0.03;
 
-        this.player.visible = false;
-        this.cameras.main.shake(SHAKE_DURATION, SHAKE_INTENSITY);
+        this.visible = false;
+
+        this.scene.cameras.main.shake(SHAKE_DURATION, SHAKE_INTENSITY);
 
         this.time.addEvent({
             delay: SHAKE_DURATION,

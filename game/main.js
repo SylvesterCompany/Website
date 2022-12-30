@@ -31,8 +31,8 @@ const config = {
     canvas: canvas,
     scale: {
         mode: Phaser.Scale.ScaleModes.FIT,
-        width: CANVAS_WIDTH, // 20 tiles
-        height: CANVAS_HEIGHT, // 13 tiles
+        width: CANVAS_WIDTH,
+        height: CANVAS_HEIGHT,
     },
     //zoom: ZOOM_FACTOR,
     roundPixels: true,
@@ -52,5 +52,6 @@ const config = {
  * Starts the game (can be imported).
  */
 export function startGame() {
-    game = new Phaser.Game(config);
+    const game = new Phaser.Game(config);
+    game.registry.set({TILE_SIZE, TILE_Y});
 }
