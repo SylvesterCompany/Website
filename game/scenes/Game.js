@@ -75,23 +75,10 @@ export default class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.plateformes);
         this.physics.world.setBounds(0, 0, 40 * TILE_SIZE, 13 * TILE_SIZE); // TODO: Gérer par rapport à la taille de la map chargée
 
-        // Overlap
-        /*this.physics.add.overlap(this.player, this.fires, () => {
-            // Starts the scene in parallel
-            //this.scene.launch('GameOverScene');
-        }, null, this);*/
-
         // Make the camera follow the player
 
         this.cameras.main.setBounds(0, 0, 40 * TILE_SIZE, TILE_Y * TILE_SIZE, true);
         this.cameras.main.startFollow(this.player, true, 1, 1, 0, 0);
-
-        // ALWAYS AT THE END OF CREATE
-
-        console.log(JSON.parse(localStorage.getItem("Level")));
-        // setTimeout(() => {
-        //     this.changeLevel(2, 1);
-        // }, 2000);
     };
 
     createSodaCans() {
@@ -115,6 +102,8 @@ export default class GameScene extends Phaser.Scene {
             }
         }
     }
+
+    createDoors() {}
 
     createPropulsors() {
         // Create soda cans (but not those whose that were previously collected!)
@@ -167,7 +156,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     changeLevel(levelId, checkpointId) {
-        this.currentLevel = this.game.registry.get('levels')[levelId - 1];
+        this.currentLevel = levelId;
 
         this.save(levelId, checkpointId);
         this.scene.restart();
@@ -176,7 +165,7 @@ export default class GameScene extends Phaser.Scene {
     createWorld() {
         // Add Tiles set
 
-        const map = this.add.tilemap("tilemap_1_1");
+        const map = this.add.tilemap(`tilemap_1_${this.currentLevel}`);
         this.map = map;
 
         const last_back = map.addTilesetImage('last_background');
