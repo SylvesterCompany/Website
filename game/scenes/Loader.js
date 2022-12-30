@@ -20,10 +20,8 @@ export default class LoaderScene extends Phaser.Scene {
 
         let loadingText = this.add.text(width, height - 20, 'Loading...', {fontFamily: 'Pixel'})
             .setOrigin(0.5)
-        console.log(loadingText);
         let percentText = this.add.text(width, height + 20, '0%', {fontFamily: 'Pixel'})
             .setOrigin(0.5)
-
 
         this.load.on('progress', (value) => {
             loadingText.setText('Loading' + '.'

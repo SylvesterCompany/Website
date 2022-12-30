@@ -1,4 +1,4 @@
-import getZoomFactor from "./utils/getResolution.js";
+import getZoomFactor from "./utils/getZoomFactor.js";
 
 import MenuScene from "./scenes/Menu.js";
 import GameScene from "./scenes/Game.js";

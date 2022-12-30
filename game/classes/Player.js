@@ -83,8 +83,16 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    die() {
-        this.scene.launch("GameOverScene", {ctx: this});
+    die() { // "this" refers to the scene
+        const SHAKE_DURATION = 100;
+        const SHAKE_INTENSITY = 0.03;
+
+        this.cameras.main.shake(SHAKE_DURATION, SHAKE_INTENSITY);
+
+        this.time.addEvent({
+            delay: SHAKE_DURATION,
+            callback: () => { this.scene.launch("GameOverScene", {ctx: this}) },
+        });
     }
 
     _registerAnimations() {

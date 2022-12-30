@@ -16,7 +16,7 @@ export default class GameScene extends Phaser.Scene {
     restartButton;
     archiveCollection;
     theme;
-    dustEmitter;
+    dustEmitters = [];
 
     // Layers
 
@@ -139,7 +139,7 @@ export default class GameScene extends Phaser.Scene {
         this.background.depth = -3;
 
         this.lights = map.createLayer("lights", tileset_lights);
-        this.lights.scrollFactorX = 0.5;
+        this.lights.scrollFactorX = 0.4;
         this.lights.depth = -2;
 
         this.plateformes = map.createLayer('plateformes', tileset_forest);
@@ -155,8 +155,8 @@ export default class GameScene extends Phaser.Scene {
 
         this.front = map.createLayer("front", tileset_rocks);
         // TODO: Dynamically set scrollFactor (from Tiled info)
-        this.front.scrollFactorX = 1.2;
-        this.front.scrollFactorY = 1.2;
+        this.front.scrollFactorX = 1.4;
+        this.front.scrollFactorY = 1.4;
         this.front.depth = 2;
 
         // Make dangerous tiles... dangerous
@@ -178,18 +178,31 @@ export default class GameScene extends Phaser.Scene {
     createDustEmitters() {
         const MIN_SPEED = 1;
         const MAX_SPEED = 5;
+        const LIFESPAN = 3000;
 
         const dustParticles = this.add.particles("dust");
-        this.dustEmitter = dustParticles.createEmitter();
-        this.dustEmitter.deathCallback = this._relocateDust.bind(this);
 
-        this.dustEmitter.setPosition(0, 0);
-        this.dustEmitter.setSpeed({ min: MIN_SPEED, max: MAX_SPEED});
-        this.dustEmitter.setFrequency(50);
-        this.dustEmitter.setAngle(0);
-        this.dustEmitter.setLifespan(4000);
-        this.dustEmitter.setQuantity(1);
-        this.dustEmitter.setBlendMode(Phaser.BlendModes.ADD);
+        const addEmitter = (scrollFactorX, depth) => {
+            const newEmitter = dustParticles.createEmitter();
+
+            newEmitter.deathCallback = this._relocateDust.bind(this);
+
+            newEmitter.setPosition(0, 0);
+            newEmitter.setSpeed({ min: MIN_SPEED, max: MAX_SPEED});
+            newEmitter.setFrequency(100);
+            newEmitter.setAngle(0);
+            newEmitter.setLifespan(LIFESPAN);
+            newEmitter.setQuantity(1);
+            newEmitter.setBlendMode(Phaser.BlendModes.ADD);
+
+            newEmitter.scrollFactorX = scrollFactorX;
+            newEmitter.depth = depth;
+
+            this.dustEmitters = [...this.dustEmitters, newEmitter];
+        }
+
+        addEmitter(1.1, 1);
+        addEmitter(1.3, 1);
     }
 
     _relocateDust() {
@@ -197,12 +210,14 @@ export default class GameScene extends Phaser.Scene {
         const MAX_GRAVITY = 5;
         const AMPLITUDE = 2;
 
-        this.dustEmitter.setPosition(
-            this.player.x + Math.random() * this.game.canvas.width * AMPLITUDE - (this.game.canvas.width * AMPLITUDE) / 2,
-            Math.random() * this.game.canvas.height
-        );
-        this.dustEmitter.setGravityY(Math.random() * (MIN_GRAVITY + MAX_GRAVITY) - MIN_GRAVITY);
-        this.dustEmitter.setAlpha(Math.cos(this.game.getTime() / 500) / 10 + 0.2);
+        this.dustEmitters.forEach(emitter => {
+            emitter.setPosition(
+                this.player.x + Math.random() * this.game.canvas.width * AMPLITUDE - (this.game.canvas.width * AMPLITUDE) / 2,
+                Math.random() * this.game.canvas.height
+            );
+            emitter.setGravityY(Math.random() * (MIN_GRAVITY + MAX_GRAVITY) - MIN_GRAVITY);
+            emitter.setAlpha(Math.cos(this.game.getTime() / 500) / 10 + 0.2);
+        });
     }
 
     createCamera() {

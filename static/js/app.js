@@ -40,7 +40,7 @@ switchToGame();
 startGame();
 
 import openDialog from "/game/utils/openDialog.js";
-import getResolution from "../../game/utils/getResolution.js";
+import getResolution from "../../game/utils/getZoomFactor.js";
 
 // setTimeout(() => {
     // openDialog({
