@@ -384,7 +384,7 @@
                         {
                          "name":"destination",
                          "type":"string",
-                         "value":"2_1"
+                         "value":"1_2"
                         }, 
                         {
                          "name":"doorId",
@@ -405,38 +405,27 @@
         }, 
         {
          "draworder":"topdown",
-         "id":14,
-         "name":"spawners",
+         "id":8,
+         "name":"checkpoints",
          "objects":[
                 {
                  "class":"",
-                 "height":0,
-                 "id":49,
+                 "gid":781,
+                 "height":16,
+                 "id":56,
                  "name":"",
-                 "point":true,
                  "properties":[
                         {
-                         "name":"spawnerId",
+                         "name":"checkpointId",
                          "type":"int",
                          "value":1
                         }],
                  "rotation":0,
                  "visible":true,
-                 "width":0,
+                 "width":12,
                  "x":32,
                  "y":144
                 }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":8,
-         "name":"checkpoints",
-         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -581,7 +570,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":56,
+ "nextobjectid":57,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
