@@ -72,18 +72,19 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         }
 
-        if (cursors.up.isDown && this.body.onFloor() && this.upReleased) { // Jump
-
-            this.setVelocityY(-Player.JUMP);
-            this.anims.play(this.playerDirection === "right" ? "jump-up-right" : "jump-up-left", true);
-
-            this.upReleased = false; // Prevents the player from jumping while maintaining the key down
-        }
-
         if (cursors.up.isUp) {
 
             this.upReleased = true;
 
+        }
+
+        // if (cursors.up.isDown && this.body.onFloor() && this.upReleased) { // Jump
+        if (cursors.up.isDown && this.body.onFloor()) { // Jump
+            this.setVelocityY(-Player.JUMP);
+
+            this.anims.play(this.playerDirection === "right" ? "jump-up-right" : "jump-up-left", true);
+
+            this.upReleased = false; // Prevents the player from jumping while maintaining the key down
         }
 
         if (!this.body.onFloor()) { // In midair

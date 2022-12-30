@@ -120,7 +120,7 @@ export default class GameScene extends Phaser.Scene {
                 const newPropulsor = new Propulsor(this, prop.x, prop.y);
 
                 this.physics.add.overlap(this.player, newPropulsor, () => {
-                    //this.player.propulse();
+                    this.player.propulse();
                     //console.log(this);
                     //console.log(this);
                     /*if (!this.wind.isPlaying)
@@ -331,7 +331,6 @@ export default class GameScene extends Phaser.Scene {
     };
 
     update() {
-        console.log(this.player.body.onFloor());
         this.cursors = this.input.keyboard.createCursorKeys(); // Retrieves the keys
         this.player.listenControls(this.cursors);
 

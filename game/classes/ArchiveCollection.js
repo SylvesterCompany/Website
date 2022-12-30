@@ -1,5 +1,3 @@
-import getJSONFrom from "../utils/getJSONFrom.js";
-
 export default class ArchiveCollection {
     static LOCAL_STORAGE_KEY = 'Archive_collection';
     collectedIds;
