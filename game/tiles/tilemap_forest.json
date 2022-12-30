@@ -471,6 +471,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":12,
+         "name":"propulsors",
+         "objects":[
+                {
+                 "class":"",
+                 "gid":1575,
+                 "height":16,
+                 "id":41,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":440,
+                 "y":152
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":8,
          "name":"checkpoints",
          "objects":[
@@ -695,8 +718,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":12,
- "nextobjectid":41,
+ "nextlayerid":13,
+ "nextobjectid":42,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -1153,6 +1176,19 @@
          "name":"last_background",
          "spacing":0,
          "tilecount":260,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":9,
+         "firstgid":1572,
+         "image":"propulsor.png",
+         "imageheight":16,
+         "imagewidth":144,
+         "margin":0,
+         "name":"propulsor",
+         "spacing":0,
+         "tilecount":9,
          "tileheight":16,
          "tilewidth":16
         }],

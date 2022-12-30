@@ -3,6 +3,7 @@ import Checkpoint from "../classes/Checkpoint.js";
 import ArchiveCollection from "../classes/ArchiveCollection.js";
 import openArchive from "../utils/openArchive.js";
 import SodaCan from "../classes/SodaCan.js";
+import Propulsor from "../classes/Propulsor.js";
 
 export default class GameScene extends Phaser.Scene {
     player;
@@ -23,6 +24,7 @@ export default class GameScene extends Phaser.Scene {
     front;
     sodaCans = [];
     checkpoints = [];
+    propulsors = [];
     plateformes;
     decors;
     lights;
@@ -48,6 +50,7 @@ export default class GameScene extends Phaser.Scene {
         this.createWorld();
         this.createSodaCans();
         this.createCheckpoints();
+        this.createPropulsors();
         this.createCamera();
         this.createDustEmitters();
         // this.createFire();
@@ -64,7 +67,7 @@ export default class GameScene extends Phaser.Scene {
         }, null, this);
 
         // Make the camera follow the player
-        this.cameras.main.startFollow(this.player,true);
+        this.cameras.main.startFollow(this.player, true);
 
         // ALWAYS AT THE END OF CREATE
         this.loadCheckpoint();
@@ -79,7 +82,7 @@ export default class GameScene extends Phaser.Scene {
     createSodaCans() {
         // Create soda cans (but not those whose that were previously collected!)
 
-        let sodacans = this.map.objects.find(object => object.name === "sodacans")
+        let sodacans = this.map.objects.find(object => object.name === "sodacans");
 
         if (sodacans) {
             sodacans = sodacans.objects;
@@ -94,6 +97,24 @@ export default class GameScene extends Phaser.Scene {
 
                     this.sodaCans = [...this.sodaCans, newSodacan];
                 }
+            }
+        }
+    }
+
+    createPropulsors() {
+        // Create soda cans (but not those whose that were previously collected!)
+
+        let propulsors = this.map.objects.find(object => object.name === "propulsors");
+
+        if (propulsors) {
+            propulsors = propulsors.objects;
+
+            for (const prop of propulsors) {
+                const newPropulsor = new Propulsor(this, prop.x, prop.y);
+
+                this.physics.add.overlap(this.player, newPropulsor, () => { this.player.propulse() }, null, this);
+
+                this.propulsors = [...this.propulsors, newPropulsor];
             }
         }
     }
@@ -190,7 +211,7 @@ export default class GameScene extends Phaser.Scene {
             newEmitter.deathCallback = this._relocateDust.bind(this);
 
             newEmitter.setPosition(0, 0);
-            newEmitter.setSpeed({ min: MIN_SPEED, max: MAX_SPEED});
+            newEmitter.setSpeed({min: MIN_SPEED, max: MAX_SPEED});
             newEmitter.setFrequency(100);
             newEmitter.setAngle(0);
             newEmitter.setLifespan(LIFESPAN);
@@ -273,7 +294,7 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
-    save(player, checkpoint){
+    save(player, checkpoint) {
         checkpoint.save();
 
         localStorage.setItem('Player_position', JSON.stringify({
@@ -282,7 +303,7 @@ export default class GameScene extends Phaser.Scene {
         }));
     };
 
-    loadCheckpoint(){
+    loadCheckpoint() {
         const lastCheckpoint = localStorage.getItem('Player_position');
         if (lastCheckpoint) {
             const position = JSON.parse(lastCheckpoint);

@@ -1,3 +1,5 @@
+import Propulsor from "./Propulsor.js";
+
 export default class Player extends Phaser.Physics.Arcade.Sprite {
     static SPRITE_WIDTH = 36;
     static SPRITE_HEIGHT = 16;
@@ -91,6 +93,10 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             }
 
         }
+    }
+
+    propulse() {
+        this.setVelocityY(-Player.JUMP - Propulsor.INTENSITY);
     }
 
     die() { // "this" refers to the scene

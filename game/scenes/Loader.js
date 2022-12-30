@@ -1,6 +1,7 @@
 import Player from "../classes/Player.js";
 import SodaCan from "../classes/SodaCan.js";
 import Checkpoint from "../classes/Checkpoint.js";
+import Propulsor from "../classes/Propulsor.js";
 
 export default class LoaderScene extends Phaser.Scene {
     LEVEL = "tilemap_forest.json";
@@ -91,6 +92,11 @@ export default class LoaderScene extends Phaser.Scene {
         this.load.spritesheet('soda_can', '/game/sprites/soda_can.png', {
             frameWidth: SodaCan.SPRITE_WIDTH,
             frameHeight: SodaCan.SPRITE_HEIGHT
+        });
+
+        this.load.spritesheet('propulsor', '/game/sprites/propulsor.png', {
+            frameWidth: Propulsor.SPRITE_WIDTH,
+            frameHeight: Propulsor.SPRITE_HEIGHT
         });
 
         // Dust texture
