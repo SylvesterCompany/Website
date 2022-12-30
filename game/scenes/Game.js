@@ -4,8 +4,11 @@ import ArchiveCollection from "../classes/ArchiveCollection.js";
 import openArchive from "../utils/openArchive.js";
 import SodaCan from "../classes/SodaCan.js";
 import Propulsor from "../classes/Propulsor.js";
+import Door from "../classes/Door.js";
 
 export default class GameScene extends Phaser.Scene {
+    static FADE_DURATION = 1000;
+
     player;
     map;
     cursors;
@@ -19,6 +22,7 @@ export default class GameScene extends Phaser.Scene {
 
     front;
     sodaCans = [];
+    doors = [];
     checkpoints = [];
     propulsors = [];
     plateformes;
@@ -44,9 +48,9 @@ export default class GameScene extends Phaser.Scene {
         const { TILE_SIZE, TILE_Y } = this.game.registry.values;
 
         this.scene.launch('OverlayScene');
-        //this.scale.resize(16 * 20, 16 * 13);
+
         this.scale.setGameSize(16 * 20, 16 * 13);
-        this.cameras.main.fadeIn(500);
+        this.cameras.main.fadeIn(GameScene.FADE_DURATION);
 
         this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));
 
@@ -68,6 +72,7 @@ export default class GameScene extends Phaser.Scene {
         this.spawn();
 
         this.createSodaCans();
+        this.createDoors();
         this.createPropulsors();
         this.createDustEmitters();
 
@@ -103,7 +108,27 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
-    createDoors() {}
+    createDoors() {
+        // Create soda cans (but not those whose that were previously collected!)
+
+        let doors = this.map.objects.find(object => object.name === "doors");
+
+        if (doors) {
+            doors = doors.objects;
+            for (const door of doors) {
+                const doorId = door.properties.find(property => property.name === "doorId").value;
+                const destination = door.properties.find(property => property.name === "destination").value;
+
+                const newDoor = new Door(this, door.x, door.y, door.width, door.height, doorId, destination);
+
+                this.physics.add.overlap(this.player, newDoor, (player, doorObj) => {
+                    this.changeLevel(doorObj.destination.levelId, doorObj.destination.checkpointId);
+                });
+
+                this.doors = [...this.doors, newDoor];
+            }
+        }
+    }
 
     createPropulsors() {
         // Create soda cans (but not those whose that were previously collected!)
@@ -159,6 +184,7 @@ export default class GameScene extends Phaser.Scene {
         this.currentLevel = levelId;
 
         this.save(levelId, checkpointId);
+
         this.scene.restart();
     }
 

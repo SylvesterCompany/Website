@@ -1,39 +1,30 @@
 export default class Door extends Phaser.Physics.Arcade.Sprite {
+    id;
     width;
     height;
-
-    id;
     destination;
 
-    constructor(scene, x, y) {
-        super(scene, x, y, "propulsor");
+    constructor(scene, x, y, width, height, id, destination) {
+        super(scene, x, y, "");
+
+        this.id = id;
+        this.width = width;
+        this.height = height;
+        this.destination = new Destination(destination);
 
         // Adds the soda can to the scene
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.visible = false;
+        this.depth = 0;
+
+        // Set the size
+        this.body.setSize(width, height);
 
         this.body.immovable = true;
         this.body.allowGravity = false;
-        this.visible = true;
-        this.depth = 0;
 
-        this.setSize(Propulsor.SPRITE_WIDTH, Propulsor.SPRITE_HEIGHT);
-        this.setOrigin(0, 1);
-
-        this._registerAnimations();
-
-        this.anims.play("normal");
-    }
-
-    _registerAnimations() {
-        const highlightAnim = this.scene.anims.create({ // Highlight
-            key: "normal",
-            frames: this.anims.generateFrameNumbers("propulsor", {
-                start: 0, end: 8
-            }),
-            frameRate: 1000 / 75,
-            repeat: -1
-        });
+        this.setOrigin(0);
     }
 }
 
@@ -44,7 +35,7 @@ class Destination {
     constructor(rawDest) {
         rawDest = rawDest.split("_");
 
-        this.levelId = rawDest[0];
-        this.checkpointId = rawDest[1];
+        this.levelId = parseInt(rawDest[0]);
+        this.checkpointId = parseInt(rawDest[1]);
     }
 }
