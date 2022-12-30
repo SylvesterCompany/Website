@@ -4,7 +4,10 @@ import Checkpoint from "../classes/Checkpoint.js";
 import Propulsor from "../classes/Propulsor.js";
 
 export default class LoaderScene extends Phaser.Scene {
-    LEVEL = "tilemap_forest.json";
+    levels = [
+        "tilemap_1_1.json",
+        "tilemap_1_2.json"
+    ];
 
     constructor() {
         super("LoaderScene");
@@ -40,8 +43,9 @@ export default class LoaderScene extends Phaser.Scene {
             percentText.destroy();
         });
 
-        // Load the JSON level
-        this.load.tilemapTiledJSON('tilemap_forest', `/game/tiles/${this.LEVEL}`);
+        // Load the JSON levels
+        for (const level of this.levels)
+            this.load.tilemapTiledJSON(level.split('.')[0], `/game/tiles/${level}`);
 
         // Sylvester's cave Theme
         this.load.audio('cave', ['/game/music/cave.mp3']);

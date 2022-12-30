@@ -13,7 +13,7 @@ include __DIR__ . '/templates/header.php';
     </section>
     <section>
         <h1>Equipe</h1>
-        <p>Simon:<br>Loukas:<br>Alonso:<br>Vincent:</p>
+        <p>Simon:<br>Loukas:<br>Alonso:<br>Vincent (et son chat):</p>
     </section>
 </main>
 <?php include __DIR__ . '/templates/footer.php'; ?>

@@ -2,10 +2,13 @@ export default class Checkpoint extends Phaser.Physics.Arcade.Sprite {
     static SPRITE_WIDTH = 48;
     static SPRITE_HEIGHT = 32;
 
-    saved = false;
+    id;
+    triggered = false;
 
-    constructor(scene, x, y) {
+    constructor(scene, x, y, id) {
         super(scene, x, y, "checkpoint_off", 0);
+
+        this.id = id;
 
         // Adds the checkpoint to the scene
         scene.add.existing(this);
@@ -33,10 +36,10 @@ export default class Checkpoint extends Phaser.Physics.Arcade.Sprite {
         });
     }
 
-    save() {
-        if (!this.saved) {
+    trigger() {
+        if (!this.triggered) {
             this.anims.play("checkpoint_save");
-            this.saved = true;
+            this.triggered = true;
         }
     }
 }

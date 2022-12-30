@@ -9,11 +9,6 @@ export default class GameScene extends Phaser.Scene {
     player;
     map;
     cursors;
-
-    checkLap;
-    gameoverText;
-    screenCenterX;
-    screenCenterY;
     restartButton;
     archiveCollection;
     theme;
@@ -34,11 +29,23 @@ export default class GameScene extends Phaser.Scene {
 
     constructor() {
         super('GameScene');
+
+        // Retrieves the potential save
+        const save = JSON.parse(localStorage.getItem("Level"));
+
+        if (save && save.levelId && save.checkpointId) { // If there is one, set the current level value to that
+            this.currentLevel = save.levelId;
+        } else { // If not, set up a new save (first level, first checkpoint)
+            this.save(this.currentLevel = 1, 1);
+        }
     }
 
     create() {
+        const { TILE_SIZE, TILE_Y } = this.game.registry.values;
+
         this.scene.launch('OverlayScene');
-        this.scale.resize(16 * 20, 16 * 13);
+        //this.scale.resize(16 * 20, 16 * 13);
+        this.scale.setGameSize(16 * 20, 16 * 13);
         this.cameras.main.fadeIn(500);
 
         this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));
@@ -52,39 +59,39 @@ export default class GameScene extends Phaser.Scene {
             volume: 0.3,
         });
 
-        this.createPlayer();
-        this.createWorld();
-        this.createSodaCans();
-        this.createCheckpoints();
-        this.createPropulsors();
-        this.createCamera();
-        this.createDustEmitters();
-        // this.createFire();
+        this.player = new Player(this, 0, 0);
 
-        // Méthode avec classe
+        this.createWorld();
+        this.createCheckpoints();
+
+        // Depends on the checkpoints
+        this.spawn();
+
+        this.createSodaCans();
+        this.createPropulsors();
+        this.createDustEmitters();
 
         // Collisions
         this.physics.add.collider(this.player, this.plateformes);
+        this.physics.world.setBounds(0, 0, 40 * TILE_SIZE, 13 * TILE_SIZE); // TODO: Gérer par rapport à la taille de la map chargée
 
         // Overlap
-        this.physics.add.overlap(this.player, this.fires, () => {
+        /*this.physics.add.overlap(this.player, this.fires, () => {
             // Starts the scene in parallel
             //this.scene.launch('GameOverScene');
-        }, null, this);
+        }, null, this);*/
 
         // Make the camera follow the player
-        this.cameras.main.startFollow(this.player, true);
+
+        this.cameras.main.setBounds(0, 0, 40 * TILE_SIZE, TILE_Y * TILE_SIZE, true);
+        this.cameras.main.startFollow(this.player, true, 1, 1, 0, 0);
 
         // ALWAYS AT THE END OF CREATE
-        this.loadCheckpoint();
 
-        //console.log(this.player.body.onFloor());
-    };
-
-    createPlayer() {
-        this.player = new Player(this, 80, 145);
-        this.player.visible = true;
-        this.player.depth = 1;
+        console.log(JSON.parse(localStorage.getItem("Level")));
+        // setTimeout(() => {
+        //     this.changeLevel(2, 1);
+        // }, 2000);
     };
 
     createSodaCans() {
@@ -144,21 +151,32 @@ export default class GameScene extends Phaser.Scene {
             checkpoints = checkpoints.objects;
 
             for (const cp of checkpoints) {
-                const newCheckpoint = new Checkpoint(this, cp.x, cp.y);
+                const checkpointId = cp.properties.find(property => property.name === "checkpointId").value;
+                const newCheckpoint = new Checkpoint(this, cp.x, cp.y, checkpointId);
 
                 newCheckpoint.depth = -2;
 
-                this.physics.add.overlap(this.player, newCheckpoint, this.save, null, this);
+                this.physics.add.overlap(this.player, newCheckpoint, (player, checkpoint) => {
+                    checkpoint.trigger();
+                    this.save(this.currentLevel, checkpoint.id);
+                }, null, this);
 
                 this.checkpoints = [...this.checkpoints, newCheckpoint];
             }
         }
     }
 
+    changeLevel(levelId, checkpointId) {
+        this.currentLevel = this.game.registry.get('levels')[levelId - 1];
+
+        this.save(levelId, checkpointId);
+        this.scene.restart();
+    }
+
     createWorld() {
         // Add Tiles set
 
-        const map = this.add.tilemap('tilemap_forest');
+        const map = this.add.tilemap("tilemap_1_1");
         this.map = map;
 
         const last_back = map.addTilesetImage('last_background');
@@ -209,7 +227,7 @@ export default class GameScene extends Phaser.Scene {
             if (!processedIndexes.has(index)) {
                 processedIndexes.add(index);
 
-                this.plateformes.setTileIndexCallback(index, this.player.die, this);
+                this.plateformes.setTileIndexCallback(index, this.killPlayer, this);
             }
         });
     };
@@ -261,12 +279,6 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
-    createCamera() {
-        // Add camera
-        this.physics.world.setBounds(0, 0, 40 * 16, 13 * 16);
-        this.cameras.main.setBounds(0, 0, 40 * 16, 13 * 16, true);
-    };
-
     createFire() {
         // Load json data
         this.levelData = this.cache.json.get('fireData');
@@ -281,6 +293,7 @@ export default class GameScene extends Phaser.Scene {
             let curr = this.levelData.fires[i];
 
             let newObj = this.add.sprite(curr.x, curr.y, 'fire').setOrigin(0);
+
             if (!this.anims.get('burning')) {
                 // fire animation
                 this.anims.create({
@@ -292,6 +305,7 @@ export default class GameScene extends Phaser.Scene {
                     repeat: -1
                 });
             }
+
             // play fire animation
             newObj.anims.play('burning');
             this.fires.add(newObj);
@@ -310,32 +324,29 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
-    save(player, checkpoint) {
-        checkpoint.save();
+    killPlayer() {
+        this.player.die();
+    }
 
-        localStorage.setItem('Player_position', JSON.stringify({
-            x: this.player.x,
-            y: this.player.y,
+    save(levelId, checkpointId) {
+        localStorage.removeItem('Level');
+
+        localStorage.setItem('Level', JSON.stringify({
+            levelId: levelId,
+            checkpointId: checkpointId
         }));
     };
 
-    loadCheckpoint() {
-        const lastCheckpoint = localStorage.getItem('Player_position');
-        if (lastCheckpoint) {
-            const position = JSON.parse(lastCheckpoint);
-            this.player.setX(position.x);
-            this.player.setY(position.y);
-        }
+    spawn() {
+        const { checkpointId } = JSON.parse(localStorage.getItem('Level'));
 
-        localStorage.removeItem('Player_position');
+        const checkpoint = this.checkpoints.find(cp => cp.id === checkpointId);
+
+        this.player.setPosition(checkpoint.x, checkpoint.y);
     };
 
     update() {
         this.cursors = this.input.keyboard.createCursorKeys(); // Retrieves the keys
         this.player.listenControls(this.cursors);
-
-        // Center of the Game screen
-        this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
-        this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
     }
 };
