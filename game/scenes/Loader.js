@@ -18,19 +18,15 @@ export default class LoaderScene extends Phaser.Scene {
         progressBox.fillStyle(0x222222, 0.6);
         progressBox.fillRect(width - 100, height - 10, 200, 20);
 
-        let loadingText = this.add.text(width, height - 20, 'Loading...', {font: 'Pixel'})
-            .setFontSize(10)
+        let loadingText = this.add.text(width, height - 20, 'Loading...', {fontFamily: 'Pixel'})
             .setOrigin(0.5)
-            .setScale(2);
         console.log(loadingText);
-        let percentText = this.add.text(width, height + 20, '0%', {font: 'Pixel'})
-            .setFontSize(10)
+        let percentText = this.add.text(width, height + 20, '0%', {fontFamily: 'Pixel'})
             .setOrigin(0.5)
-            .setScale(2);
 
 
         this.load.on('progress', (value) => {
-            loadingText.setText('LOADING' + '.'
+            loadingText.setText('Loading' + '.'
                 .repeat((loadingText.text.match(/./g) || []).length % 3))
             percentText.setText(parseInt(value * 100) + '%');
             progressBar.clear();

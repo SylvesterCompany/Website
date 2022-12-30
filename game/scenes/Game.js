@@ -34,6 +34,8 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+        this.scene.launch('OverlayScene');
+        this.scale.resize(16 * 20, 16 * 13);
         this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));
 
         this.theme = this.sound.add('cave', {
@@ -168,7 +170,7 @@ export default class GameScene extends Phaser.Scene {
             if (!processedIndexes.has(index)) {
                 processedIndexes.add(index);
 
-                this.plateformes.setTileIndexCallback(index, () => { this.player.die() }, this);
+                this.plateformes.setTileIndexCallback(index, this.player.die, this);
             }
         });
     };
@@ -197,7 +199,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.dustEmitter.setPosition(
             this.player.x + Math.random() * this.game.canvas.width * AMPLITUDE - (this.game.canvas.width * AMPLITUDE) / 2,
-            0 + Math.random() * this.game.canvas.height
+            Math.random() * this.game.canvas.height
         );
         this.dustEmitter.setGravityY(Math.random() * (MIN_GRAVITY + MAX_GRAVITY) - MIN_GRAVITY);
         this.dustEmitter.setAlpha(Math.cos(this.game.getTime() / 500) / 10 + 0.2);

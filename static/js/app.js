@@ -30,13 +30,12 @@ function loadFont(name, url) {
 const playBtn = document.getElementById("play-btn");
 
 playBtn.addEventListener("click", () => {
-    loadFont('Pixel', 'https://fonts.googleapis.com/css2?family=Sevillana&display=swap');
     switchToGame();
     startGame();
 });
 
 // TODO: Delete after development phase
-
+loadFont('Pixel', '/static/fonts/Pixel.ttf');
 switchToGame();
 startGame();
 

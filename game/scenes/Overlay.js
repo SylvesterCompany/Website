@@ -4,7 +4,7 @@ export default class OverlayScene extends Phaser.Scene {
     }
 
     create() {
-        //const text = this.add.text(this.cameras.main.width - 100, 100, 'Score: 0', {font: '30px', fontFamily: 'Pixel'});
+        const text = this.add.text(this.cameras.main.width - 70, 10, 'Score: 0', {fontFamily: 'Pixel'});
         //console.log(text);
     }
 }
