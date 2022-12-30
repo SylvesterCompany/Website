@@ -4,6 +4,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     static SPRITE_WIDTH = 36;
     static SPRITE_HEIGHT = 16;
     static BOX_WIDTH = 12;
+    static DEPTH = 1;
 
     static BOUNCE = 0;
     static SPEED = 150;
@@ -29,6 +30,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         // Defines the bounce factor
         this.setBounce(Player.BOUNCE);
+
+        this.setVisible(true);
+        this.depth = Player.DEPTH;
 
         this.playerDirection = "right";
 
@@ -108,9 +112,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene.cameras.main.shake(SHAKE_DURATION, SHAKE_INTENSITY);
 
-        this.time.addEvent({
+        this.scene.time.addEvent({
             delay: SHAKE_DURATION,
-            callback: () => { this.scene.launch("GameOverScene", {ctx: this}) },
+            callback: () => { this.scene.scene.launch("GameOverScene", {ctx: this.scene}) },
         });
     }
 

@@ -5,8 +5,10 @@ export default class Checkpoint extends Phaser.Physics.Arcade.Sprite {
     id;
     triggered = false;
 
-    constructor(scene, x, y) {
+    constructor(scene, x, y, id) {
         super(scene, x, y, "checkpoint_off", 0);
+
+        this.id = id;
 
         // Adds the checkpoint to the scene
         scene.add.existing(this);

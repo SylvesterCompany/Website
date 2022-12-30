@@ -21,7 +21,6 @@ const DEBUG_MODE = false;
 // Global variables
 
 const canvas = document.getElementById('game');
-let game = null;
 
 // Game configuration
 
@@ -34,7 +33,6 @@ const config = {
         width: CANVAS_WIDTH,
         height: CANVAS_HEIGHT,
     },
-    //zoom: ZOOM_FACTOR,
     roundPixels: true,
     pixelArt: true,
     backgroundColor: 0x000000,
