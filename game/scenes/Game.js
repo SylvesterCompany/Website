@@ -17,6 +17,7 @@ export default class GameScene extends Phaser.Scene {
     restartButton;
     archiveCollection;
     theme;
+    wind;
     dustEmitters = [];
 
     // Layers
@@ -45,6 +46,9 @@ export default class GameScene extends Phaser.Scene {
             loop: true
         });
         this.theme.play();
+        this.wind = this.sound.add('wind', {
+            volume: 0.3,
+        });
 
         this.createPlayer();
         this.createWorld();
@@ -71,6 +75,8 @@ export default class GameScene extends Phaser.Scene {
 
         // ALWAYS AT THE END OF CREATE
         this.loadCheckpoint();
+
+        //console.log(this.player.body.onFloor());
     };
 
     createPlayer() {
@@ -108,11 +114,19 @@ export default class GameScene extends Phaser.Scene {
 
         if (propulsors) {
             propulsors = propulsors.objects;
-
             for (const prop of propulsors) {
                 const newPropulsor = new Propulsor(this, prop.x, prop.y);
 
-                this.physics.add.overlap(this.player, newPropulsor, () => { this.player.propulse() }, null, this);
+                this.physics.add.overlap(this.player, newPropulsor, () => {
+                    //this.player.propulse();
+                    //console.log(this);
+                    //console.log(this);
+                    /*if (!this.wind.isPlaying)
+                        this.wind.play();*/
+                }, () => {
+                    //console.log(this.game.getTime());
+                    //console.log(this);
+                }, this);
 
                 this.propulsors = [...this.propulsors, newPropulsor];
             }
@@ -315,6 +329,7 @@ export default class GameScene extends Phaser.Scene {
     };
 
     update() {
+        console.log(this.player.body.onFloor());
         this.cursors = this.input.keyboard.createCursorKeys(); // Retrieves the keys
         this.player.listenControls(this.cursors);
 
