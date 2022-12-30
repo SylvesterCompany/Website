@@ -35,7 +35,7 @@ $translation = array_merge($lang->translate(), $lang->translate($page['name']));
         <script src="/static/js/app.js" type="module" defer></script>
     <?php endif; ?>
 </head>
-<body>
+<body class="pixel-art">
 <header>
     <nav>
         <ul>

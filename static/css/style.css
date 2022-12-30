@@ -82,9 +82,17 @@
 body {
     margin: 0;
 
-    background-image: url("/static/img/bg_placeholder.png"), linear-gradient(to bottom, #646464, #646464);
-    /*background-size: cover;*/
-    background-repeat: repeat;
+    background-image: url("/static/img/bg.png");
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.pixel-art {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
 }
 
 * {
@@ -176,9 +184,9 @@ main, #title-container, #game-container {
 
 #game {
     /*transform: scaleY(0);*/
-    border-radius: 15px;
+    border-radius: 12px;
     /*border: solid var(--light-gold) 2px;*/
-    box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.4);
+    /*box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.4);*/
     /*animation: zoom-in 1s 1 forwards;*/
 }
 
@@ -248,7 +256,7 @@ main, #title-container, #game-container {
 #overlay {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0);
     position: fixed;
     top: 0;
     left: 0;
@@ -257,8 +265,7 @@ main, #title-container, #game-container {
 }
 
 #overlay.dim {
-    background-color: black;
-    /*backdrop-filter: blur(10px);*/
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Game elements */
