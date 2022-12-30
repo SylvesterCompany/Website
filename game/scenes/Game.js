@@ -109,6 +109,8 @@ export default class GameScene extends Phaser.Scene {
             for (const cp of checkpoints) {
                 const newCheckpoint = new Checkpoint(this, cp.x, cp.y);
 
+                newCheckpoint.depth = -2;
+
                 this.physics.add.overlap(this.player, newCheckpoint, this.save, null, this);
 
                 this.checkpoints = [...this.checkpoints, newCheckpoint];
@@ -216,7 +218,7 @@ export default class GameScene extends Phaser.Scene {
                 Math.random() * this.game.canvas.height
             );
             emitter.setGravityY(Math.random() * (MIN_GRAVITY + MAX_GRAVITY) - MIN_GRAVITY);
-            emitter.setAlpha(Math.cos(this.game.getTime() / 500) / 10 + 0.2);
+            emitter.setAlpha(Math.cos(this.game.getTime() / 500) / 20 + 0.25);
         });
     }
 
