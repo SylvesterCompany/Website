@@ -97,7 +97,7 @@ export default class LoaderScene extends Phaser.Scene {
         this.load.image('dust', '/game/sprites/dust.png');
 
         // Restart button
-        this.load.image('restart', '/game/sprites/restart.png');
+        this.load.image('restart', '/game/sprites/restart_button.png');
 
         // Fire dataPositionLoad
         this.load.json('fireData', '/game/levelDataFire.json');

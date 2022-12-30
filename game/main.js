@@ -36,6 +36,7 @@ const config = {
     },
     //zoom: ZOOM_FACTOR,
     roundPixels: true,
+    pixelArt: true,
     antialias: false,
     backgroundColor: 0x000000,
     physics: {
