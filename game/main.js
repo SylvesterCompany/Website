@@ -4,6 +4,7 @@ import MenuScene from "./scenes/Menu.js";
 import GameScene from "./scenes/Game.js";
 import LoaderScene from "./scenes/Loader.js";
 import GameOverScene from "./scenes/GameOver.js";
+import OverlayScene from "./scenes/Overlay.js";
 
 // Constants
 
@@ -11,9 +12,10 @@ const TILE_SIZE = 16;
 const TILE_X = 20;
 const TILE_Y = 13;
 const GRAVITY = 1000;
-const CANVAS_WIDTH = TILE_SIZE * TILE_X;
-const CANVAS_HEIGHT = TILE_SIZE * TILE_Y;
-const ZOOM_FACTOR = getZoomFactor(CANVAS_HEIGHT);
+const ZOOM_FACTOR = getZoomFactor(TILE_SIZE * TILE_Y);
+const CANVAS_WIDTH = TILE_SIZE * TILE_X * ZOOM_FACTOR;
+const CANVAS_HEIGHT = TILE_SIZE * TILE_Y * ZOOM_FACTOR;
+
 const DEBUG_MODE = false;
 
 // Global variables
@@ -25,11 +27,16 @@ let game = null;
 
 const config = {
     type: Phaser.WEBGL,
-    width: CANVAS_WIDTH, // 20 tiles
-    height: CANVAS_HEIGHT, // 13 tiles
+    parent: 'game-container',
     canvas: canvas,
-    zoom: ZOOM_FACTOR,
+    scale: {
+        mode: Phaser.Scale.ScaleModes.FIT,
+        width: CANVAS_WIDTH, // 20 tiles
+        height: CANVAS_HEIGHT, // 13 tiles
+    },
+    //zoom: ZOOM_FACTOR,
     roundPixels: true,
+    antialias: false,
     backgroundColor: 0x000000,
     physics: {
         default: 'arcade',
@@ -38,7 +45,7 @@ const config = {
             debug: DEBUG_MODE
         }
     },
-    scene: [LoaderScene, GameScene, GameOverScene, MenuScene]
+    scene: [LoaderScene, GameScene, OverlayScene, GameOverScene, MenuScene]
 };
 
 /**

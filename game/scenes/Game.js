@@ -28,6 +28,11 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+        //this.cameras.main.setZoom(2);
+
+        //const newCameras = this.cameras.add(0, 0, 16 * 20, 16 * 13, true);
+        //newCameras.setZoom(2);
+        this.scale.resize(16 * 20, 16 * 13);
         this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));
 
         this.theme = this.sound.add('cave', {
@@ -35,6 +40,8 @@ export default class GameScene extends Phaser.Scene {
             loop: true
         });
         this.theme.play();
+
+        this.scene.launch('OverlayScene');
 
         this.createPlayer();
         this.createWorld();
@@ -138,7 +145,7 @@ export default class GameScene extends Phaser.Scene {
 
             if (!processedIndexes.has(index)) {
                 processedIndexes.add(index);
-                this.plateformes.setTileIndexCallback(index, () => { this.player.die() }, this);
+                this.plateformes.setTileIndexCallback(index, this.player.die, this);
             }
         });
     };

@@ -16,11 +16,21 @@ function switchToGame() {
     overlay.classList.add("dim");
 }
 
+function loadFont(name, url) {
+    const newFont = new FontFace(name, `url(${url})`);
+    newFont.load().then((loaded) => {
+        document.fonts.add(loaded);
+    }).catch((error) => {
+        return error;
+    });
+}
+
 // Main program
 
 const playBtn = document.getElementById("play-btn");
 
 playBtn.addEventListener("click", () => {
+    loadFont('Pixel', 'https://fonts.googleapis.com/css2?family=Sevillana&display=swap');
     switchToGame();
     startGame();
 });
