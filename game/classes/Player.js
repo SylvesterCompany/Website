@@ -96,6 +96,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     propulse() {
+        this.scene.cameras.main.shake(200, 0.005);
         this.setVelocityY(-Player.JUMP - Propulsor.INTENSITY);
     }
 

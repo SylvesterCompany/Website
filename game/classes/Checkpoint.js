@@ -28,7 +28,7 @@ export default class Checkpoint extends Phaser.Physics.Arcade.Sprite {
             frames: this.anims.generateFrameNumbers("checkpoint_save", {
                 start: 0, end: 10
             }),
-            frameRate: 1000 / 25,
+            frameRate: 1000 / 40,
             repeat: 0
         });
     }

@@ -38,7 +38,7 @@ const config = {
     roundPixels: true,
     pixelArt: true,
     antialias: false,
-    backgroundColor: 0x000000,
+    backgroundColor: 0x363a3a,
     physics: {
         default: 'arcade',
         arcade: {

@@ -494,6 +494,86 @@
         }, 
         {
          "draworder":"topdown",
+         "id":13,
+         "name":"doors",
+         "objects":[
+                {
+                 "class":"",
+                 "height":128,
+                 "id":47,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"destination",
+                         "type":"string",
+                         "value":"2_1"
+                        }, 
+                        {
+                         "name":"doorId",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":624,
+                 "y":0
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":14,
+         "name":"spawners",
+         "objects":[
+                {
+                 "class":"",
+                 "height":0,
+                 "id":49,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"spawnerId",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":32,
+                 "y":144
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":55,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"spawnerId",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":608,
+                 "y":128
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":8,
          "name":"checkpoints",
          "objects":[
@@ -507,18 +587,6 @@
                  "visible":true,
                  "width":12,
                  "x":285,
-                 "y":128
-                }, 
-                {
-                 "class":"",
-                 "gid":781,
-                 "height":16,
-                 "id":38,
-                 "name":"",
-                 "rotation":0,
-                 "visible":true,
-                 "width":12,
-                 "x":592,
                  "y":128
                 }],
          "opacity":1,
@@ -718,8 +786,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":13,
- "nextobjectid":42,
+ "nextlayerid":15,
+ "nextobjectid":56,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

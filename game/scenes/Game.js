@@ -38,6 +38,8 @@ export default class GameScene extends Phaser.Scene {
     create() {
         this.scene.launch('OverlayScene');
         this.scale.resize(16 * 20, 16 * 13);
+        this.cameras.main.fadeIn(500);
+
         this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));
 
         this.theme = this.sound.add('cave', {
