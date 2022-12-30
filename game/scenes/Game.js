@@ -208,6 +208,8 @@ export default class GameScene extends Phaser.Scene {
     }
 
     _relocateDust() {
+        // TODO: Improve later
+
         const MIN_GRAVITY = 1;
         const MAX_GRAVITY = 5;
         const AMPLITUDE = 2;
