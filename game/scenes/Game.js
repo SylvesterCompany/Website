@@ -246,7 +246,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     changeLevel(levelId, checkpointId) {
-        console.log(`Changing current level ${this.currentLevel} to ${levelId} (checkpoint ${checkpointId})`);
+        // console.log(`Changing current level ${this.currentLevel} to ${levelId} (checkpoint ${checkpointId})`);
         this.currentLevel = levelId;
 
         this.save(levelId, checkpointId);
@@ -365,7 +365,7 @@ export default class GameScene extends Phaser.Scene {
         const { checkpointId } = JSON.parse(localStorage.getItem('Level'));
 
         const checkpoint = this.checkpoints.find(cp => cp.id === checkpointId);
-        console.log(`Player spawning at checkpoint ${checkpointId} (coordinates ${checkpoint.x};${checkpoint.y})`);
+        // console.log(`Player spawning at checkpoint ${checkpointId} (coordinates ${checkpoint.x};${checkpoint.y})`);
 
         this.player.setPosition(checkpoint.x, checkpoint.y);
     };
