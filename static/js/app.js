@@ -49,8 +49,8 @@ playBtn.addEventListener('click', () => {
 // TODO: Delete after development phase
 loadFont('Pixel', '/static/fonts/Pixel.ttf');
 
-// switchToGame();
-// startGame();
+switchToGame();
+startGame();
 
 // setTimeout(() => {
     // openDialog({
