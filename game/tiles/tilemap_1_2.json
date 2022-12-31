@@ -740,41 +740,6 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
-         "id":15,
-         "name":"trash",
-         "objects":[
-                {
-                 "class":"",
-                 "gid":1581,
-                 "height":16,
-                 "id":68,
-                 "name":"",
-                 "rotation":0,
-                 "visible":true,
-                 "width":16,
-                 "x":304,
-                 "y":128
-                }, 
-                {
-                 "class":"",
-                 "gid":1581,
-                 "height":16,
-                 "id":69,
-                 "name":"",
-                 "rotation":0,
-                 "visible":true,
-                 "width":16,
-                 "x":160,
-                 "y":176
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
          "chunks":[
                 {
                  "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -900,8 +865,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":16,
- "nextobjectid":70,
+ "nextlayerid":15,
+ "nextobjectid":66,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -1312,9 +1277,9 @@
         {
          "columns":1,
          "firstgid":781,
-         "image":"..\/sprites\/flag.png",
+         "image":"flag.png",
          "imageheight":16,
-         "imagewidth":16,
+         "imagewidth":12,
          "margin":0,
          "name":"Flag",
          "spacing":0,
@@ -1364,24 +1329,11 @@
         {
          "columns":9,
          "firstgid":1572,
-         "image":"..\/sprites\/propulsor.png",
+         "image":"propulsor.png",
          "imageheight":16,
          "imagewidth":144,
          "margin":0,
          "name":"propulsor",
-         "spacing":0,
-         "tilecount":9,
-         "tileheight":16,
-         "tilewidth":16
-        }, 
-        {
-         "columns":9,
-         "firstgid":1581,
-         "image":"..\/sprites\/trash.png",
-         "imageheight":16,
-         "imagewidth":144,
-         "margin":0,
-         "name":"trash",
          "spacing":0,
          "tilecount":9,
          "tileheight":16,

@@ -89,11 +89,11 @@ export default class GameScene extends Phaser.Scene {
     createWorld() {
         const { TILE_SIZE } = this.game.registry.values;
 
-        // Add tilesets
-
+        // Map
         const map = this.add.tilemap(`tilemap_1_${this.currentLevel}`);
         this.map = map;
 
+        // Tilesets
         const last_back = map.addTilesetImage('last_background');
         const back = map.addTilesetImage('background');
         const tileset_forest = map.addTilesetImage('tileset_forest');
@@ -102,34 +102,42 @@ export default class GameScene extends Phaser.Scene {
 
         // Create layers
 
+        // Last background
         this.lastBackground = map.createLayer('last_background', last_back);
         this.lastBackground.scrollFactorX = 0.1;
+        this.lastBackground.scrollFactorY = 0;
         this.lastBackground.depth = -4;
 
+        // First background
         this.background = map.createLayer('background', back);
-        this.background.scrollFactorX = 0.3;
+        this.background.scrollFactorX = 0.2;
+        this.background.scrollFactorY = 0;
         this.background.depth = -3;
 
+        // Lights
         this.lights = map.createLayer("lights", tileset_lights);
-        this.lights.scrollFactorX = 0.4;
+        this.lights.scrollFactorX = 0.3;
+        this.lights.scrollFactorY = 0;
         this.lights.depth = -2;
 
+        // Platforms
         this.plateformes = map.createLayer('plateformes', tileset_forest);
         this.plateformes.setCollisionByProperty({estSolide: true});
         this.plateformes.depth = 0;
 
-        // Collisions
-        this.physics.add.collider(this.player, this.plateformes);
-        this.physics.world.setBounds(0, 0, map.width * TILE_SIZE, map.height * TILE_SIZE); // TODO: Gérer par rapport à la taille de la map chargée
-
+        // Props
         this.decors = map.createLayer('decors', tileset_forest);
         this.decors.depth = -1;
 
+        // Front rocks
         this.front = map.createLayer("front", tileset_rocks);
-        // TODO: Dynamically set scrollFactor (from Tiled info)
         this.front.scrollFactorX = 1.4;
         this.front.scrollFactorY = 1.4;
         this.front.depth = 2;
+
+        // Collisions
+        this.physics.add.collider(this.player, this.plateformes);
+        this.physics.world.setBounds(0, 0, map.width * TILE_SIZE, map.height * TILE_SIZE); // TODO: Gérer par rapport à la taille de la map chargée
 
         // Make dangerous tiles... dangerous
 
@@ -284,6 +292,7 @@ export default class GameScene extends Phaser.Scene {
         const MIN_SPEED = 1;
         const MAX_SPEED = 5;
         const LIFESPAN = 3000;
+        const FREQUENCY = 30;
 
         const dustParticles = this.add.particles("dust");
 
@@ -294,7 +303,7 @@ export default class GameScene extends Phaser.Scene {
 
             newEmitter.setPosition(0, 0);
             newEmitter.setSpeed({min: MIN_SPEED, max: MAX_SPEED});
-            newEmitter.setFrequency(100);
+            newEmitter.setFrequency(FREQUENCY);
             newEmitter.setAngle(0);
             newEmitter.setLifespan(LIFESPAN);
             newEmitter.setQuantity(1);
@@ -317,10 +326,13 @@ export default class GameScene extends Phaser.Scene {
         const MAX_GRAVITY = 5;
         const AMPLITUDE = 2;
 
+        const camera = this.cameras.main;
+        const currentMid = camera.getWorldPoint(camera.x + camera.displayWidth / 2, camera.y + camera.displayHeight / 2);
+
         this.dustEmitters.forEach(emitter => {
             emitter.setPosition(
-                this.player.x + Math.random() * this.game.canvas.width * AMPLITUDE - (this.game.canvas.width * AMPLITUDE) / 2,
-                Math.random() * this.game.canvas.height
+                currentMid.x + Math.random() * this.game.canvas.width * AMPLITUDE - (this.game.canvas.width * AMPLITUDE) / 2,
+                currentMid.y + Math.random() * this.game.canvas.height * AMPLITUDE - (this.game.canvas.width * AMPLITUDE) / 2
             );
             emitter.setGravityY(Math.random() * (MIN_GRAVITY + MAX_GRAVITY) - MIN_GRAVITY);
             emitter.setAlpha(Math.cos(this.game.getTime() / 500) / 20 + 0.25);
