@@ -3,6 +3,7 @@ import Checkpoint from "../classes/Checkpoint.js";
 import ArchiveCollection from "../classes/ArchiveCollection.js";
 import openArchive from "../utils/openArchive.js";
 import SodaCan from "../classes/SodaCan.js";
+import TrashBag from "../classes/TrashBag.js";
 import Propulsor from "../classes/Propulsor.js";
 import Door from "../classes/Door.js";
 
@@ -17,6 +18,8 @@ export default class GameScene extends Phaser.Scene {
     theme;
     wind;
     dustEmitters = [];
+    score;
+    scoreText;
 
     // Layers
 
@@ -67,14 +70,14 @@ export default class GameScene extends Phaser.Scene {
 
         this.createWorld();
         this.createCheckpoints();
-
-        // Depends on the checkpoints
-        this.spawn();
-
+        this.createTrashBag();
         this.createSodaCans();
         this.createDoors();
         this.createPropulsors();
         this.createDustEmitters();
+
+        // Depends on the checkpoints
+        this.spawn();
 
         // Make the camera follow the player
 
@@ -241,6 +244,26 @@ export default class GameScene extends Phaser.Scene {
                 }, null, this);
 
                 this.checkpoints = [...this.checkpoints, newCheckpoint];
+            }
+        }
+    }
+
+    createTrashBag() {
+        // Create trashbag
+
+        let trashbags = this.map.objects.find(object => object.name === "trash");
+
+        if (trashbags) {
+            trashbags = trashbags.objects;
+            for (const tb of trashbags) {
+                const newTrashBag = new TrashBag(this, tb.x, tb.y);
+
+                this.physics.add.overlap(this.player, newTrashBag, (player, trashbag) => {
+                    trashbag.disableBody(true,true);
+                    this.score += 10;
+                    this.scoreText.setText('Score: ' + this.score);
+                }, null, this);
+
             }
         }
     }

@@ -2,6 +2,7 @@ import Player from "../classes/Player.js";
 import SodaCan from "../classes/SodaCan.js";
 import Checkpoint from "../classes/Checkpoint.js";
 import Propulsor from "../classes/Propulsor.js";
+import TrashBag from "../classes/TrashBag.js";
 
 export default class LoaderScene extends Phaser.Scene {
     levels = [
@@ -70,6 +71,10 @@ export default class LoaderScene extends Phaser.Scene {
         this.load.spritesheet("checkpoint_save", "game/sprites/checkpoint_save.png", {
             frameWidth: Checkpoint.SPRITE_WIDTH,
             frameHeight: Checkpoint.SPRITE_HEIGHT
+        });
+        this.load.spritesheet("trash", "game/sprites/trash.png", {
+            frameWidth: TrashBag.SPRITE_WIDTH,
+            frameHeight: TrashBag.SPRITE_HEIGHT
         });
 
         // Fire texture
