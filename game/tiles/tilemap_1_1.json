@@ -439,7 +439,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":15,
+ "nextlayerid":16,
  "nextobjectid":63,
  "orientation":"orthogonal",
  "renderorder":"right-down",
@@ -851,9 +851,9 @@
         {
          "columns":1,
          "firstgid":781,
-         "image":"flag.png",
+         "image":"..\/sprites\/flag.png",
          "imageheight":16,
-         "imagewidth":12,
+         "imagewidth":16,
          "margin":0,
          "name":"Flag",
          "spacing":0,
@@ -903,7 +903,7 @@
         {
          "columns":9,
          "firstgid":1572,
-         "image":"propulsor.png",
+         "image":"..\/sprites\/propulsor.png",
          "imageheight":16,
          "imagewidth":144,
          "margin":0,

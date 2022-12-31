@@ -50,7 +50,8 @@ export default class GameScene extends Phaser.Scene {
     create() {
         const { TILE_SIZE } = this.game.registry.values;
 
-        this.scene.launch('OverlayScene');
+        this.updateEmitter = new Phaser.Events.EventEmitter();
+        this.scene.launch('OverlayScene', {emitter: this.updateEmitter});
 
         this.scale.setGameSize(16 * 20, 16 * 13);
         this.cameras.main.fadeIn(GameScene.FADE_DURATION);
@@ -67,6 +68,7 @@ export default class GameScene extends Phaser.Scene {
         });
 
         this.player = new Player(this, 0, 0);
+        this.score = 0;
 
         this.createWorld();
         this.createCheckpoints();
@@ -75,14 +77,13 @@ export default class GameScene extends Phaser.Scene {
         this.createDoors();
         this.createPropulsors();
         this.createDustEmitters();
-
-        // Depends on the checkpoints
-        this.spawn();
-
         // Make the camera follow the player
 
         this.cameras.main.setBounds(0, 0, this.map.width * TILE_SIZE, this.map.height * TILE_SIZE, true);
         this.cameras.main.startFollow(this.player, true, 1, 1, 0, 0);
+
+        // Depends on the checkpoints
+        this.spawn();
     };
 
     createWorld() {
@@ -261,7 +262,7 @@ export default class GameScene extends Phaser.Scene {
                 this.physics.add.overlap(this.player, newTrashBag, (player, trashbag) => {
                     trashbag.disableBody(true,true);
                     this.score += 10;
-                    this.scoreText.setText('Score: ' + this.score);
+                    this.updateEmitter.emit('trashbagCollected', this.score);
                 }, null, this);
 
             }
@@ -377,7 +378,9 @@ export default class GameScene extends Phaser.Scene {
 
     save(levelId, checkpointId) {
         localStorage.removeItem('Level');
-
+        // localStorage.setItem('Score', JSON.stringify({
+        //     score: this.score
+        // }))
         localStorage.setItem('Level', JSON.stringify({
             levelId: levelId,
             checkpointId: checkpointId
@@ -391,6 +394,13 @@ export default class GameScene extends Phaser.Scene {
         // console.log(`Player spawning at checkpoint ${checkpointId} (coordinates ${checkpoint.x};${checkpoint.y})`);
 
         this.player.setPosition(checkpoint.x, checkpoint.y);
+
+        // const savedScore = localStorage.getItem('Score');
+        // if (savedScore) {
+        //     this.score = JSON.parse(savedScore);
+        //     this.updateEmitter.emit('trashbagCollected', this.score);
+        //
+        // }
     };
 
     update() {
