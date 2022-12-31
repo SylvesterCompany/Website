@@ -3,6 +3,7 @@ import Checkpoint from "../classes/Checkpoint.js";
 import ArchiveCollection from "../classes/ArchiveCollection.js";
 import openArchive from "../utils/openArchive.js";
 import SodaCan from "../classes/SodaCan.js";
+import TrashBag from "../classes/TrashBag.js";
 import Propulsor from "../classes/Propulsor.js";
 import Door from "../classes/Door.js";
 
@@ -12,11 +13,12 @@ export default class GameScene extends Phaser.Scene {
     player;
     map;
     cursors;
-    restartButton;
     archiveCollection;
     theme;
     wind;
     dustEmitters = [];
+    score;
+    scoreText;
 
     // Layers
 
@@ -64,26 +66,24 @@ export default class GameScene extends Phaser.Scene {
         });
 
         this.player = new Player(this, 0, 0);
-
+        // Make the camera follow the player
+        this.physics.world.setBounds(0, 0, 40 * TILE_SIZE, 13 * TILE_SIZE); // TODO: Gérer par rapport à la taille de la map chargée
+        this.cameras.main.setBounds(0, 0, 40 * TILE_SIZE, TILE_Y * TILE_SIZE, true);
+        this.cameras.main.startFollow(this.player, true, 1, 1, 0, 0);
         this.createWorld();
         this.createCheckpoints();
-
-        // Depends on the checkpoints
-        this.spawn();
-
+        this.createTrashBag();
         this.createSodaCans();
         this.createDoors();
         this.createPropulsors();
         this.createDustEmitters();
 
+        // Depends on the checkpoints
+        this.spawn();
+
         // Collisions
         this.physics.add.collider(this.player, this.plateformes);
-        this.physics.world.setBounds(0, 0, 40 * TILE_SIZE, 13 * TILE_SIZE); // TODO: Gérer par rapport à la taille de la map chargée
 
-        // Make the camera follow the player
-
-        this.cameras.main.setBounds(0, 0, 40 * TILE_SIZE, TILE_Y * TILE_SIZE, true);
-        this.cameras.main.startFollow(this.player, true, 1, 1, 0, 0);
     };
 
     createSodaCans() {
@@ -180,6 +180,26 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    createTrashBag() {
+        // Create trashbag
+
+        let trashbags = this.map.objects.find(object => object.name === "trash");
+
+        if (trashbags) {
+            trashbags = trashbags.objects;
+            for (const tb of trashbags) {
+                const newTrashBag = new TrashBag(this, tb.x, tb.y);
+
+                this.physics.add.overlap(this.player, newTrashBag, (player, trashbag) => {
+                    trashbag.disableBody(true,true);
+                    this.score += 10;
+                    this.scoreText.setText('Score: ' + this.score);
+                }, null, this);
+
+            }
+        }
+    }
+
     changeLevel(levelId, checkpointId) {
         this.currentLevel = levelId;
 
@@ -245,6 +265,7 @@ export default class GameScene extends Phaser.Scene {
                 this.plateformes.setTileIndexCallback(index, this.killPlayer, this);
             }
         });
+
     };
 
     createDustEmitters() {
