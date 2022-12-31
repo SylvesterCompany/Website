@@ -1,12 +1,13 @@
 import { startGame } from "/game/main.js";
+import onClickOutside from "/game/utils/onClickOutside.js";
+
+const titleContainer = document.getElementById("title-container");
+const gameContainer = document.getElementById("game-container");
+const header = document.querySelector("header");
+const footer = document.querySelector("footer");
+const overlay = document.getElementById("overlay");
 
 function switchToGame() {
-    const titleContainer = document.getElementById("title-container");
-    const gameContainer = document.getElementById("game-container");
-    const header = document.querySelector("header");
-    const footer = document.querySelector("footer");
-    const overlay = document.getElementById("overlay");
-
     // Changes the elements and dim the background
 
     titleContainer.classList.add("hidden");
@@ -14,6 +15,14 @@ function switchToGame() {
     header.classList.add("hidden");
     footer.classList.add("hidden");
     overlay.classList.add("dim");
+}
+
+function hideGame() {
+    titleContainer.classList.remove("hidden");
+    gameContainer.classList.add("hidden");
+    header.classList.remove("hidden");
+    footer.classList.remove("hidden");
+    overlay.classList.remove("dim");
 }
 
 function loadFont(name, url) {
@@ -27,21 +36,21 @@ function loadFont(name, url) {
 
 // Main program
 
-const playBtn = document.getElementById("play-btn");
+const playBtn = document.getElementById('play-btn');
+const canvas = document.getElementById('game');
 
-playBtn.addEventListener("click", () => {
+playBtn.addEventListener('click', () => {
     switchToGame();
-    startGame();
+    startGame(hideGame);
 });
+
+
 
 // TODO: Delete after development phase
 loadFont('Pixel', '/static/fonts/Pixel.ttf');
 
 // switchToGame();
 // startGame();
-
-import openDialog from "/game/utils/openDialog.js";
-import getResolution from "../../game/utils/getZoomFactor.js";
 
 // setTimeout(() => {
     // openDialog({

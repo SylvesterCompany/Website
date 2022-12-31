@@ -4,6 +4,7 @@ import ArchiveCollection from "../classes/ArchiveCollection.js";
 import openArchive from "../utils/openArchive.js";
 import SodaCan from "../classes/SodaCan.js";
 import Propulsor from "../classes/Propulsor.js";
+import handler from "../utils/handler.js";
 
 export default class GameScene extends Phaser.Scene {
     player;
@@ -42,10 +43,10 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         const { TILE_SIZE, TILE_Y } = this.game.registry.values;
+        this.scale.setGameSize(TILE_SIZE * 20, TILE_SIZE * TILE_Y);
 
         this.scene.launch('OverlayScene');
         //this.scale.resize(16 * 20, 16 * 13);
-        this.scale.setGameSize(16 * 20, 16 * 13);
         this.cameras.main.fadeIn(500);
 
         this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));

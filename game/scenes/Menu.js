@@ -6,16 +6,7 @@ export default class MenuScene extends Phaser.Scene {
         super('MenuScene')
     }
 
-    preload() {
-
-    }
-
     create() {
-
+        console.log("hello");
     }
-
-    update() {
-
-    }
-
 };

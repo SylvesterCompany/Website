@@ -180,14 +180,9 @@ main, #title-container, #game-container {
     height: 100vh;
 }
 
-
 #game {
     cursor: none;
-    /*transform: scaleY(0);*/
     border-radius: 12px;
-    /*border: solid var(--light-gold) 2px;*/
-    /*box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.4);*/
-    /*animation: zoom-in 1s 1 forwards;*/
 }
 
 #logo {

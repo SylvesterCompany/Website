@@ -6,6 +6,7 @@ export default class GameOverScene extends Phaser.Scene {
     }
 
     back() {
+        this.input.setDefaultCursor('none');
         this.cameras.main.fadeOut(500);
         this.cameras.main.on('camerafadeoutcomplete', () => {
             this.before.scene.restart();
@@ -24,6 +25,8 @@ export default class GameOverScene extends Phaser.Scene {
         // Pause everything like scene and music
         this.before.scene.pause();
         this.before.theme.stop();
+
+        this.input.setDefaultCursor('default');
 
         this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 10, 'Game Over', {
             fontSize: '28px',
