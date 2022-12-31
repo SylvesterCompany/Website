@@ -20,12 +20,12 @@ export default class Propulsor extends Phaser.Physics.Arcade.Sprite {
 
         this._registerAnimations();
 
-        this.anims.play("normal");
+        this.anims.play("propulsor-normal");
     }
 
     _registerAnimations() {
         const highlightAnim = this.scene.anims.create({ // Highlight
-            key: "normal",
+            key: "propulsor-normal",
             frames: this.anims.generateFrameNumbers("propulsor", {
                 start: 0, end: 8
             }),

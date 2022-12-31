@@ -740,6 +740,17 @@
          "y":0
         }, 
         {
+         "draworder":"topdown",
+         "id":15,
+         "name":"enemies",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
          "chunks":[
                 {
                  "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -865,7 +876,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":15,
+ "nextlayerid":16,
  "nextobjectid":66,
  "orientation":"orthogonal",
  "renderorder":"right-down",

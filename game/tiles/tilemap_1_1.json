@@ -378,6 +378,17 @@
          "y":0
         }, 
         {
+         "draworder":"topdown",
+         "id":15,
+         "name":"enemies",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
          "chunks":[
                 {
                  "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -434,13 +445,13 @@
          "startx":0,
          "starty":0,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":32,
          "x":0,
          "y":0
         }],
- "nextlayerid":15,
- "nextobjectid":63,
+ "nextlayerid":16,
+ "nextobjectid":67,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -912,6 +923,19 @@
          "tilecount":9,
          "tileheight":16,
          "tilewidth":16
+        }, 
+        {
+         "columns":5,
+         "firstgid":1581,
+         "image":"enemy.png",
+         "imageheight":32,
+         "imagewidth":160,
+         "margin":0,
+         "name":"enemy",
+         "spacing":0,
+         "tilecount":5,
+         "tileheight":32,
+         "tilewidth":32
         }],
  "tilewidth":16,
  "type":"map",

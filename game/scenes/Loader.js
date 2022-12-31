@@ -3,6 +3,7 @@ import SodaCan from "../classes/SodaCan.js";
 import Checkpoint from "../classes/Checkpoint.js";
 import Propulsor from "../classes/Propulsor.js";
 import TrashBag from "../classes/TrashBag.js";
+import Enemy from "../classes/Enemy.js";
 
 export default class LoaderScene extends Phaser.Scene {
     levels = [
@@ -75,6 +76,12 @@ export default class LoaderScene extends Phaser.Scene {
         this.load.spritesheet("trash", "game/sprites/trash.png", {
             frameWidth: TrashBag.SPRITE_WIDTH,
             frameHeight: TrashBag.SPRITE_HEIGHT
+        });
+
+        // Enemy's texture
+        this.load.spritesheet('enemy', '/game/sprites/enemy.png', {
+            frameWidth: Enemy.SPRITE_WIDTH,
+            frameHeight: Enemy.SPRITE_HEIGHT
         });
 
         // Fire texture

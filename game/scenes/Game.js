@@ -6,6 +6,7 @@ import SodaCan from "../classes/SodaCan.js";
 import TrashBag from "../classes/TrashBag.js";
 import Propulsor from "../classes/Propulsor.js";
 import Door from "../classes/Door.js";
+import Enemy from "../classes/Enemy.js";
 
 export default class GameScene extends Phaser.Scene {
     static FADE_DURATION = 1000;
@@ -26,6 +27,7 @@ export default class GameScene extends Phaser.Scene {
     front;
     sodaCans = [];
     doors = [];
+    enemies  =[];
     checkpoints = [];
     propulsors = [];
     plateformes;
@@ -72,6 +74,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.createWorld();
         this.createCheckpoints();
+        this.createEnemies();
         this.createTrashBag();
         this.createSodaCans();
         this.createDoors();
@@ -154,6 +157,30 @@ export default class GameScene extends Phaser.Scene {
             }
         });
     };
+
+    createEnemies() {
+        // Create soda cans (but not those whose that were previously collected!)
+
+        this.enemies = [];
+
+        let enemies = this.map.objects.find(object => object.name === "enemies");
+
+        if (enemies) {
+            enemies = enemies.objects;
+            for (const enemy of enemies) {
+                const newEnemy = new Enemy(this, enemy.x, enemy.y);
+
+                this.physics.add.overlap(this.player, newEnemy, () => {
+                    this.killPlayer();
+                }, null, this);
+
+                this.enemies = [...this.enemies, newEnemy];
+            }
+        }
+
+        // TODO: Refactor later...
+        this.physics.add.collider(this.enemies, this.plateformes);
+    }
 
     createSodaCans() {
         // Create soda cans (but not those whose that were previously collected!)
@@ -320,8 +347,6 @@ export default class GameScene extends Phaser.Scene {
     }
 
     _relocateDust() {
-        // TODO: Improve later
-
         const MIN_GRAVITY = 1;
         const MAX_GRAVITY = 5;
         const AMPLITUDE = 2;
