@@ -440,7 +440,13 @@ export default class GameScene extends Phaser.Scene {
     };
 
     update() {
-        this.cursors = this.input.keyboard.createCursorKeys(); // Retrieves the keys
+        // Retrieves the controls
+        this.cursors = this.input.keyboard.createCursorKeys();
         this.player.listenControls(this.cursors);
+
+        // Checks if the player touches the world's bottom
+        if (this.player.body.bottom === this.physics.world.bounds.bottom) {
+            this.killPlayer();
+        }
     }
 };
