@@ -6,7 +6,8 @@ import Propulsor from "../classes/Propulsor.js";
 export default class LoaderScene extends Phaser.Scene {
     levels = [
         "tilemap_1_1.json",
-        "tilemap_1_2.json"
+        "tilemap_1_2.json",
+        "tilemap_1_3.json"
     ];
 
     constructor() {

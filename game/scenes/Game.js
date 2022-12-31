@@ -45,7 +45,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        const { TILE_SIZE, TILE_Y } = this.game.registry.values;
+        const { TILE_SIZE } = this.game.registry.values;
 
         this.scene.launch('OverlayScene');
 
@@ -76,18 +76,77 @@ export default class GameScene extends Phaser.Scene {
         this.createPropulsors();
         this.createDustEmitters();
 
-        // Collisions
-        this.physics.add.collider(this.player, this.plateformes);
-        this.physics.world.setBounds(0, 0, 40 * TILE_SIZE, 13 * TILE_SIZE); // TODO: Gérer par rapport à la taille de la map chargée
-
         // Make the camera follow the player
 
-        this.cameras.main.setBounds(0, 0, 40 * TILE_SIZE, TILE_Y * TILE_SIZE, true);
+        this.cameras.main.setBounds(0, 0, this.map.width * TILE_SIZE, this.map.height * TILE_SIZE, true);
         this.cameras.main.startFollow(this.player, true, 1, 1, 0, 0);
+    };
+
+    createWorld() {
+        const { TILE_SIZE } = this.game.registry.values;
+
+        // Add tilesets
+
+        const map = this.add.tilemap(`tilemap_1_${this.currentLevel}`);
+        this.map = map;
+
+        const last_back = map.addTilesetImage('last_background');
+        const back = map.addTilesetImage('background');
+        const tileset_forest = map.addTilesetImage('tileset_forest');
+        const tileset_rocks = map.addTilesetImage('front_rocks');
+        const tileset_lights = map.addTilesetImage("lights");
+
+        // Create layers
+
+        this.lastBackground = map.createLayer('last_background', last_back);
+        this.lastBackground.scrollFactorX = 0.1;
+        this.lastBackground.depth = -4;
+
+        this.background = map.createLayer('background', back);
+        this.background.scrollFactorX = 0.3;
+        this.background.depth = -3;
+
+        this.lights = map.createLayer("lights", tileset_lights);
+        this.lights.scrollFactorX = 0.4;
+        this.lights.depth = -2;
+
+        this.plateformes = map.createLayer('plateformes', tileset_forest);
+        this.plateformes.setCollisionByProperty({estSolide: true});
+        this.plateformes.depth = 0;
+
+        // Collisions
+        this.physics.add.collider(this.player, this.plateformes);
+        this.physics.world.setBounds(0, 0, map.width * TILE_SIZE, map.height * TILE_SIZE); // TODO: Gérer par rapport à la taille de la map chargée
+
+        this.decors = map.createLayer('decors', tileset_forest);
+        this.decors.depth = -1;
+
+        this.front = map.createLayer("front", tileset_rocks);
+        // TODO: Dynamically set scrollFactor (from Tiled info)
+        this.front.scrollFactorX = 1.4;
+        this.front.scrollFactorY = 1.4;
+        this.front.depth = 2;
+
+        // Make dangerous tiles... dangerous
+
+        const dangerousTiles = this.plateformes.filterTiles(tile => tile.properties.estDangereux);
+        const processedIndexes = new Set();
+
+        dangerousTiles.forEach(dangerousTile => {
+            const index = dangerousTile.index;
+
+            if (!processedIndexes.has(index)) {
+                processedIndexes.add(index);
+
+                this.plateformes.setTileIndexCallback(index, this.killPlayer, this);
+            }
+        });
     };
 
     createSodaCans() {
         // Create soda cans (but not those whose that were previously collected!)
+
+        this.sodaCans = [];
 
         let sodacans = this.map.objects.find(object => object.name === "sodacans");
 
@@ -111,6 +170,8 @@ export default class GameScene extends Phaser.Scene {
     createDoors() {
         // Create soda cans (but not those whose that were previously collected!)
 
+        this.doors = [];
+
         let doors = this.map.objects.find(object => object.name === "doors");
 
         if (doors) {
@@ -132,6 +193,8 @@ export default class GameScene extends Phaser.Scene {
 
     createPropulsors() {
         // Create soda cans (but not those whose that were previously collected!)
+
+        this.propulsors = [];
 
         let propulsors = this.map.objects.find(object => object.name === "propulsors");
 
@@ -159,6 +222,8 @@ export default class GameScene extends Phaser.Scene {
     createCheckpoints() {
         // Create checkpoints
 
+        this.checkpoints = [];
+
         let checkpoints = this.map.objects.find(object => object.name === "checkpoints");
 
         if (checkpoints) {
@@ -168,7 +233,7 @@ export default class GameScene extends Phaser.Scene {
                 const checkpointId = cp.properties.find(property => property.name === "checkpointId").value;
                 const newCheckpoint = new Checkpoint(this, cp.x, cp.y, checkpointId);
 
-                newCheckpoint.depth = -2;
+                newCheckpoint.depth = -1;
 
                 this.physics.add.overlap(this.player, newCheckpoint, (player, checkpoint) => {
                     checkpoint.trigger();
@@ -181,6 +246,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     changeLevel(levelId, checkpointId) {
+        console.log(`Changing current level ${this.currentLevel} to ${levelId} (checkpoint ${checkpointId})`);
         this.currentLevel = levelId;
 
         this.save(levelId, checkpointId);
@@ -188,66 +254,9 @@ export default class GameScene extends Phaser.Scene {
         this.scene.restart();
     }
 
-    createWorld() {
-        // Add Tiles set
-
-        const map = this.add.tilemap(`tilemap_1_${this.currentLevel}`);
-        this.map = map;
-
-        const last_back = map.addTilesetImage('last_background');
-        const back = map.addTilesetImage('background');
-        const tileset_forest = map.addTilesetImage('tileset_forest');
-        const tileset_rocks = map.addTilesetImage('front_rocks');
-        const tileset_lights = map.addTilesetImage("lights");
-
-        // Create Layers
-
-        this.lastBackground = map.createLayer('last_background', last_back);
-        this.lastBackground.scrollFactorX = 0.1;
-        this.lastBackground.depth = -4;
-
-        this.background = map.createLayer('background', back);
-        this.background.scrollFactorX = 0.3;
-        this.background.depth = -3;
-
-        this.lights = map.createLayer("lights", tileset_lights);
-        this.lights.scrollFactorX = 0.4;
-        this.lights.depth = -2;
-
-        this.plateformes = map.createLayer('plateformes', tileset_forest);
-        this.plateformes.setCollisionByProperty({estSolide: true});
-        this.plateformes.depth = 0;
-
-        // // TODO: Temporary
-        // const debugGraphics = this.add.graphics();
-        // this.plateformes.renderDebug(debugGraphics);
-
-        this.decors = map.createLayer('decors', tileset_forest);
-        this.decors.depth = -1;
-
-        this.front = map.createLayer("front", tileset_rocks);
-        // TODO: Dynamically set scrollFactor (from Tiled info)
-        this.front.scrollFactorX = 1.4;
-        this.front.scrollFactorY = 1.4;
-        this.front.depth = 2;
-
-        // Make dangerous tiles... dangerous
-
-        const dangerousTiles = this.plateformes.filterTiles(tile => tile.properties.estDangereux);
-        const processedIndexes = new Set();
-
-        dangerousTiles.forEach(dangerousTile => {
-            const index = dangerousTile.index;
-
-            if (!processedIndexes.has(index)) {
-                processedIndexes.add(index);
-
-                this.plateformes.setTileIndexCallback(index, this.killPlayer, this);
-            }
-        });
-    };
-
     createDustEmitters() {
+        this.dustEmitters = [];
+
         const MIN_SPEED = 1;
         const MAX_SPEED = 5;
         const LIFESPAN = 3000;
@@ -356,6 +365,7 @@ export default class GameScene extends Phaser.Scene {
         const { checkpointId } = JSON.parse(localStorage.getItem('Level'));
 
         const checkpoint = this.checkpoints.find(cp => cp.id === checkpointId);
+        console.log(`Player spawning at checkpoint ${checkpointId} (coordinates ${checkpoint.x};${checkpoint.y})`);
 
         this.player.setPosition(checkpoint.x, checkpoint.y);
     };
