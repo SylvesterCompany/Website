@@ -6,6 +6,7 @@ import SodaCan from "../classes/SodaCan.js";
 import TrashBag from "../classes/TrashBag.js";
 import Propulsor from "../classes/Propulsor.js";
 import Door from "../classes/Door.js";
+import handler from "../utils/handler.js";
 
 export default class GameScene extends Phaser.Scene {
     static FADE_DURATION = 1000;
@@ -50,10 +51,8 @@ export default class GameScene extends Phaser.Scene {
     create() {
         const { TILE_SIZE } = this.game.registry.values;
 
-        this.updateEmitter = new Phaser.Events.EventEmitter();
-        this.scene.launch('OverlayScene', {emitter: this.updateEmitter});
+        this.scene.launch('OverlayScene');
 
-        this.scale.setGameSize(16 * 20, 16 * 13);
         this.cameras.main.fadeIn(GameScene.FADE_DURATION);
 
         this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));
@@ -270,7 +269,7 @@ export default class GameScene extends Phaser.Scene {
                 this.physics.add.overlap(this.player, newTrashBag, (player, trashbag) => {
                     trashbag.disableBody(true,true);
                     this.score += 10;
-                    this.updateEmitter.emit('trashbagCollected', this.score);
+                    handler.emit('trashbagCollected', this.score);
                 }, null, this);
 
             }

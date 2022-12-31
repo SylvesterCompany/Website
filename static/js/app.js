@@ -1,5 +1,4 @@
 import { startGame } from "/game/main.js";
-import onClickOutside from "/game/utils/onClickOutside.js";
 
 const titleContainer = document.getElementById("title-container");
 const gameContainer = document.getElementById("game-container");
@@ -37,7 +36,6 @@ function loadFont(name, url) {
 // Main program
 
 const playBtn = document.getElementById('play-btn');
-const canvas = document.getElementById('game');
 
 playBtn.addEventListener('click', () => {
     switchToGame();
@@ -49,8 +47,8 @@ playBtn.addEventListener('click', () => {
 // TODO: Delete after development phase
 loadFont('Pixel', '/static/fonts/Pixel.ttf');
 
-switchToGame();
-startGame();
+//switchToGame();
+//startGame();
 
 // setTimeout(() => {
     // openDialog({

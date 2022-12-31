@@ -14,9 +14,9 @@ const TILE_SIZE = 16;
 const TILE_X = 20;
 const TILE_Y = 13;
 const GRAVITY = 1000;
-const ZOOM_FACTOR = getZoomFactor(TILE_SIZE * TILE_Y);
-const CANVAS_WIDTH = TILE_SIZE * TILE_X * ZOOM_FACTOR;
-const CANVAS_HEIGHT = TILE_SIZE * TILE_Y * ZOOM_FACTOR;
+const CANVAS_WIDTH = TILE_SIZE * TILE_X;
+const CANVAS_HEIGHT = TILE_SIZE * TILE_Y;
+const ZOOM_FACTOR = getZoomFactor(CANVAS_HEIGHT);
 
 const DEBUG_MODE = false;
 
@@ -32,15 +32,9 @@ const config = {
     type: Phaser.WEBGL,
     parent: 'game-container',
     canvas: canvas,
-    canvasStyle: 'width: 960; height: 624;',
-    scale: {
-        mode: Phaser.Scale.FIT,
-        width: CANVAS_WIDTH,
-        height: CANVAS_HEIGHT,
-        //resizeInterval: 99000,
-        //expandParent: false
-    },
-    //zoom: ZOOM_FACTOR,
+    width: CANVAS_WIDTH,
+    height: CANVAS_HEIGHT,
+    zoom: ZOOM_FACTOR,
     roundPixels: true,
     pixelArt: true,
     backgroundColor: 0x000000,
@@ -60,16 +54,11 @@ const config = {
 export function startGame(callback) {
     if (!game) {
         game = new Phaser.Game(config);
-        game.registry.set({TILE_SIZE, TILE_Y});
+        game.registry.set({TILE_SIZE});
     }
     game.scale.once('resize', () => {
-        //game.scale.scaleMode = Phaser.Scale.NONE;
-
         if (game.scene.isPaused('GameScene')) {
             game.scene.getScene('GameScene').scene.resume();
-            //game.scale.setGameSize(3000, 1000);
-            //game.scale.setZoom(2);
-            console.log(game.scale.width)
         }
 
         handler.on('clickedoutside', () => {
