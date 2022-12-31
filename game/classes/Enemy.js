@@ -14,7 +14,6 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     maxJumps;
 
-    direction;
     jumpAmount = 0;
 
     constructor(scene, x, y, maxJumps=2) {
@@ -39,8 +38,6 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 
         this.setVisible(true);
         this.depth = Enemy.DEPTH;
-
-        this.direction = "right";
 
         this._registerAnimations();
 
@@ -69,11 +66,11 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     jump() {
         if (this.jumpAmount >= this.maxJumps) {
-            this.direction = this.direction === "right" ? "left" : "right";
+            this.setFlipX(!this.flipX);
             this.jumpAmount = 0;
         }
 
-        let speed = this.direction === "right" ? Enemy.SPEED : -Enemy.SPEED;
+        let speed = !this.flipX ? Enemy.SPEED : -Enemy.SPEED;
 
         this.body.setVelocity(speed, -Enemy.JUMP);
         this.anims.play("enemy-jump");
