@@ -10,12 +10,14 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     static BOUNCE = 0.25;
     static JUMP = 270;
-    static JUMP_DELAY = 750;
+    static JUMP_DELAY = 1000;
     static JUMP_DURATION = 500;
 
+    firstX;
+    firstY;
+    tileDistancePerJump;
+
     speed;
-
-
     maxJumps;
 
     jumpAmount = 0;
@@ -29,7 +31,11 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
+        this.firstX = x;
+        this.firstY = y;
+
         this.maxJumps = maxJumps > 0 ? maxJumps : 1;
+        this.tileDistancePerJump = tileDistancePerJump;
         this.speed = tileDistancePerJump * TILE_SIZE / (Enemy.JUMP_DURATION / 1000);
 
         // Prevents the enemy from passing through the world's bounds
@@ -78,6 +84,8 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     jump() {
+        const { TILE_SIZE } = this.scene.game.registry.values;
+
         if (this.jumpAmount >= this.maxJumps) {
             this.setFlipX(!this.flipX);
             this.jumpAmount = 0;
@@ -86,13 +94,23 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         let speed = !this.flipX ? this.speed : -this.speed;
 
         this.body.setVelocity(speed, -Enemy.JUMP);
-        this.anims.play("enemy-jump");
-
-        this.on("animationcomplete", () => {
-            this.body.setVelocityX(0);
-            this.anims.play("enemy-normal");
-        });
+        this.anims.play("enemy-jump", true);
 
         this.jumpAmount++;
+
+        this.scene.time.addEvent({
+            delay: Enemy.JUMP_DURATION,
+            callback: () => {
+                this.body.setVelocityX(0);
+
+                // Replace correctly (because of the imprecision offset)
+                const offsetX = this.tileDistancePerJump * TILE_SIZE * (this.flipX ? this.maxJumps - this.jumpAmount : this.jumpAmount);
+                this.setPosition(this.firstX + offsetX, this.y);
+
+                this.anims.play("enemy-normal");
+            },
+            callbackScope: this,
+            loop: false
+        });
     }
 }
