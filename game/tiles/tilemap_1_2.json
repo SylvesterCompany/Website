@@ -583,7 +583,19 @@
          "draworder":"topdown",
          "id":12,
          "name":"propulsors",
-         "objects":[],
+         "objects":[
+                {
+                 "class":"",
+                 "gid":1576,
+                 "height":16,
+                 "id":66,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":432,
+                 "y":128
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -877,7 +889,7 @@
          "y":0
         }],
  "nextlayerid":16,
- "nextobjectid":66,
+ "nextobjectid":67,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
