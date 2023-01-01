@@ -1,5 +1,7 @@
 import Propulsor from "./Propulsor.js";
+
 import handler from "../utils/handler.js";
+
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
     static SPRITE_WIDTH = 36;

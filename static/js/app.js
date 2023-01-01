@@ -1,14 +1,16 @@
 import { startGame } from "/game/main.js";
 
+
 const titleContainer = document.getElementById("title-container");
 const gameContainer = document.getElementById("game-container");
 const header = document.querySelector("header");
 const footer = document.querySelector("footer");
 const overlay = document.getElementById("overlay");
 
-function switchToGame() {
-    // Changes the elements and dim the background
-
+/**
+ * Change the elements and dim the background
+ */
+function showGame() {
     titleContainer.classList.add("hidden");
     gameContainer.classList.remove("hidden");
     header.classList.add("hidden");
@@ -16,6 +18,9 @@ function switchToGame() {
     overlay.classList.add("dim");
 }
 
+/**
+ * Revert elements changing to the default
+ */
 function hideGame() {
     titleContainer.classList.remove("hidden");
     gameContainer.classList.add("hidden");
@@ -24,6 +29,12 @@ function hideGame() {
     overlay.classList.remove("dim");
 }
 
+/**
+ * Load a given font
+ *
+ * @param name
+ * @param url
+ */
 function loadFont(name, url) {
     const newFont = new FontFace(name, `url(${url})`);
     newFont.load().then((loaded) => {
@@ -33,17 +44,10 @@ function loadFont(name, url) {
     });
 }
 
-// Main program
-
 const playBtn = document.getElementById('play-btn');
 
 playBtn.addEventListener('click', () => {
-    switchToGame();
+    loadFont('Pixel', '/static/fonts/Pixel.ttf');
+    showGame();
     startGame(hideGame);
 });
-
-// TODO: Delete after development phase
-loadFont('Pixel', '/static/fonts/Pixel.ttf');
-
-// switchToGame();
-// startGame(hideGame);

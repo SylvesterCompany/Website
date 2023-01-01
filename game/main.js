@@ -1,11 +1,11 @@
 import getZoomFactor from "./utils/getZoomFactor.js";
+import onClickOutside from "./utils/onClickOutside.js";
 
-import MenuScene from "./scenes/Menu.js";
 import GameScene from "./scenes/Game.js";
 import LoaderScene from "./scenes/Loader.js";
 import GameOverScene from "./scenes/GameOver.js";
 import OverlayScene from "./scenes/Overlay.js";
-import onClickOutside from "./utils/onClickOutside.js";
+
 
 // Constants
 
@@ -16,7 +16,6 @@ const GRAVITY = 1000;
 const CANVAS_WIDTH = TILE_SIZE * TILE_X;
 const CANVAS_HEIGHT = TILE_SIZE * TILE_Y;
 const ZOOM_FACTOR = getZoomFactor(CANVAS_HEIGHT);
-
 const DEBUG_MODE = false;
 
 // Global variables
@@ -44,7 +43,7 @@ const config = {
             debug: DEBUG_MODE
         }
     },
-    scene: [LoaderScene, GameScene, OverlayScene, GameOverScene, MenuScene]
+    scene: [LoaderScene, OverlayScene, GameScene, GameOverScene]
 };
 
 /**

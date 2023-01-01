@@ -1,36 +1,34 @@
 import Player from "/game/classes/Player.js";
 import Checkpoint from "../classes/Checkpoint.js";
 import ArchiveCollection from "../classes/ArchiveCollection.js";
-import openArchive from "../utils/openArchive.js";
 import SodaCan from "../classes/SodaCan.js";
 import TrashBag from "../classes/TrashBag.js";
 import Propulsor from "../classes/Propulsor.js";
 import Door from "../classes/Door.js";
 import Enemy from "../classes/Enemy.js";
+
+import openArchive from "../utils/openArchive.js";
 import handler from "../utils/handler.js";
+
 
 export default class GameScene extends Phaser.Scene {
     static FADE_DURATION = 1000;
 
     player;
     map;
-    cursors;
-    restartButton;
     archiveCollection;
     theme;
-    windSound;
     deathSound;
     pageSound;
     dustEmitters = [];
     score;
-    scoreText;
 
     // Layers
 
     front;
     sodaCans = [];
     doors = [];
-    enemies  =[];
+    enemies = [];
     checkpoints = [];
     propulsors = [];
     plateformes;
@@ -39,6 +37,9 @@ export default class GameScene extends Phaser.Scene {
     background;
     lastBackground;
 
+    /**
+     * Constructor: Everything we need to retrieve in the cache
+     */
     constructor() {
         super('GameScene');
 
@@ -52,6 +53,9 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    /**
+     * Callback: Free to get back on the main page
+     */
     back() {
         const { callback } = this.game.registry.values;
         this.sound.pauseAll();
@@ -59,20 +63,12 @@ export default class GameScene extends Phaser.Scene {
         callback();
     }
 
+    /**
+     * Call everything we need here
+     */
     create() {
         const { TILE_SIZE } = this.game.registry.values;
-        // handler.on('clickedoutside', this.back, this);
-        this.input.keyboard.on('keyup-ESC', this.back, this);
-        handler.on('playerdeath', () => {
-            const SHAKE_DURATION = 100;
-            const SHAKE_INTENSITY = 0.03;
-            this.cameras.main.shake(SHAKE_DURATION, SHAKE_INTENSITY);
-            this.time.addEvent({
-                delay: SHAKE_DURATION,
-                callback: () => { this.scene.launch("GameOverScene", {ctx: this}) },
-            });
-            this.deathSound.play();
-        });
+
         this.score = 0;
 
         this.cameras.main.fadeIn(GameScene.FADE_DURATION);
@@ -81,6 +77,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.player = new Player(this, 0, 0);
 
+        this.listener();
         this.createSounds();
         this.createWorld();
         this.createCheckpoints();
@@ -99,8 +96,29 @@ export default class GameScene extends Phaser.Scene {
         this.spawn();
     };
 
+    /**
+     * Listen to some events
+     */
+    listener() {
+        handler.on('clickedoutside', this.back, this);
+        this.input.keyboard.on('keyup-ESC', this.back, this);
+        handler.on('playerdeath', (resetLevel) => {
+            const SHAKE_DURATION = 100;
+            const SHAKE_INTENSITY = 0.03;
+            this.cameras.main.shake(SHAKE_DURATION, SHAKE_INTENSITY);
+            this.time.addEvent({
+                delay: SHAKE_DURATION,
+                callback: () => { this.scene.launch("GameOverScene", {ctx: this, resetLevel}) },
+            });
+            this.deathSound.play();
+        });
+    }
+
+    /**
+     * Create all the sounds
+     */
     createSounds() {
-        this.theme = this.sound.add('cave', {
+        this.theme = this.sound.add('theme', {
             volume: 0.2,
             loop: true
         });
@@ -112,6 +130,9 @@ export default class GameScene extends Phaser.Scene {
         this.pageSound = this.sound.add('page');
     }
 
+    /**
+     * Create all the tiles and draw them on the map
+     */
     createWorld() {
         const { TILE_SIZE } = this.game.registry.values;
 
@@ -163,7 +184,7 @@ export default class GameScene extends Phaser.Scene {
 
         // Collisions
         this.physics.add.collider(this.player, this.plateformes);
-        this.physics.world.setBounds(0, 0, map.width * TILE_SIZE, map.height * TILE_SIZE); // TODO: Gérer par rapport à la taille de la map chargée
+        this.physics.world.setBounds(0, 0, map.width * TILE_SIZE, map.height * TILE_SIZE);
 
         // Make dangerous tiles... dangerous
 
@@ -176,7 +197,7 @@ export default class GameScene extends Phaser.Scene {
             if (!processedIndexes.has(index)) {
                 processedIndexes.add(index);
 
-                this.plateformes.setTileIndexCallback(index, (sprite, tile) => {
+                this.plateformes.setTileIndexCallback(index, (sprite) => {
                     if (sprite instanceof Player) {
                         this.killPlayer();
                     }
@@ -185,9 +206,10 @@ export default class GameScene extends Phaser.Scene {
         });
     };
 
+    /**
+     * Create some enemies and make them hostiles to the player
+     */
     createEnemies() {
-        // Create soda cans (but not those whose that were previously collected!)
-
         this.enemies = [];
 
         let enemies = this.map.objects.find(object => object.name === "enemies");
@@ -209,9 +231,10 @@ export default class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.enemies, this.plateformes);
     }
 
+    /**
+     * Create only soda cans that were not found
+     */
     createSodaCans() {
-        // Create soda cans (but not those whose that were previously collected!)
-
         this.sodaCans = [];
 
         let sodacans = this.map.objects.find(object => object.name === "sodacans");
@@ -233,9 +256,10 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    /**
+     * Create some doors on the extremities of the level and make them like a portal
+     */
     createDoors() {
-        // Create soda cans (but not those whose that were previously collected!)
-
         this.doors = [];
 
         let doors = this.map.objects.find(object => object.name === "doors");
@@ -250,6 +274,7 @@ export default class GameScene extends Phaser.Scene {
 
                 this.physics.add.overlap(this.player, newDoor, (player, doorObj) => {
                     this.changeLevel(doorObj.destination.levelId, doorObj.destination.checkpointId);
+                    this.scene.restart();
                 });
 
                 this.doors = [...this.doors, newDoor];
@@ -257,9 +282,10 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    /**
+     * Create propulsors and make the player jumping while being on them
+     */
     createPropulsors() {
-        // Create soda cans (but not those whose that were previously collected!)
-
         this.propulsors = [];
 
         let propulsors = this.map.objects.find(object => object.name === "propulsors");
@@ -271,23 +297,17 @@ export default class GameScene extends Phaser.Scene {
 
                 this.physics.add.overlap(this.player, newPropulsor, () => {
                     this.player.propulse();
-                    //console.log(this);
-                    //console.log(this);
-                    /*if (!this.wind.isPlaying)
-                        this.wind.play();*/
-                }, () => {
-                    //console.log(this.game.getTime());
-                    //console.log(this);
-                }, this);
+                }, null, this);
 
                 this.propulsors = [...this.propulsors, newPropulsor];
             }
         }
     }
 
+    /**
+     * Create some checkpoints depending on the level and make them trigger-able
+     */
     createCheckpoints() {
-        // Create checkpoints
-
         this.checkpoints = [];
 
         let checkpoints = this.map.objects.find(object => object.name === "checkpoints");
@@ -312,8 +332,6 @@ export default class GameScene extends Phaser.Scene {
     }
 
     createTrashBag() {
-        // Create trashbag
-
         let trashbags = this.map.objects.find(object => object.name === "trash");
 
         if (trashbags) {
@@ -330,15 +348,21 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    /**
+     * Set current level and checkpoint positions
+     *
+     * @param levelId
+     * @param checkpointId
+     */
     changeLevel(levelId, checkpointId) {
-        // console.log(`Changing current level ${this.currentLevel} to ${levelId} (checkpoint ${checkpointId})`);
         this.currentLevel = levelId;
 
         this.save(levelId, checkpointId);
-
-        this.scene.restart();
     }
 
+    /**
+     * Display some dust particles in the background
+     */
     createDustEmitters() {
         this.dustEmitters = [];
 
@@ -390,49 +414,22 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
-    createFire() {
-        // Load json data
-        this.levelData = this.cache.json.get('fireData');
-
-        // create all the fires
-        this.fires = this.physics.add.group({
-            allowGravity: false,
-            immovable: true
-        });
-
-        for (let i = 0; i < this.levelData.fires.length; i++) {
-            let curr = this.levelData.fires[i];
-
-            let newObj = this.add.sprite(curr.x, curr.y, 'fire').setOrigin(0);
-
-            if (!this.anims.get('burning')) {
-                // fire animation
-                this.anims.create({
-                    key: 'burning',
-                    frames: this.anims.generateFrameNames('fire', {
-                        frames: [0, 1]
-                    }),
-                    frameRate: 4,
-                    repeat: -1
-                });
-            }
-
-            // play fire animation
-            newObj.anims.play('burning');
-            this.fires.add(newObj);
-        }
-    };
-
+    /**
+     * On archive collecting
+     *
+     * @param player
+     * @param sodacan
+     */
     collectArchive(player, sodacan) {
         sodacan.destroy();
 
         this.archiveCollection.collect(sodacan.archiveId);
 
         this.physics.pause();
+        this.pageSound.play();
 
         openArchive(this.archiveCollection.getArchive(sodacan.archiveId), () => {
             this.physics.resume();
-            this.pageSound.play();
         });
     }
 
@@ -440,6 +437,12 @@ export default class GameScene extends Phaser.Scene {
         this.player.die();
     }
 
+    /**
+     * Save current level and checkpoint positions to the local storage
+     *
+     * @param levelId
+     * @param checkpointId
+     */
     save(levelId, checkpointId) {
         localStorage.removeItem('Level');
         // localStorage.setItem('Score', JSON.stringify({
@@ -451,6 +454,9 @@ export default class GameScene extends Phaser.Scene {
         }));
     };
 
+    /**
+     * Player spawning
+     */
     spawn() {
         const { checkpointId } = JSON.parse(localStorage.getItem('Level'));
 
@@ -467,14 +473,16 @@ export default class GameScene extends Phaser.Scene {
         // }
     };
 
+    /**
+     * Update every tick
+     */
     update() {
         // Retrieves the controls
-        this.cursors = this.input.keyboard.createCursorKeys();
-        this.player.listenControls(this.cursors);
+        const cursors = this.input.keyboard.createCursorKeys();
+        this.player.listenControls(cursors);
 
         // Checks if the player touches the world's bottom
-        if (this.player.body.bottom === this.physics.world.bounds.bottom) {
+        if (this.player.body.bottom === this.physics.world.bounds.bottom)
             this.killPlayer();
-        }
     }
 };
