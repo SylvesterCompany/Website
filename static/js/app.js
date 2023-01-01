@@ -46,4 +46,4 @@ playBtn.addEventListener('click', () => {
 loadFont('Pixel', '/static/fonts/Pixel.ttf');
 
 switchToGame();
-startGame();
+startGame(hideGame);
