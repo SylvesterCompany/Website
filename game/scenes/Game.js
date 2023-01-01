@@ -61,7 +61,7 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         const { TILE_SIZE } = this.game.registry.values;
-        handler.on('clickedoutside', this.back, this);
+        // handler.on('clickedoutside', this.back, this);
         this.input.keyboard.on('keyup-ESC', this.back, this);
         handler.on('playerdeath', () => {
             const SHAKE_DURATION = 100;
@@ -90,8 +90,8 @@ export default class GameScene extends Phaser.Scene {
         this.createDoors();
         this.createPropulsors();
         this.createDustEmitters();
-        // Make the camera follow the player
 
+        // Make the camera follow the player
         this.cameras.main.setBounds(0, 0, this.map.width * TILE_SIZE, this.map.height * TILE_SIZE, true);
         this.cameras.main.startFollow(this.player, true);
 
@@ -176,7 +176,11 @@ export default class GameScene extends Phaser.Scene {
             if (!processedIndexes.has(index)) {
                 processedIndexes.add(index);
 
-                this.plateformes.setTileIndexCallback(index, this.killPlayer, this);
+                this.plateformes.setTileIndexCallback(index, (sprite, tile) => {
+                    if (sprite instanceof Player) {
+                        this.killPlayer();
+                    }
+                }, this);
             }
         });
     };
