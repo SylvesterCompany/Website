@@ -16,8 +16,7 @@ export default class OverlayScene extends Phaser.Scene {
             delay: 180000,
             loop: true,
             callback: () => {
-                // TODO: add reason to playerdeath & make him respawn at the beginning
-                handler.emit('playerdeath');
+                handler.emit('playerdeath', {resetLevel: true})
             },
             callbackScope: this
         });

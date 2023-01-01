@@ -61,15 +61,15 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         const { TILE_SIZE } = this.game.registry.values;
-        // handler.on('clickedoutside', this.back, this);
+        handler.on('clickedoutside', this.back, this);
         this.input.keyboard.on('keyup-ESC', this.back, this);
-        handler.on('playerdeath', () => {
+        handler.on('playerdeath', (resetLevel) => {
             const SHAKE_DURATION = 100;
             const SHAKE_INTENSITY = 0.03;
             this.cameras.main.shake(SHAKE_DURATION, SHAKE_INTENSITY);
             this.time.addEvent({
                 delay: SHAKE_DURATION,
-                callback: () => { this.scene.launch("GameOverScene", {ctx: this}) },
+                callback: () => { this.scene.launch("GameOverScene", {ctx: this, resetLevel}) },
             });
             this.deathSound.play();
         });
@@ -250,6 +250,7 @@ export default class GameScene extends Phaser.Scene {
 
                 this.physics.add.overlap(this.player, newDoor, (player, doorObj) => {
                     this.changeLevel(doorObj.destination.levelId, doorObj.destination.checkpointId);
+                    this.scene.restart();
                 });
 
                 this.doors = [...this.doors, newDoor];
@@ -335,8 +336,6 @@ export default class GameScene extends Phaser.Scene {
         this.currentLevel = levelId;
 
         this.save(levelId, checkpointId);
-
-        this.scene.restart();
     }
 
     createDustEmitters() {

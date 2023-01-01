@@ -2,6 +2,7 @@ import handler from "../utils/handler.js";
 
 export default class GameOverScene extends Phaser.Scene {
     before;
+    resetLevel;
 
     constructor() {
         super('GameOverScene');
@@ -12,6 +13,8 @@ export default class GameOverScene extends Phaser.Scene {
         this.cameras.main.fadeOut(500);
         this.cameras.main.on('camerafadeoutcomplete', () => {
             handler.emit('respawn');
+            if (this.resetLevel)
+                this.before.changeLevel(1, 1);
             this.before.scene.restart();
             this.scene.stop();
         }, this);
@@ -24,6 +27,7 @@ export default class GameOverScene extends Phaser.Scene {
         const RESTART_RELATIVE_Y = 25;
 
         this.before = data.ctx;
+        this.resetLevel = data.resetLevel;
 
         // Pause everything like scene and music
         this.before.scene.pause();
