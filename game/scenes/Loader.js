@@ -56,6 +56,12 @@ export default class LoaderScene extends Phaser.Scene {
         // Wind Sound
         this.load.audio('wind', ['/game/music/wind.mp3']);
 
+        // Death Sound
+        this.load.audio('death', ['/game/music/death.mp3']);
+
+        // Page Sound
+        this.load.audio('page', ['/game/music/page.mp3']);
+
         // Player's textures
         this.load.spritesheet("player-idle", "/game/sprites/sylvester_idle.png", {
             frameWidth: Player.SPRITE_WIDTH,
@@ -130,6 +136,6 @@ export default class LoaderScene extends Phaser.Scene {
     }
 
     create() {
-        this.scene.start("GameScene");
+        this.scene.start("OverlayScene");
     }
 }

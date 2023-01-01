@@ -1,4 +1,5 @@
 import Propulsor from "./Propulsor.js";
+import handler from "../utils/handler.js";
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
     static SPRITE_WIDTH = 36;
@@ -105,18 +106,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.setVelocityY(-Player.JUMP - Propulsor.INTENSITY);
     }
 
-    die() { // "this" refers to the scene
-        const SHAKE_DURATION = 100;
-        const SHAKE_INTENSITY = 0.03;
-
+    die() {
         this.visible = false;
-
-        this.scene.cameras.main.shake(SHAKE_DURATION, SHAKE_INTENSITY);
-
-        this.scene.time.addEvent({
-            delay: SHAKE_DURATION,
-            callback: () => { this.scene.scene.launch("GameOverScene", {ctx: this.scene}) },
-        });
+        handler.emit('playerdeath');
     }
 
     _registerAnimations() {

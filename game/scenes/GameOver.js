@@ -1,3 +1,5 @@
+import handler from "../utils/handler.js";
+
 export default class GameOverScene extends Phaser.Scene {
     before;
 
@@ -9,6 +11,7 @@ export default class GameOverScene extends Phaser.Scene {
         this.input.setDefaultCursor('none');
         this.cameras.main.fadeOut(500);
         this.cameras.main.on('camerafadeoutcomplete', () => {
+            handler.emit('restart');
             this.before.scene.restart();
             this.scene.stop();
         }, this);

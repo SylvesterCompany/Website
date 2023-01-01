@@ -18,7 +18,9 @@ export default class GameScene extends Phaser.Scene {
     restartButton;
     archiveCollection;
     theme;
-    wind;
+    windSound;
+    deathSound;
+    pageSound;
     dustEmitters = [];
     score;
     scoreText;
@@ -50,27 +52,36 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    back() {
+        const { callback } = this.game.registry.values;
+        this.sound.pauseAll();
+        this.scene.pause();
+        callback();
+    }
+
     create() {
         const { TILE_SIZE } = this.game.registry.values;
-
-        this.scene.launch('OverlayScene');
+        handler.on('clickedoutside', this.back, this);
+        this.input.keyboard.on('keyup-ESC', this.back, this);
+        handler.on('playerdeath', () => {
+            const SHAKE_DURATION = 100;
+            const SHAKE_INTENSITY = 0.03;
+            this.cameras.main.shake(SHAKE_DURATION, SHAKE_INTENSITY);
+            this.time.addEvent({
+                delay: SHAKE_DURATION,
+                callback: () => { this.scene.launch("GameOverScene", {ctx: this}) },
+            });
+            this.deathSound.play();
+        });
+        this.score = 0;
 
         this.cameras.main.fadeIn(GameScene.FADE_DURATION);
 
         this.archiveCollection = new ArchiveCollection(this.game.cache.json.get("archives"));
 
-        this.theme = this.sound.add('cave', {
-            volume: 0.2,
-            loop: true
-        });
-        this.theme.play();
-        this.wind = this.sound.add('wind', {
-            volume: 0.3,
-        });
-
         this.player = new Player(this, 0, 0);
-        this.score = 0;
 
+        this.createSounds();
         this.createWorld();
         this.createCheckpoints();
         this.createEnemies();
@@ -82,11 +93,24 @@ export default class GameScene extends Phaser.Scene {
         // Make the camera follow the player
 
         this.cameras.main.setBounds(0, 0, this.map.width * TILE_SIZE, this.map.height * TILE_SIZE, true);
-        this.cameras.main.startFollow(this.player, true, 1, 1, 0, 0);
+        this.cameras.main.startFollow(this.player, true);
 
         // Depends on the checkpoints
         this.spawn();
     };
+
+    createSounds() {
+        this.theme = this.sound.add('cave', {
+            volume: 0.2,
+            loop: true
+        });
+        this.theme.play();
+        this.deathSound = this.sound.add('death', {
+            volume: 0.2,
+            rate: 1.5
+        });
+        this.pageSound = this.sound.add('page');
+    }
 
     createWorld() {
         const { TILE_SIZE } = this.game.registry.values;
@@ -296,9 +320,8 @@ export default class GameScene extends Phaser.Scene {
                 this.physics.add.overlap(this.player, newTrashBag, (player, trashbag) => {
                     trashbag.disableBody(true,true);
                     this.score += 10;
-                    handler.emit('trashbagCollected', this.score);
+                    handler.emit('trashbagcollected', this.score);
                 }, null, this);
-
             }
         }
     }
@@ -405,6 +428,7 @@ export default class GameScene extends Phaser.Scene {
 
         openArchive(this.archiveCollection.getArchive(sodacan.archiveId), () => {
             this.physics.resume();
+            this.pageSound.play();
         });
     }
 

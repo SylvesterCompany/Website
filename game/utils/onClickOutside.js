@@ -1,10 +1,9 @@
 import handler from "./handler.js";
 
-export default function onClickOutside(element, callback) {
+export default function onClickOutside(element) {
     const outsideClickListener = event => {
         if (!element.contains(event.target)) {
             handler.emit('clickedoutside');
-            callback();
             removeClickListener();
         }
     }

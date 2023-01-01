@@ -6,7 +6,6 @@ import LoaderScene from "./scenes/Loader.js";
 import GameOverScene from "./scenes/GameOver.js";
 import OverlayScene from "./scenes/Overlay.js";
 import onClickOutside from "./utils/onClickOutside.js";
-import handler from "./utils/handler.js";
 
 // Constants
 
@@ -54,17 +53,14 @@ const config = {
 export function startGame(callback) {
     if (!game) {
         game = new Phaser.Game(config);
-        game.registry.set({TILE_SIZE});
+        game.registry.set({TILE_SIZE, callback});
     }
     game.scale.once('resize', () => {
+        const gameScene = game.scene.getScene('GameScene');
         if (game.scene.isPaused('GameScene')) {
-            game.scene.getScene('GameScene').scene.resume();
+            gameScene.scene.resume();
+            gameScene.sound.resumeAll();
         }
-
-        handler.on('clickedoutside', () => {
-            game.scene.getScene('GameScene').scene.pause();
-        });
-
-        onClickOutside(canvas, callback);
+        onClickOutside(document.getElementById(game.config.parent));
     });
 }
