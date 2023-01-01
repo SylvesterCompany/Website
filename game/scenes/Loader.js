@@ -131,6 +131,6 @@ export default class LoaderScene extends Phaser.Scene {
      * Starting the overlay
      */
     create() {
-        this.scene.start("OverlayScene");
+        this.scene.start('OverlayScene');
     }
 }

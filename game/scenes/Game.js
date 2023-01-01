@@ -38,7 +38,7 @@ export default class GameScene extends Phaser.Scene {
     lastBackground;
 
     /**
-     * Constructor: Everything we need to retrieve
+     * Constructor: Everything we need to retrieve in the cache
      */
     constructor() {
         super('GameScene');
@@ -426,10 +426,10 @@ export default class GameScene extends Phaser.Scene {
         this.archiveCollection.collect(sodacan.archiveId);
 
         this.physics.pause();
+        this.pageSound.play();
 
         openArchive(this.archiveCollection.getArchive(sodacan.archiveId), () => {
             this.physics.resume();
-            this.pageSound.play();
         });
     }
 
