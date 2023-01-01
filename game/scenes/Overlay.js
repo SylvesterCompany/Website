@@ -13,7 +13,7 @@ export default class OverlayScene extends Phaser.Scene {
         this.scene.launch('GameScene');
         const gameScene = this.scene.get('GameScene');
         this.timer = this.time.addEvent({
-            delay: 5000,
+            delay: 180000,
             loop: true,
             callback: () => {
                 // TODO: add reason to playerdeath & make him respawn at the beginning
