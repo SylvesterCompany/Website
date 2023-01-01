@@ -14,7 +14,7 @@ Then you can deploy it using HTTP Server **Apache 2**
 * [Phaser 3.55.2](https://phaser.io)
 
 ## Authors
-* [Alonso](https://github.com/) ``AKA GoldenHawk``
-* [Loukas](https://github.com/) ``AKA Loukas``
-* [Simon](https://github.com/SuperDelphi) ``AKA SuperDelphi``
-* [Vincent](https://github.com/Phindau) ``AKA F1D0``
+* [Alonso](https://github.com/) ``GoldenHawk``
+* [Loukas](https://github.com/) ``Loukas``
+* [Simon](https://github.com/SuperDelphi) ``SuperDelphi``
+* [Vincent](https://github.com/Phindau) ``F1D0``
