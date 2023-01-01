@@ -5,6 +5,7 @@ import Propulsor from "../classes/Propulsor.js";
 import TrashBag from "../classes/TrashBag.js";
 import Enemy from "../classes/Enemy.js";
 
+
 export default class LoaderScene extends Phaser.Scene {
     levels = [
         "tilemap_1_1.json",
@@ -16,7 +17,12 @@ export default class LoaderScene extends Phaser.Scene {
         super("LoaderScene");
     }
 
+    /**
+     * Main preloading function
+     * Load everything we need here with a nice loading bar to get a status
+     */
     preload() {
+        // Loading bar
         let width = this.cameras.main.centerX;
         let height = this.cameras.main.centerY;
 
@@ -50,11 +56,8 @@ export default class LoaderScene extends Phaser.Scene {
         for (const level of this.levels)
             this.load.tilemapTiledJSON(level.split('.')[0], `/game/tiles/${level}`);
 
-        // Sylvester's cave Theme
-        this.load.audio('cave', ['/game/sounds/cave.mp3']);
-
-        // Wind Sound
-        this.load.audio('wind', ['/game/sounds/wind.mp3']);
+        // Sylvester's Theme
+        this.load.audio('theme', ['/game/sounds/theme.mp3']);
 
         // Death Sound
         this.load.audio('death', ['/game/sounds/death.mp3']);
@@ -62,7 +65,7 @@ export default class LoaderScene extends Phaser.Scene {
         // Page Sound
         this.load.audio('page', ['/game/sounds/page.mp3']);
 
-        // Player's textures
+        // Player textures
         this.load.spritesheet("player-idle", "/game/sprites/sylvester_idle.png", {
             frameWidth: Player.SPRITE_WIDTH,
             frameHeight: Player.SPRITE_HEIGHT,
@@ -75,48 +78,40 @@ export default class LoaderScene extends Phaser.Scene {
             frameWidth: Player.SPRITE_WIDTH,
             frameHeight: Player.SPRITE_HEIGHT
         });
-        this.load.spritesheet("checkpoint_save", "game/sprites/checkpoint_save.png", {
-            frameWidth: Checkpoint.SPRITE_WIDTH,
-            frameHeight: Checkpoint.SPRITE_HEIGHT
-        });
+
+        // Trash texture
         this.load.spritesheet("trash", "game/sprites/trash.png", {
             frameWidth: TrashBag.SPRITE_WIDTH,
             frameHeight: TrashBag.SPRITE_HEIGHT
         });
 
-        // Enemy's texture
+        // Enemy texture
         this.load.spritesheet('enemy', '/game/sprites/enemy.png', {
             frameWidth: Enemy.SPRITE_WIDTH,
             frameHeight: Enemy.SPRITE_HEIGHT
         });
 
-        // Fire texture
-        this.load.spritesheet('fire', '/game/sprites/fire_spritesheet.png', {
-            frameWidth: 20,
-            frameHeight: 21,
-            margin: 1,
-            spacing: 1
-        });
-
-        // Map's textures
+        // Map textures
         this.load.image('tileset_forest', '/game/tiles/tileset_forest.png');
         this.load.image("front_rocks", "/game/tiles/front_rocks.png");
         this.load.image('background', '/game/tiles/light_sky.png');
         this.load.image('last_background', '/game/tiles/last_background.png');
         this.load.image('lights', '/game/tiles/lights.png');
 
+        // Checkpoint textures
         this.load.spritesheet("checkpoint_save", "game/sprites/checkpoint_save.png", {
             frameWidth: Checkpoint.SPRITE_WIDTH,
             frameHeight: Checkpoint.SPRITE_HEIGHT
         });
-
         this.load.image('checkpoint_off', '/game/sprites/checkpoint_off.png');
 
+        // Soda can texture
         this.load.spritesheet('soda_can', '/game/sprites/soda_can.png', {
             frameWidth: SodaCan.SPRITE_WIDTH,
             frameHeight: SodaCan.SPRITE_HEIGHT
         });
 
+        // Propulsor texture
         this.load.spritesheet('propulsor', '/game/sprites/propulsor.png', {
             frameWidth: Propulsor.SPRITE_WIDTH,
             frameHeight: Propulsor.SPRITE_HEIGHT
@@ -128,13 +123,13 @@ export default class LoaderScene extends Phaser.Scene {
         // Restart button
         this.load.image('restart', '/game/sprites/restart_button.png');
 
-        // Fire dataPositionLoad
-        this.load.json('fireData', '/game/levelDataFire.json');
-
         // Archive data
         this.load.json('archives', `/lang/${LANG}/game_archives.json`);
     }
 
+    /**
+     * Starting the overlay
+     */
     create() {
         this.scene.start("OverlayScene");
     }

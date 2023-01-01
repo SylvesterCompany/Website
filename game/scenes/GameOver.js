@@ -1,5 +1,6 @@
 import handler from "../utils/handler.js";
 
+
 export default class GameOverScene extends Phaser.Scene {
     before;
     resetLevel;
@@ -8,6 +9,9 @@ export default class GameOverScene extends Phaser.Scene {
         super('GameOverScene');
     }
 
+    /**
+     * Callback: Get back to the main scene
+     */
     back() {
         this.input.setDefaultCursor('none');
         this.cameras.main.fadeOut(500);

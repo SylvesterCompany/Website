@@ -1,5 +1,6 @@
 import handler from "../utils/handler.js";
 
+
 export default class OverlayScene extends Phaser.Scene {
     timer;
     timerText;
@@ -9,6 +10,10 @@ export default class OverlayScene extends Phaser.Scene {
         super('OverlayScene');
     }
 
+    /**
+     * Starting the main scene
+     * Put and refresh every information to the screen
+     */
     create() {
         this.scene.launch('GameScene');
         const gameScene = this.scene.get('GameScene');
@@ -28,10 +33,18 @@ export default class OverlayScene extends Phaser.Scene {
         handler.on('trashbagcollected', this.updateScore, this);
     }
 
+    /**
+     * Callback: update to the current score
+     *
+     * @param score
+     */
     updateScore(score) {
         this.scoreText.setText(`Score: ${score}`);
     }
 
+    /**
+     * Update the timer every tick
+     */
     update() {
         this.timerText.setText(this.timer.getRemainingSeconds().toFixed());
     }
