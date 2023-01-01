@@ -10,7 +10,7 @@ const overlay = document.getElementById("overlay");
 /**
  * Change the elements and dim the background
  */
-function switchToGame() {
+function showGame() {
     titleContainer.classList.add("hidden");
     gameContainer.classList.remove("hidden");
     header.classList.add("hidden");
@@ -48,6 +48,6 @@ const playBtn = document.getElementById('play-btn');
 
 playBtn.addEventListener('click', () => {
     loadFont('Pixel', '/static/fonts/Pixel.ttf');
-    switchToGame();
+    showGame();
     startGame(hideGame);
 });
