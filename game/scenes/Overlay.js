@@ -13,7 +13,7 @@ export default class OverlayScene extends Phaser.Scene {
         const gameScene = this.scene.get('GameScene');
         this.elapsedTime = 0;
         this.timer = this.time.addEvent({
-            delay: 999999,
+            delay: 180000,
         });
         gameScene.events.on('pause', () => { this.timer.paused = !this.timer.paused });
         handler.on('restart', () => { this.timer.paused = !this.timer.paused });
@@ -28,7 +28,12 @@ export default class OverlayScene extends Phaser.Scene {
     }
 
     update() {
-        // TODO: check if time is over then emit event
-        this.timerText.setText(this.timer.getElapsedSeconds().toFixed(0));
+        // TODO: add reason to playerdeath
+        const remainingTime = this.timer.getRemainingSeconds().toFixed(0);
+        if (remainingTime) {
+            this.timerText.setText(remainingTime);
+        } else {
+            handler.emit('playerdeath');
+        }
     }
 }
