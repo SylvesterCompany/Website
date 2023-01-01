@@ -51,16 +51,16 @@ export default class LoaderScene extends Phaser.Scene {
             this.load.tilemapTiledJSON(level.split('.')[0], `/game/tiles/${level}`);
 
         // Sylvester's cave Theme
-        this.load.audio('cave', ['/game/music/cave.mp3']);
+        this.load.audio('cave', ['/game/sounds/cave.mp3']);
 
         // Wind Sound
-        this.load.audio('wind', ['/game/music/wind.mp3']);
+        this.load.audio('wind', ['/game/sounds/wind.mp3']);
 
         // Death Sound
-        this.load.audio('death', ['/game/music/death.mp3']);
+        this.load.audio('death', ['/game/sounds/death.mp3']);
 
         // Page Sound
-        this.load.audio('page', ['/game/music/page.mp3']);
+        this.load.audio('page', ['/game/sounds/page.mp3']);
 
         // Player's textures
         this.load.spritesheet("player-idle", "/game/sprites/sylvester_idle.png", {
