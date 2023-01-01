@@ -1,3 +1,10 @@
 {
-  "title": "A propósito de"
+  "title": "Sobre el juego",
+  "motivation_title": "Motivaciones",
+  "motivation_content": "Detrás de una ardilla aventurera, se oculta un verdadero esfuerzo en la lucha por el medio ambiente. En efecto; el ritmo de desaparición de bosques en el mundo es alarmante. Según la Organización de Naciones Unidas para la alimentación y la agricultura (FAO), 420 millones de hectáreas de bosques, una superficie equivalente a la de la Unión Europea, han sido arrasadas por la deforestación entre 1990 y 2020.",
+  "specs_title": "Especificaciones",
+  "specs_content_1": "El juego fue concebido para ser jugado en computadoras portátiles o de escritorio, utilizando cualquier tipo de navegador web moderno.",
+  "specs_content_2": "El personaje principal, Sylvester, es una ardilla que podemos controlar con la ayuda de las flechas direccionales del teclado \n      (←↕→). Sylvester deberá recorrer un entorno hostil, en la búsqueda de respuestas sobre el origen de un mal que amenaza a la tierra y sus bosques, luego de años de descuido y negligencia hacia el medio ambiente.",
+  "specs_content_3": "En relación a la búsqueda y objetivos, el juego consiste en llegar a la línea de meta antes que el tiempo establecido se termine, leyendo en el camino los mensajes que se encuentran en ciertas latas. Estos mensajes develan poco a poco la causa de la destrucción del bosque.",
+  "specs_content_4": "El mundo de Sylvester es visualmente atrayente e inmersivo, gracias a las texturas de la técnica empleada: el ¨pixel art¨."
 }

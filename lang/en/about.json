@@ -1,3 +1,10 @@
 {
-  "title": "About"
+  "title": "About",
+  "motivation_title": "Motivations",
+  "motivation_content": "Behind an adventurous squirrel is a real investment in the fight for the environment. Indeed, the rate at which forests are disappearing around the world is alarming. According to the Food and Agriculture Organization of the United Nations (FAO), 420 million hectares of forest, an area equivalent to that of the European Union, were razed by deforestation between 1990 and 2020.",
+  "specs_title": "Specifications",
+  "specs_content_1": "The game has been designed to be played on a laptop or desktop computer, with any modern web browser.",
+  "specs_content_2": "The main character, Sylvester, is a squirrel that can be controlled using the directional arrows on the keyboard (←↕→). He will have to travel through a hostile environment, in search of answers about the origin of an evil that threatens the earth and its forests, after years of neglecting the environment.",
+  "specs_content_3": "In terms of quests and objectives, the game proposes to reach the finish line before the end of the time limit, by reading the information found in the cans. These information gradually reveals the cause of the destruction of his forest.",
+  "specs_content_4": "Sylvester's world is visually appealing and immersive, with \"pixel art\" textures."
 }

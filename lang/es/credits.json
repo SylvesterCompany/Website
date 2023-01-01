@@ -1,3 +1,25 @@
 {
-  "title": "Créditos"
+  "title": "Créditos",
+  "mentions_title": "Menciones",
+  "mentions_content": "En la elaboración de este proyecto, utilizamos un cierto número de herramientas.",
+  "phaser_title": "Phaser.js",
+  "phaser_content": "Un entorno de trabajo JavaScript que permite crear un lienzo en el cual se pueden colocar diversos elementos (sprites, tiles, etc) en una escena provista de un motor de físicas.",
+  "apache_title": "Apache",
+  "apache_content": "Servidor HTTP",
+  "tiled_title": "Tiled",
+  "tiled_content": "Programa de creación de mapas",
+  "aseprite_title": "Aseprite",
+  "aseprite_content": "Programa de creación de mosaicos y sprites de videojuegos.",
+  "git_title": "Git",
+  "git_content": "Programa de gestión de versiones",
+  "team_title": "Equipo",
+  "team_content": "He aquí el buen equipo que participó en el desarrollo de este proyecto universitario.",
+  "simon_title": "Simon",
+  "simon_content": "Desarrollo, diseño del juego, creación del front-end del sitio (logotipo incluido) y recursos para el desarrollo de áreas y escenarios del juego.",
+  "loukas_title": "Loukas",
+  "loukas_content": "Desarrollo, diseño del juego y creación de sprites. Dio en el clavo, al encontar el nombre del juego epónimo.",
+  "alonso_title": "Alonso",
+  "alonso_content": "Desarrollo, diseño del juego, creación de sprites, búsqueda del guión y traducción en español (latino-américa)",
+  "vincent_title": "Vincent (y su gatito)",
+  "vincent_content": "Desarrollo, diseño del juego, creación del front-end del sitio (logotipo incluido) y recursos para el desarrollo de áreas y escenarios del juego.<br>Mensaje del gatito: oçàiiiiiiiiiiiihjnn$m:à! (dixit)."
 }

@@ -8,6 +8,8 @@ spl_autoload_register(function ($class) {
         require $file;
 });
 
+$links = ["index", "about", "credits"]; // The page name in the array and in the translation JSON files MUST be the same
+
 $lang = new Lang();
 
 $page['lang'] = $lang->getLang();
@@ -33,15 +35,17 @@ $translation = array_merge($lang->translate(), $lang->translate($page['name']));
         <script src="/game/phaser.js"></script>
         <script src="/game/main.js" type="module" defer></script>
         <script src="/static/js/app.js" type="module" defer></script>
+    <?php else: ?>
+        <link rel="stylesheet" href="/static/css/content.css">
     <?php endif; ?>
 </head>
 <body class="pixel-art">
 <header>
     <nav>
         <ul>
-            <li><a href="/index.php" class="current"><?= $translation['home']; ?></a></li>
-            <li><a href="/about.php"><?= $translation['about']; ?></a></li>
-            <li><a href="/credits.php"><?= $translation['credits']; ?></a></li>
+            <?php foreach ($links as $link): ?>
+                <li><a href="/<?= $link ?>.php" class="<?= $page['name'] === $link ? 'current' : ''?>"><?= $translation[$link]; ?></a></li>
+            <?php endforeach; ?>
         </ul>
     </nav>
     <div id="univ-aside">
