@@ -11,7 +11,7 @@ export default class GameOverScene extends Phaser.Scene {
         this.input.setDefaultCursor('none');
         this.cameras.main.fadeOut(500);
         this.cameras.main.on('camerafadeoutcomplete', () => {
-            handler.emit('restart');
+            handler.emit('respawn');
             this.before.scene.restart();
             this.scene.stop();
         }, this);
