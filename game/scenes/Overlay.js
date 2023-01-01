@@ -2,9 +2,9 @@ import handler from "../utils/handler.js";
 
 export default class OverlayScene extends Phaser.Scene {
     timer;
-    timerConfig;
     timerText;
     scoreText;
+
     constructor() {
         super('OverlayScene');
     }
@@ -12,8 +12,15 @@ export default class OverlayScene extends Phaser.Scene {
     create() {
         this.scene.launch('GameScene');
         const gameScene = this.scene.get('GameScene');
-        this.timerConfig = { delay: 5000 };
-        this.timer = this.time.addEvent(this.timerConfig);
+        this.timer = this.time.addEvent({
+            delay: 5000,
+            loop: true,
+            callback: () => {
+                // TODO: add reason to playerdeath & make him respawn at the beginning
+                handler.emit('playerdeath');
+            },
+            callbackScope: this
+        });
         gameScene.events.on('pause', () => { this.timer.paused = !this.timer.paused });
         handler.on('respawn', () => { this.timer.paused = !this.timer.paused });
         gameScene.events.on('resume', () => { this.timer.paused = !this.timer.paused });
@@ -27,14 +34,6 @@ export default class OverlayScene extends Phaser.Scene {
     }
 
     update() {
-        // TODO: add reason to playerdeath
-        const remainingTime = this.timer.getRemainingSeconds();
-        console.log(remainingTime);
-        if (remainingTime) {
-            this.timerText.setText(remainingTime.toFixed());
-        } else {
-            this.timer.reset(this.timerConfig);
-            handler.emit('playerdeath');
-        }
+        this.timerText.setText(this.timer.getRemainingSeconds().toFixed());
     }
 }
