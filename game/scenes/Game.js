@@ -15,13 +15,19 @@ export default class GameScene extends Phaser.Scene {
     static FADE_DURATION = 1000;
 
     player;
+    score;
     map;
     archiveCollection;
+
+    // Sounds
+
     theme;
+    triumph;
     deathSound;
     pageSound;
-    dustEmitters = [];
-    score;
+    bounceSound;
+    bagSound;
+    sodaSound;
 
     // Layers
 
@@ -31,6 +37,7 @@ export default class GameScene extends Phaser.Scene {
     enemies = [];
     checkpoints = [];
     propulsors = [];
+    dustEmitters = [];
     plateformes;
     decors;
     lights;
@@ -43,6 +50,7 @@ export default class GameScene extends Phaser.Scene {
     constructor() {
         super('GameScene');
 
+        this.score = 0;
         // Retrieves the potential save
         const save = JSON.parse(localStorage.getItem("Level"));
 
@@ -68,8 +76,6 @@ export default class GameScene extends Phaser.Scene {
      */
     create() {
         const { TILE_SIZE } = this.game.registry.values;
-
-        this.score = 0;
 
         this.cameras.main.fadeIn(GameScene.FADE_DURATION);
 
@@ -128,6 +134,16 @@ export default class GameScene extends Phaser.Scene {
             rate: 1.5
         });
         this.pageSound = this.sound.add('page');
+        this.bounceSound = this.sound.add('bounce', {
+            volume: 0.3
+        });
+        this.bagSound = this.sound.add('bag');
+        this.sodaSound = this.sound.add('soda', {
+            volume: 0.2
+        });
+        this.triumph = this.sound.add('triumph', {
+            volume: 0.5
+        });
     }
 
     /**
@@ -219,9 +235,7 @@ export default class GameScene extends Phaser.Scene {
             for (const enemy of enemies) {
                 const newEnemy = new Enemy(this, enemy.x, enemy.y);
 
-                this.physics.add.overlap(this.player, newEnemy, () => {
-                    this.killPlayer();
-                }, null, this);
+                this.physics.add.overlap(this.player, newEnemy, this.killPlayer, null, this);
 
                 this.enemies = [...this.enemies, newEnemy];
             }
@@ -248,7 +262,12 @@ export default class GameScene extends Phaser.Scene {
                 if (!this.archiveCollection.getCollectedIds().includes(archiveId)) {
                     const newSodacan = new SodaCan(this, sc.x, sc.y, archiveId);
 
-                    this.physics.add.overlap(this.player, newSodacan, this.collectArchive, null, this);
+                    this.physics.add.overlap(this.player, newSodacan, () => {
+                        this.collectArchive(this.player, newSodacan);
+                        this.score += 15;
+                        this.sodaSound.play();
+                        handler.emit('trashcollected', this.score);
+                    }, null, this);
 
                     this.sodaCans = [...this.sodaCans, newSodacan];
                 }
@@ -297,7 +316,10 @@ export default class GameScene extends Phaser.Scene {
 
                 this.physics.add.overlap(this.player, newPropulsor, () => {
                     this.player.propulse();
-                }, null, this);
+                    this.bounceSound.play();
+                }, (player) => {
+                    return !player.body.onFloor();
+                }, this);
 
                 this.propulsors = [...this.propulsors, newPropulsor];
             }
@@ -342,7 +364,8 @@ export default class GameScene extends Phaser.Scene {
                 this.physics.add.overlap(this.player, newTrashBag, (player, trashbag) => {
                     trashbag.disableBody(true,true);
                     this.score += 10;
-                    handler.emit('trashbagcollected', this.score);
+                    this.bagSound.play();
+                    handler.emit('trashcollected', this.score);
                 }, null, this);
             }
         }
@@ -426,10 +449,10 @@ export default class GameScene extends Phaser.Scene {
         this.archiveCollection.collect(sodacan.archiveId);
 
         this.physics.pause();
-        this.pageSound.play();
 
         openArchive(this.archiveCollection.getArchive(sodacan.archiveId), () => {
             this.physics.resume();
+            this.pageSound.play();
         });
     }
 

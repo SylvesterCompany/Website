@@ -30,7 +30,7 @@ export default class OverlayScene extends Phaser.Scene {
         gameScene.events.on('resume', () => { this.timer.paused = !this.timer.paused });
         this.timerText = this.add.text(this.cameras.main.width - 32, 5, '', {fontFamily: 'Pixel'});
         this.scoreText = this.add.text(5, 5, 'Score: 0', {fontFamily: 'Pixel'});
-        handler.on('trashbagcollected', this.updateScore, this);
+        handler.on('trashcollected', this.updateScore, this);
     }
 
     /**

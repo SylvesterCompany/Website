@@ -17,5 +17,5 @@ export default function openArchive(archive, callback=null) {
             archiveElement.classList.remove("open"); // Closes the dialog box
             callback && callback(); // Invokes the callback function
         }
-    });
+    }, {once: true});
 }

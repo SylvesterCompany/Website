@@ -65,6 +65,18 @@ export default class LoaderScene extends Phaser.Scene {
         // Page Sound
         this.load.audio('page', ['/game/sounds/page.mp3']);
 
+        // Bounce Sound
+        this.load.audio('bounce', ['/game/sounds/bounce.mp3']);
+
+        // Bag Sound
+        this.load.audio('bag', ['/game/sounds/bag.mp3']);
+
+        // Soda Sound
+        this.load.audio('soda', ['/game/sounds/soda.mp3']);
+
+        // Triumph Sound
+        this.load.audio('triumph', ['/game/sounds/triumph.mp3']);
+
         // Player textures
         this.load.spritesheet("player-idle", "/game/sprites/sylvester_idle.png", {
             frameWidth: Player.SPRITE_WIDTH,
