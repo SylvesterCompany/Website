@@ -1,3 +1,10 @@
 {
-  "title": "A propos"
+  "title": "À propos",
+  "motivation_title": "Motivation",
+  "motivation_content": "Derrière un écureuil aventurier se cache un réel investissement dans la lutte pour l'environnement. En effet, le rythme de la disparition des forêts dans le monde est alarmant. Selon l’Organisation des Nations Unies pour l’alimentation et l’agriculture (FAO), 420 millions d’hectares de forêts, soit une superficie équivalente à celle de l’Union européenne, ont été rasés par la déforestation entre 1990 et 2020.",
+  "specs_title": "Cahier des charges",
+  "specs_content_1": "Le jeu a été conçu pour être joué sur ordinateur portable ou de bureau, avec n'importe quel navigateur web moderne.",
+  "specs_content_2": "Le personnage principal, Sylvester, est un écureuil que l'on peut contrôler à l'aide des flèches directionnelles du clavier (←↕→). Il devra parcourir un environnement hostile, à la recherche de réponses sur l'origine d'un mal qui menace la Terre et ses forêts, après des années de négligence vis-à-vis de l'environnement.",
+  "specs_content_3": "En termes de quêtes et d’objectifs, le jeu propose d’atteindre la ligne d'arrivée avant la fin du temps imparti, en lisant les informations qui se trouvent dans les canettes. Ces informations dévoilent petit à petit la cause de la destruction de sa forêt.",
+  "specs_content_4": "Le monde de Sylvester est visuellement attrayant et immersif, avec des textures en \"pixel art\"."
 }

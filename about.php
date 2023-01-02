@@ -8,11 +8,25 @@ include __DIR__ . '/templates/header.php';
 ?>
 <main>
     <section>
-        <h1>Motivation</h1>
-        <p>Derrière un écureuil aventurier se cache un réel investissement dans la lutte pour l'environnement. En effet, le rythme de la disparition des forêts dans le monde est alarmant. Selon l’Organisation des Nations Unies pour l’alimentation et l’agriculture (FAO), 420 millions d’hectares de forêts, soit une superficie équivalente à celle de l’Union européenne, ont été rasés par la déforestation entre 1990 et 2020.</p>
+        <h1><?= $translation["motivation_title"] ?></h1>
+        <p><?= $translation["motivation_content"] ?></p>
     </section>
     <section>
-        <h1>Cahier des charges</h1>
+        <h1><?= $translation["specs_title"] ?></h1>
+        <ul>
+            <li>
+                <p><?= $translation["specs_content_1"] ?></p>
+            </li>
+            <li>
+                <p><?= $translation["specs_content_2"] ?></p>
+            </li>
+            <li>
+                <p><?= $translation["specs_content_3"] ?></p>
+            </li>
+            <li>
+                <p><?= $translation["specs_content_4"] ?></p>
+            </li>
+        </ul>
     </section>
 </main>
 <?php include __DIR__ . '/templates/footer.php'; ?>

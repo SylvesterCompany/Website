@@ -1,3 +1,25 @@
 {
-  "title": "Credits"
+  "title": "Credits",
+  "mentions_title": "Mentions",
+  "mentions_content": "During the development of this project, we used a great variety of tools.",
+  "phaser_title": "Phaser.js",
+  "phaser_content": "A JavaScript framework that allows you to create a canvas in which are arranged several elements (sprites, tiles, etc.) in a scene with a physics engine.",
+  "apache_title": "Apache",
+  "apache_content": "An HTTP server.",
+  "tiled_title": "Tiled",
+  "tiled_content": "A software for creating maps.",
+  "aseprite_title": "Aseprite",
+  "aseprite_content": "A tile and sprite creation software.",
+  "git_title": "Git",
+  "git_content": "A version management software.",
+  "team_title": "Team",
+  "team_content": "And here is the fine team that participated in the development of this university project.",
+  "simon_title": "Simon",
+  "simon_content": "Development, game design, creation of the front-end of the site (including logo) and field assets.",
+  "loukas_title": "Loukas",
+  "loukas_content": "Development, game design and sprite creation. Found the name of the eponymous game.",
+  "alonso_title": "Alonso",
+  "alonso_content": "Development, game design, sprite creation, scenario research and Spanish translation.",
+  "vincent_title": "Vincent (and his cat)",
+  "vincent_content": "Development, game design, creation of the website back-end and the translation system.<br>Message from the cat: oçàiiiiiiiiiiiihjnn$m:à! (that's true !)."
 }

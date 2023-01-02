@@ -8,36 +8,50 @@ include __DIR__ . '/templates/header.php';
 ?>
 <main>
     <section>
-        <h1>Mentions</h1>
-        <p>Dans l'élaboration de ce projet, nous avons utilisé un certain nombre d'outils.</p>
+        <h1><?= $translation["mentions_title"] ?></h1>
+        <p><?= $translation["mentions_content"] ?></p>
         <ul>
-            <li>Phaser.js: Un module javascript permettant de créer un canvas dans lequel sont disposés plusieurs éléments (sprites, tiles) dans une scène pourvue de physique.</li>
-            <li>Apache: Serveur HTTP.</li>
-            <li>Tiled: Logiciel de création de map.</li>
-            <li>Aseprite: Logiciel de création de tiles/sprites.</li>
-            <li>Git: Logiciel de gestion de version.</li>
+            <li>
+                <h2><?= $translation["phaser_title"] ?></h2>
+                <p><?= $translation["phaser_content"] ?></p>
+            </li>
+            <li>
+                <h2><?= $translation["apache_title"] ?></h2>
+                <p><?= $translation["apache_content"] ?></p>
+            </li>
+            <li>
+                <h2><?= $translation["tiled_title"] ?></h2>
+                <p><?= $translation["tiled_content"] ?></p>
+            </li>
+            <li>
+                <h2><?= $translation["aseprite_title"] ?></h2>
+                <p><?= $translation["aseprite_content"] ?></p>
+            </li>
+            <li>
+                <h2><?= $translation["git_title"] ?></h2>
+                <p><?= $translation["git_content"] ?></p>
+            </li>
         </ul>
-
-        <br><br><br><br><br>
     </section>
     <section>
-        <h1>Équipe</h1>
+        <h1><?= $translation["team_title"] ?></h1>
+        <p><?= $translation["team_content"] ?></p>
         <ul>
             <li>
-                <h2>Simon</h2>
-                <p></p>
+                <h2><?= $translation["simon_title"] ?></h2>
+                <p><?= $translation["simon_content"] ?></p>
             </li>
             <li>
-                <h2>Loukas</h2>
-                <p></p>
+                <h2><?= $translation["loukas_title"] ?></h2>
+                <p><?= $translation["loukas_content"] ?></p>
             </li>
             <li>
-                <h2>Alonso</h2>
-                <p></p>
+                <h2><?= $translation["alonso_title"] ?></h2>
+                <p><?= $translation["alonso_content"] ?></p>
             </li>
             <li>
-                <h2>Vincent (et son chat) :</h2>
-                <p></p>
+                <h2><?= $translation["vincent_title"] ?></h2>
+                <p><?= $translation["vincent_content"] ?></p>
             </li>
         </ul>
     </section>
