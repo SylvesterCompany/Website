@@ -40,18 +40,22 @@ include __DIR__ . '/templates/header.php';
             <li>
                 <h2><?= $translation["simon_title"] ?></h2>
                 <p><?= $translation["simon_content"] ?></p>
+                <a target="_blank" href="https://github.com/SuperDelphi"><?= $translation["see_github"] ?></a>
             </li>
             <li>
                 <h2><?= $translation["loukas_title"] ?></h2>
                 <p><?= $translation["loukas_content"] ?></p>
+                <a target="_blank" href="https://github.com/Loukas"><?= $translation["see_github"] ?></a>
             </li>
             <li>
                 <h2><?= $translation["alonso_title"] ?></h2>
                 <p><?= $translation["alonso_content"] ?></p>
+                <a target="_blank" href="https://github.com/goldenhawk05"><?= $translation["see_github"] ?></a>
             </li>
             <li>
                 <h2><?= $translation["vincent_title"] ?></h2>
                 <p><?= $translation["vincent_content"] ?></p>
+                <a target="_blank" href="https://github.com/Phindau"><?= $translation["see_github"] ?></a>
             </li>
         </ul>
     </section>
