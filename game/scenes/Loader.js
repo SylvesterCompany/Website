@@ -131,7 +131,7 @@ export default class LoaderScene extends Phaser.Scene {
         });
 
         // End texture
-        this.load.spritesheet('end', '/game/sprites/flag.png', {
+        this.load.spritesheet('end', '/game/sprites/end.png', {
             frameWidth: End.SPRITE_WIDTH,
             frameHeight: End.SPRITE_HEIGHT
         });

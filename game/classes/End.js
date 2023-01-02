@@ -25,13 +25,13 @@ export default class End extends Phaser.Physics.Arcade.Sprite {
     }
 
     _registerAnimations() {
-        this.scene.anims.create({ // Highlight
-            key: "propulsor-normal",
-            frames: this.anims.generateFrameNumbers("propulsor", {
-                start: 0, end: 8
-            }),
-            frameRate: 1000 / 75,
-            repeat: -1
-        });
+        // this.scene.anims.create({ // Highlight
+        //     key: "propulsor-normal",
+        //     frames: this.anims.generateFrameNumbers("propulsor", {
+        //         start: 0, end: 8
+        //     }),
+        //     frameRate: 1000 / 75,
+        //     repeat: -1
+        // });
     }
 }
