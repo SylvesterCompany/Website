@@ -310,13 +310,15 @@ export default class GameScene extends Phaser.Scene {
             const newEnd = new End(this, end.x, end.y);
 
             this.physics.add.overlap(this.player, newEnd, () => {
+                this.sound.stopAll();
                 this.triumph.play();
-                this.changeLevel(1, 1);
                 const overlay = this.scene.get('OverlayScene');
                 const score = overlay.score;
                 localStorage.clear();
-
-                openDialog([`GG You have ${score}`], () => {
+                this.changeLevel(1, 1);
+                this.scene.pause();
+                openDialog({text: `Bravo ! Vous avez accompli votre mission d'éco-responsabilité avec succès !<br>Score actuel: ${score}`}, () => {
+                    handler.emit('end');
                     this.scene.restart();
                 });
             });

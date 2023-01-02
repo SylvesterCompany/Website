@@ -18,20 +18,5 @@ export default class End extends Phaser.Physics.Arcade.Sprite {
         this.body.allowGravity = false;
 
         this.setOrigin(0, 1);
-
-        //this._registerAnimations();
-
-        //this.anims.play("propulsor-normal");
-    }
-
-    _registerAnimations() {
-        // this.scene.anims.create({ // Highlight
-        //     key: "propulsor-normal",
-        //     frames: this.anims.generateFrameNumbers("propulsor", {
-        //         start: 0, end: 8
-        //     }),
-        //     frameRate: 1000 / 75,
-        //     repeat: -1
-        // });
     }
 }
