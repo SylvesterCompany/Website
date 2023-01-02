@@ -51,6 +51,3 @@ playBtn.addEventListener('click', () => {
     showGame();
     startGame(hideGame);
 });
-
-showGame();
-startGame(hideGame);
