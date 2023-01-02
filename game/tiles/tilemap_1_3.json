@@ -1134,14 +1134,15 @@
          "objects":[
                 {
                  "class":"",
-                 "height":160,
-                 "id":78,
+                 "gid":1603,
+                 "height":16,
+                 "id":79,
                  "name":"",
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":1104,
-                 "y":160
+                 "x":992,
+                 "y":320
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1432,7 +1433,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":79,
+ "nextobjectid":80,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -1928,6 +1929,19 @@
          "name":"trash",
          "spacing":0,
          "tilecount":9,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":4,
+         "firstgid":1595,
+         "image":"end.png",
+         "imageheight":48,
+         "imagewidth":64,
+         "margin":0,
+         "name":"end",
+         "spacing":0,
+         "tilecount":12,
          "tileheight":16,
          "tilewidth":16
         }],
