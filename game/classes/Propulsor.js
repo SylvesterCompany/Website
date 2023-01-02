@@ -6,7 +6,7 @@ export default class Propulsor extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, "propulsor");
 
-        // Adds the soda can to the scene
+        // Adds the propulsor to the scene
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
@@ -24,7 +24,7 @@ export default class Propulsor extends Phaser.Physics.Arcade.Sprite {
     }
 
     _registerAnimations() {
-        const highlightAnim = this.scene.anims.create({ // Highlight
+        this.scene.anims.create({ // Highlight
             key: "propulsor-normal",
             frames: this.anims.generateFrameNumbers("propulsor", {
                 start: 0, end: 8

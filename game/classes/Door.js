@@ -12,7 +12,7 @@ export default class Door extends Phaser.Physics.Arcade.Sprite {
         this.height = height;
         this.destination = new Destination(destination);
 
-        // Adds the soda can to the scene
+        // Adds the door to the scene
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.visible = false;

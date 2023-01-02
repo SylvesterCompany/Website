@@ -6,6 +6,7 @@ import TrashBag from "../classes/TrashBag.js";
 import Propulsor from "../classes/Propulsor.js";
 import Door from "../classes/Door.js";
 import Enemy from "../classes/Enemy.js";
+import End from "../classes/End.js";
 
 import openArchive from "../utils/openArchive.js";
 import handler from "../utils/handler.js";
@@ -15,7 +16,6 @@ export default class GameScene extends Phaser.Scene {
     static FADE_DURATION = 1000;
 
     player;
-    score;
     map;
     archiveCollection;
 
@@ -50,7 +50,6 @@ export default class GameScene extends Phaser.Scene {
     constructor() {
         super('GameScene');
 
-        this.score = 0;
         // Retrieves the potential save
         const save = JSON.parse(localStorage.getItem("Level"));
 
@@ -93,6 +92,7 @@ export default class GameScene extends Phaser.Scene {
         this.createDoors();
         this.createPropulsors();
         this.createDustEmitters();
+        this.createEnd();
 
         // Make the camera follow the player
         this.cameras.main.setBounds(0, 0, this.map.width * TILE_SIZE, this.map.height * TILE_SIZE, true);
@@ -264,9 +264,8 @@ export default class GameScene extends Phaser.Scene {
 
                     this.physics.add.overlap(this.player, newSodacan, () => {
                         this.collectArchive(this.player, newSodacan);
-                        this.score += 15;
                         this.sodaSound.play();
-                        handler.emit('trashcollected', this.score);
+                        handler.emit('trashcollected', 15);
                     }, null, this);
 
                     this.sodaCans = [...this.sodaCans, newSodacan];
@@ -298,6 +297,18 @@ export default class GameScene extends Phaser.Scene {
 
                 this.doors = [...this.doors, newDoor];
             }
+        }
+    }
+
+    createEnd() {
+        let end = this.map.objects.find(object => object.name === "end");
+        if (end) {
+            [end] = end.objects;
+            const newEnd = new End(this, end.x, end.y, end.width, end.height);
+
+            this.physics.add.overlap(this.player, newEnd, () => {
+                this.triumph.play();
+            });
         }
     }
 
@@ -363,9 +374,8 @@ export default class GameScene extends Phaser.Scene {
 
                 this.physics.add.overlap(this.player, newTrashBag, (player, trashbag) => {
                     trashbag.disableBody(true,true);
-                    this.score += 10;
                     this.bagSound.play();
-                    handler.emit('trashcollected', this.score);
+                    handler.emit('trashcollected', 10);
                 }, null, this);
             }
         }
@@ -468,9 +478,6 @@ export default class GameScene extends Phaser.Scene {
      */
     save(levelId, checkpointId) {
         localStorage.removeItem('Level');
-        // localStorage.setItem('Score', JSON.stringify({
-        //     score: this.score
-        // }))
         localStorage.setItem('Level', JSON.stringify({
             levelId: levelId,
             checkpointId: checkpointId
@@ -484,16 +491,8 @@ export default class GameScene extends Phaser.Scene {
         const { checkpointId } = JSON.parse(localStorage.getItem('Level'));
 
         const checkpoint = this.checkpoints.find(cp => cp.id === checkpointId);
-        // console.log(`Player spawning at checkpoint ${checkpointId} (coordinates ${checkpoint.x};${checkpoint.y})`);
 
         this.player.setPosition(checkpoint.x, checkpoint.y);
-
-        // const savedScore = localStorage.getItem('Score');
-        // if (savedScore) {
-        //     this.score = JSON.parse(savedScore);
-        //     this.updateEmitter.emit('trashbagCollected', this.score);
-        //
-        // }
     };
 
     /**
