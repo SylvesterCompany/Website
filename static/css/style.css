@@ -285,8 +285,8 @@ main, #title-container, #game-container {
 #chatbox {
     transform: translateY(140%);
     margin-top: calc(var(--chat-box-eff-height) * -1); /* Allows not to decenter the other elements */
-    width: var(--chat-box-eff-width); /* TODO: Replace with dynamic width (depending on game constants) */
-    height: var(--chat-box-eff-height); /* TODO: Ditto */
+    width: var(--chat-box-eff-width);
+    height: var(--chat-box-eff-height);
     padding: 0 2.5rem;
 
     display: flex;

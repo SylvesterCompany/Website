@@ -242,7 +242,6 @@ export default class GameScene extends Phaser.Scene {
             }
         }
 
-        // TODO: Refactor later...
         this.physics.add.collider(this.enemies, this.plateformes);
     }
 
