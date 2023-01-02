@@ -6,7 +6,7 @@ In fact, during the travel, you will discover how to make some eco-friendly acti
 ## Usage
 To be able to test our game on your own, you can download the project using **Git**:
 
-``git clone https://gitlab.univ-lr.fr/vcohadon/ecoproject/-/tree/master``
+``git clone https://github.com/SylvesterCompany/Website``
 
 Then you can deploy it using HTTP Server **Apache 2**
 
