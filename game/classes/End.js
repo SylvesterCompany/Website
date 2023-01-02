@@ -1,13 +1,10 @@
 export default class End extends Phaser.Physics.Arcade.Sprite {
-    id;
-    width;
-    height;
+    static SPRITE_WIDTH = 64;
+    static SPRITE_HEIGHT = 48;
 
-    constructor(scene, x, y, width, height) {
+    constructor(scene, x, y) {
         super(scene, x, y, "end");
 
-        this.width = width;
-        this.height = height;
         // Adds the end to the scene
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -21,5 +18,20 @@ export default class End extends Phaser.Physics.Arcade.Sprite {
         this.body.allowGravity = false;
 
         this.setOrigin(0, 1);
+
+        //this._registerAnimations();
+
+        //this.anims.play("propulsor-normal");
+    }
+
+    _registerAnimations() {
+        this.scene.anims.create({ // Highlight
+            key: "propulsor-normal",
+            frames: this.anims.generateFrameNumbers("propulsor", {
+                start: 0, end: 8
+            }),
+            frameRate: 1000 / 75,
+            repeat: -1
+        });
     }
 }

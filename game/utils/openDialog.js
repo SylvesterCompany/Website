@@ -33,5 +33,5 @@ export default function openDialog({ text }, callback=null) {
                 callback && callback(); // Invokes the callback function
             }
         }
-    });
+    }, {once: true});
 }

@@ -4,6 +4,7 @@ import Checkpoint from "../classes/Checkpoint.js";
 import Propulsor from "../classes/Propulsor.js";
 import TrashBag from "../classes/TrashBag.js";
 import Enemy from "../classes/Enemy.js";
+import End from "../classes/End.js";
 
 
 export default class LoaderScene extends Phaser.Scene {
@@ -127,6 +128,12 @@ export default class LoaderScene extends Phaser.Scene {
         this.load.spritesheet('propulsor', '/game/sprites/propulsor.png', {
             frameWidth: Propulsor.SPRITE_WIDTH,
             frameHeight: Propulsor.SPRITE_HEIGHT
+        });
+
+        // End texture
+        this.load.spritesheet('end', '/game/sprites/flag.png', {
+            frameWidth: End.SPRITE_WIDTH,
+            frameHeight: End.SPRITE_HEIGHT
         });
 
         // Dust texture

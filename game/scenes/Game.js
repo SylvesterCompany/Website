@@ -9,6 +9,7 @@ import Enemy from "../classes/Enemy.js";
 import End from "../classes/End.js";
 
 import openArchive from "../utils/openArchive.js";
+import openDialog from "../utils/openDialog.js";
 import handler from "../utils/handler.js";
 
 
@@ -300,14 +301,25 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    /**
+     * Create end object and a little celebration
+     */
     createEnd() {
         let end = this.map.objects.find(object => object.name === "end");
         if (end) {
             [end] = end.objects;
-            const newEnd = new End(this, end.x, end.y, end.width, end.height);
+            const newEnd = new End(this, end.x, end.y);
 
             this.physics.add.overlap(this.player, newEnd, () => {
                 this.triumph.play();
+                this.changeLevel(1, 1);
+                const overlay = this.scene.get('OverlayScene');
+                const score = overlay.score;
+                localStorage.clear();
+
+                openDialog([`GG You have ${score}`], () => {
+                    this.scene.restart();
+                });
             });
         }
     }
