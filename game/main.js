@@ -43,7 +43,7 @@ const config = {
             debug: DEBUG_MODE
         }
     },
-    scene: [LoaderScene, OverlayScene, GameScene, GameOverScene]
+    scene: [LoaderScene, GameScene, GameOverScene, OverlayScene]
 };
 
 /**
