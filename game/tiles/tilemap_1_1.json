@@ -379,6 +379,17 @@
         }, 
         {
          "draworder":"topdown",
+         "id":16,
+         "name":"trash",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":15,
          "name":"enemies",
          "objects":[],
@@ -450,7 +461,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":16,
+ "nextlayerid":17,
  "nextobjectid":67,
  "orientation":"orthogonal",
  "renderorder":"right-down",
@@ -936,6 +947,19 @@
          "tilecount":5,
          "tileheight":32,
          "tilewidth":32
+        }, 
+        {
+         "columns":9,
+         "firstgid":1586,
+         "image":"trash.png",
+         "imageheight":16,
+         "imagewidth":144,
+         "margin":0,
+         "name":"trash",
+         "spacing":0,
+         "tilecount":9,
+         "tileheight":16,
+         "tilewidth":16
         }],
  "tilewidth":16,
  "type":"map",

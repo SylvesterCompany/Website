@@ -402,4 +402,23 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+
+/* Responsive */
+
+@media screen and (max-width: 800px) {
+    #univ-aside p {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 550px){
+    #univ-aside {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+    }
 }
