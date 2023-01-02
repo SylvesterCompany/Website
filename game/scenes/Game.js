@@ -317,7 +317,7 @@ export default class GameScene extends Phaser.Scene {
                 localStorage.clear();
                 this.changeLevel(1, 1);
                 this.scene.pause();
-                openDialog({text: `Bravo ! Vous avez accompli votre mission d'éco-responsabilité avec succès !<br>Score actuel: ${score}`}, () => {
+                openDialog({text: `Bravo ! Vous avez accompli votre mission d'éco-responsabilité&nbsp;!<br>Score actuel : ${score}`}, () => {
                     handler.emit('end');
                     this.scene.restart();
                 });
