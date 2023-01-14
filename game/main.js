@@ -1,5 +1,4 @@
-import getZoomFactor from "./utils/getZoomFactor.js";
-import onClickOutside from "./utils/onClickOutside.js";
+import { getZoomFactor, onClickOutside } from "./utils.js";
 
 import GameScene from "./scenes/Game.js";
 import LoaderScene from "./scenes/Loader.js";

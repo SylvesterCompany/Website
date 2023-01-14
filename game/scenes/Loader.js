@@ -142,8 +142,9 @@ export default class LoaderScene extends Phaser.Scene {
         // Restart button
         this.load.image('restart', '/game/sprites/restart_button.png');
 
-        // Archive data
+        // JSON translated data
         this.load.json('archives', `/lang/${LANG}/game_archives.json`);
+        this.load.json('dialogs', `/lang/${LANG}/dialogs.json`);
     }
 
     /**

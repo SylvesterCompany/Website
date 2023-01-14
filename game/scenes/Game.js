@@ -1,3 +1,5 @@
+import { openArchive, openDialog, handler } from "../utils.js";
+
 import Player from "/game/classes/Player.js";
 import Checkpoint from "../classes/Checkpoint.js";
 import ArchiveCollection from "../classes/ArchiveCollection.js";
@@ -7,10 +9,6 @@ import Propulsor from "../classes/Propulsor.js";
 import Door from "../classes/Door.js";
 import Enemy from "../classes/Enemy.js";
 import End from "../classes/End.js";
-
-import openArchive from "../utils/openArchive.js";
-import openDialog from "../utils/openDialog.js";
-import handler from "../utils/handler.js";
 
 
 export default class GameScene extends Phaser.Scene {
@@ -317,7 +315,7 @@ export default class GameScene extends Phaser.Scene {
                 localStorage.clear();
                 this.changeLevel(1, 1);
                 this.scene.pause();
-                openDialog({text: `Bravo ! Vous avez accompli votre mission d'éco-responsabilité&nbsp;!<br>Score actuel : ${score}`}, () => {
+                openDialog({text: this.game.cache.json.get("dialogs")[0]['content'] + score}, () => {
                     handler.emit('end');
                     this.scene.restart();
                 });

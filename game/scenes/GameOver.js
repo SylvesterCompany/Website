@@ -1,4 +1,4 @@
-import handler from "../utils/handler.js";
+import { handler } from "../utils.js";
 
 
 export default class GameOverScene extends Phaser.Scene {
