@@ -26,17 +26,17 @@ $translation = array_merge($lang->translate(), $lang->translate($page['name']));
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sylvester - <?= $translation['title']; ?></title>
-    <link rel="icon" href="/static/img/favicon.ico">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="./static/img/favicon.ico">
+    <link rel="stylesheet" href="./static/css/style.css">
     <script>
         const LANG = "<?= $page["lang"] ?>";
     </script>
     <?php if ($page['name'] === 'index') : ?>
-        <script src="/game/phaser.js"></script>
-        <script src="/game/main.js" type="module" defer></script>
-        <script src="/static/js/app.js" type="module" defer></script>
+        <script src="./game/phaser.js"></script>
+        <script src="./game/main.js" type="module" defer></script>
+        <script src="./static/js/app.js" type="module" defer></script>
     <?php else: ?>
-        <link rel="stylesheet" href="/static/css/content.css">
+        <link rel="stylesheet" href="./static/css/content.css">
     <?php endif; ?>
 </head>
 <body class="pixel-art">
@@ -44,12 +44,12 @@ $translation = array_merge($lang->translate(), $lang->translate($page['name']));
     <nav>
         <ul>
             <?php foreach ($links as $link): ?>
-                <li><a href="/<?= $link ?>.php" class="<?= $page['name'] === $link ? 'current' : ''?>"><?= $translation[$link]; ?></a></li>
+                <li><a href="./<?= $link ?>.php" class="<?= $page['name'] === $link ? 'current' : ''?>"><?= $translation[$link]; ?></a></li>
             <?php endforeach; ?>
         </ul>
     </nav>
     <div id="univ-aside">
         <p><?= $translation['context']; ?></p>
-        <img src="/static/img/lr_univ_logo.png" alt="Logo de l'Université de La Rochelle">
+        <img src="./static/img/lr_univ_logo.png" alt="Logo de l'Université de La Rochelle">
     </div>
 </header>
